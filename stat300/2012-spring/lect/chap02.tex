@@ -1,0 +1,615 @@
+\documentclass[12pt]{article}
+\usepackage{coursenote}
+
+\title{STAT 300 Chapter 2}
+\begin{document}
+\maketitle
+
+
+\section{Probability: sample space and events}
+
+Probability studies uncertainties and randomness.
+Examples of actions with uncertain outcome:
+\begin{enumerate}
+\item Toss coins.
+\item Throw dice.
+\item Draw cards.
+\item Measure the air temperature.
+\item Pick a student and obtain his/her blood type.
+\end{enumerate}
+
+\textbf{Experiment}: an action or procedure whose outcome is uncertain.
+
+\textbf{Sample space}, $\mathcal{S}$,
+of an experiment: the set of all possible outcomes
+of the experiment.
+
+\example List the sample space of\\
+(1) toss a coin once;\\
+(2) toss a coin 3 times;\\
+(3) toss 3 identical coins simultaneously;\\
+(4) throw a die twice;\\
+(5) draw 2 cards from a deck of 52 cards and get their types
+    (i.e.\@ heart, club, diamond, spade);\\
+(6) take a measure of the temperature.
+(The temperature at any given moment is assumed to be an
+unknown constant.  The randomness is due to measurement.)
+
+\indentblock{%
+From these examples we see that an outcome may be
+a scalar (if numerical), a vector, or a set.
+
+When the outcome contains multiple components,
+it is important to know or specify whether their order matters.
+If order matters, the outcome is a vector, e.g.\@ (2) and (4);
+if order does not matter, the outcome is a set (or un-ordered list),
+e.g.\@ (3) and (5).}
+
+\textbf{Event}: any collection of outcomes in the sample space,
+that is, a \emph{set} of outcomes.
+
+\emph{simple event}, \emph{compound event}, \emph{null event}
+
+\textbf{An event occurs} if the outcome of an experiment
+is in the collection of
+outcomes that define the event. Therefore, one experiment may trigger
+multiple events to occur, because that particular outcome may be in
+definition of multiple events.
+
+
+\example
+In the example~(5), define event~A as ``there is at least one heart
+in the two cards drawn''. Then A contains the following outcomes:
+\[
+\text{heart-heart, heart-diamond, heart-club, heart-spade}
+\]
+Define event~B as ``there is at least one club in the
+two cards drawn''. Then B contains
+\[
+\text{club-club, club-diamond, club-heart, club-spade}
+\]
+If an experiment results in a heart and a club,
+then both events A and B have occurred.
+
+
+\section{Relations between events}
+
+Since an event is a set of outcomes,
+then relations between events are nothing but relations between sets.
+
+\subsection{Set theory}
+
+Sample space $\mathcal{S}$: the whole set,
+whose elements are all possible ``outcomes'' of the experiment.
+
+Event $A$: any subset of $\mathcal{S}$, including $\emptyset$ and $\mathcal{S}$.
+
+\textbf{Complement}: $A' = \mathcal{S} \setminus A$.
+
+\textbf{Union}: $A \cup B$.
+
+\textbf{Intersection}: $A \cap B$.
+
+$A$ and $B$ are \textbf{mutually exclusive} or \textbf{disjoint} if
+$A \cap B = \emptyset$.
+
+The concepts of union, intersection, and disjoint generalize to multiple
+(finite or countably infinite) events.
+
+\subsection{Venn diagram}
+
+\example Fig.~2.1 at the end of Chap.~2.1.
+Use Venn diagram to illustrate
+union, intersection, complement, and mutually exclusiveness.
+
+\section{Axioms of probability}
+
+We want to assign to each event (note: not ``outcome'') $A$ a number $P(A)$, called
+``probability'', which measures the ``chance'' that $A$ will occur in an
+experiment.
+Such a measure should have the following intuitively reasonable
+properties. These are not ``theorems''; rather, they are
+``axioms''. They are not derived from other things,
+but rather stipulated from the outset as something to be accepted.
+
+\textbf{Axiom 1}. $P(A) \ge 0$.
+
+\textbf{Axiom 2}. $P(\mathcal{S}) = 1$.
+
+\textbf{Axiom 3}. If \emph{infinitely many} events $A_1$,$A_2$,...,
+    are \emph{disjoint}, then
+    \[ P(A_1 \cup A_2 \cup \dotsb) = \sum_i P(A_i) \]
+
+\medskip
+
+\textbf{Proposition 1}. $P(\emptyset) = 0$.
+
+\textbf{Proposition 2}. The property in axiom 3 is valid for a
+\emph{finite} number of disjoint events.
+
+\example Prove the two propositions above. [Hint: use the axioms!]
+
+\subsection*{Interpretation}
+
+The axioms specify the properties that the probability assignment should
+satisfy. However, for any $\mathcal{S}$, there may be more than one
+way to assign probabilities to events such that these axioms are
+satisfied.
+Therefore one needs to choose an ``interpretation'' of the probability
+$P(A)$; the interpretation will guide one to pick
+a particular assignment of probabilities to events.
+
+\example
+Toss a coin. Two possible outcomes: H and T.
+$S = \{H, T\}$.
+All possible events:
+$\emptyset$, $\{H\}$, $\{T\}$,
+$\{H, T\}$.
+We already know, by the axioms and propositions, that
+$P(\emptyset) = 0$ and $P(\{H,T\}) = 1$.
+How should we determine $P(\{H\})$ and $P(\{T\})$?
+
+\indentblock{%
+There is no definite answer to this question.
+These probabilities are not \emph{determined},
+but rather are \emph{assigned}.
+As long as the assignment does not violate the axioms,
+it is valid;
+however, whether it is \emph{reasonable} depends on
+what \emph{interpretation} we give to the term
+``probability''.
+}
+
+One of the common and simple interpretations is based on
+\emph{relative frequency} in \emph{repeatable experiments}.
+
+\emph{Relative frequency} and \emph{limiting relative frequency}:
+Conduct the experiment $N$ times and let $n$ be the number
+of times that event $A$ has occurred.
+The ratio $n/N$ is called the ``relative frequency'' of the occurrence
+of event $A$.
+Experience indicates that as $N \to \infty$, the relative frequency
+will stabilize, approaching a \emph{limiting relative frequency}.
+Then take this limiting relative frequency as $P(A)$.
+
+\example
+Re-visit the coin-tossing example.
+Suppose the coin is balanced.
+If we toss it many, many, many times,
+what ``relative frequency'' the outcome H should have?
+Intuition tells us it should be 0.5.
+So, $P(\{H\}) = 0.5$.
+
+Alternatively, intuition tells us that
+$P(\{H\}) = P(\{T\})$. Then since
+\[
+P(\{H\}) + P(\{T\}) = P(S) = 1
+\]
+we have $P(\{H\}) = P(\{T\}) = 0.5$.
+
+
+\alert
+1. This interpretation is meaningful for \emph{repeatable experiments}
+and less so for other kinds of uncertainties.
+
+2. Even in repeatable experiments, in reality one can not conduct the
+experiment infinitely and observe the limiting relative frequency.
+
+3. This interpretation of probability is called ``objective'' (by some).
+There are other interpretations, including ``subjective'' ones,
+which will not bother us in this course.
+
+The ``limiting relative frequency'' interpretation of probability
+is what we use in this course to determine probabilities.
+This will soon be applied in the situation of
+``equally-likely'' outcomes.
+
+\section{Properties of probability}
+
+Prove the following properties using the axioms and propositions:
+\begin{enumerate}
+\item $P(A) + P(A') = 1$.
+
+\item $P(A) \le 1$.
+
+\item $P(A \cup B) = P(A) + P(B) - P(A \cap B)$.
+
+\example Ex.~2.14 in Chap.~2.2.
+
+\item $P(A \cup B \cup C) = P(A) + P(B) + P(C)
+    - P(A \cap B) - P(A \cap C) - P(B \cap C)
+    + P(A \cap B \cap C)$.
+
+This property can be generalized to more events.
+\end{enumerate}
+
+\alert
+1. A useful relation between any two sets $A$ and $B$:
+\[ A = (A \cap B) \cup (A \cap B') \]
+In words,
+$A$ is the union of two disjoint sets,
+one being the part of $A$ that is also in $B$
+and the other being the part of $A$ that is outside of $B$.
+(Either of the two disjoint sets may be empty.)
+
+2. Property~4 can be derived from property~3:
+\[
+P(A\cup B\cup C)
+= P(A\cup B) + P(C) - P\bigl((A\cup B) \cap C\bigr)
+\]
+then, use
+\[
+P(A\cup B) = \dotsb
+\]
+\[
+P\bigl((A\cup B)\cap C\bigr)
+= P\bigl((A\cap C) \cup (B\cap C)\bigr)
+=\dotsb
+\]
+
+
+\section{Determining probabilities}
+
+\subsection{Equally likely outcomes}
+\label{sec:equal-likely}
+
+If an experiment has $N$ possible outcomes and all the outcomes are
+\emph{equally likely}, then $P(A) = N(A) / N$,
+where $N(A)$ is the number of outcomes in event $A$.
+
+\example
+Draw one card from a fully mixed deck of cards.
+There are 52 possible outcomes and
+it is reasonable to assume all individual cards
+have the same chance of being picked.
+
+Event $A$: the card drawn is a spade.
+
+\textbf{Answer}: $N(A) = 13$, hence $P(A) = 13/52 = 1/4$.
+
+
+\subsection{Product (or multiplication) rule}
+\label{sec:product-rule}
+
+Suppose an outcome consists of an \emph{ordered list} of $k$ items selected,
+and there are $n_1$ choices for item~1,
+$n_2$ choices for item~2,...,
+$n_k$ choices for item~k,
+then there are $n_1 \cdot n_2 \dotsb n_k$
+possibilities for this outcome.
+
+\indentblock{%
+We will use the rules \ref{sec:equal-likely} and \ref{sec:product-rule}
+A LOT.
+
+The ``ordered list of items selected'' often arises in the form of
+``a sequence of steps'' leading to an outcome.
+}
+
+\example
+Throw 4 dice into 4 spots.
+How many possible outcomes?
+
+\example
+Draw 3 cards from one deck and arrange them in the order they are drawn.
+How many possible outcomes?
+
+\example
+Experiment: draw 4 cards.\\
+Event: all 4 cards are of the same suit, and their ranks (face
+number) are in sequence, like 2, 3, 4, 5.\\
+Question: how many possible outcomes does this event contain?
+
+\textbf{Answer}.
+Think of it as 2 steps: (1) choose the suit---4 choices;
+(2) choose the ranks---11 choices (1,2,3,4; 2,3,4,5;...;11,12,13,1).
+$4 \times 11 = 44$.
+
+Or think of it this way: each outcome is uniquely identified
+by an ordered pair of items:
+\texttt{(suit, starting rank)}.
+
+\subsection{The simple property $P(A) = 1 - P(A')$ is very useful}
+
+\example Ex.~2.13 in Chap.~2.2.
+
+\subsection{Use Venn diagram}
+
+\subsection{Divide and conquer}
+    Divide the event into \emph{disjoint} sub-events, determine the probability
+    of each sub-event, then add up.
+
+
+\section{Counting techniques}
+
+In an equally-likely-outcome experiment,
+calculating probabilities amounts to counting
+the number of outcomes in the desired event,
+in addition to counting the number of outcomes in the sample space.
+
+\subsection*{Permutation}
+
+Taking $k$ out of $n$ items and placing them in order,
+the number of possible outcomes is
+\[
+P_{k,n} = n \cdot (n-1) \cdot (n-2) \dotsb [n - (k-1)]
+    = \frac{n!}{(n-k)!}
+\]
+(Product of $k$ numbers counting down from $n$.)
+
+Complete permutation:
+there are $n!$ possible orderings of $n$ items.
+
+\alert
+It appears the notation $P_{k,n}$ is not universal.
+We follow the textbook.
+
+\subsection*{Combination}
+
+Taking $k$ out of $n$ items,
+the number of unique combinations (ignoring their order) is
+\[
+{n \choose k} = \frac{P_{k,n}}{k!} = \frac{n!}{k! (n-k)!}
+\]
+(Reasoning:
+to turn a permutation to a combination,
+ignore the difference between the $k!$ orderings
+of any unique set of $k$ items.)
+
+\example
+A quality control engineer is to randomly pick 5 out of the 11 available
+products for inspection. Suppose 2 of the 11 products have defects.
+What is the probability that (1) no defective product is picked?
+(2) exactly one defective product is picked?
+
+\example
+Consider a regular deck of 52 cards.
+For a five-card poker hand, find the probability of
+(a) All of different ranks;
+(b) One pair;
+(c) Two pairs;
+(d) Three of a kind: three cards of the same rank and two others of
+different ranks, for example JJJ74;
+(e) A straight: five cards in sequence; the ace can be either high or
+low;
+(f) A flush: five cards of the same suit;
+(g) All are spades;
+(h) There are exactly 2 clubs and 2 hearts.
+
+\exercise
+Ex.~2.22 in Chap.~2.3.
+
+\exercise
+Ex.~2.23 in Chap.~2.3.
+
+
+
+\section{Conditional probability}
+
+\example
+One guy commutes 30 miles to work and makes it on time 60\% of the time
+on average. What is the prob of his getting to work on time on a
+particular day given that (1) It is snowing? (2) He got up extra
+early?
+
+\example
+Pick one American at random, the prob that
+he or she skies is 0.3\%.
+What if this person is from Fairbanks?
+
+\example Roll a die, $A = \{1\}$. $B = \{1,3,5\}$.
+(1) $P(A)$? (2) $P(A \given B)$?
+
+\textbf{Answer}: $P(A) = 1/6$.  $P(A \given B) = 1/3$.
+
+\textbf{Why?}
+
+In the case of equally-likely outcomes,
+\[
+P(A \given B)
+= \frac{N(\text{in $A$, besides being in $B$})}{N(\text{in $B$})}
+= \frac{N(A \cap B)}{N(B)}
+\]
+
+Since $B$ is a condition, that is, it is assumed that $B$ occurs,
+then the effective \emph{sample space} for the subsequent (conditional) event
+is $B$. Under this condition,
+the \emph{event $A$ is actually $A \cap B$}.
+Hence
+$P(A \given B) = N(A \cap B) / N(B)$.
+
+More generally,
+
+\[ P(A \given B) = \frac{P(A \cap B)}{P(B)} \]
+(This can be considered a \emph{definition} of \emph{conditional
+probability}.)
+
+\emph{Understand this using Venn diagram}.
+
+\example
+Ex.~2.26 in Chap.~2.4.
+
+\alert
+We often use the definition this way:
+\[
+P(A \cap B) = P(A \given B) P(B) = P(B \given A) P(A)
+\]
+
+\example
+Draw two cards from a deck of 52 cards.
+What's the probability of getting a pair?
+
+\textbf{Answer}
+
+Solution 1.
+$N(S) = {52 \choose 2}$.
+$N(A) = {13 \choose 1} {4 \choose 2}$.
+
+\[
+P(A)
+= \frac{N(A)}{N(S)}
+= \frac{13 \times 4 \times 3}{1 \times 2} \Bigm/
+  \frac{52 \times 51}{1 \times 2}
+= 1/17
+\]
+
+Solution 2.
+\[
+A = (1,1) \cup (2,2) \cup \dotsb \cup (13,13)
+\]
+These sub-events are mutually exclusive,
+and they all have the same probability.
+\[
+P(A)
+= \sum_{i=1}^{13} P(i,i)
+= 13\times P(\text{first draw 1})
+    P(\text{second draw 1} \given \text{first draw 1})
+= 13 \times \frac{4}{52} \frac{3}{51}
+= \frac{1}{17}
+\]
+
+
+\alert
+\[ P(A) = P(A \cap B) + P(A \cap B') = P(B) P(A \given B) + P(B') P(A
+\given B')
+\]
+This is a special case of the \emph{law of total probability}
+(p.~72, 7th ed; p.~78, 8th ed).
+
+Think how this can be used to solve problems by ``classification'' or
+``divide and conquer''.
+
+\example Pick 2 cards without replacement from a 52 deck.\\
+A1 = an ace is selected on the first draw.\\
+A2 = an ace is selected on the second draw.\\
+Find $P(A_1)$, $P(A_2)$.
+
+\textbf{Answer}\\
+\begin{align*}
+P(A_1) &= \frac{4}{52}
+\\
+P(A_2) &= P(A_1) P(A_2 \given A_1) + P(A_1') P(A_2 \given A_1')
+        = \frac{4}{52} \frac{3}{51} + \frac{48}{52} \frac{4}{51}
+        = \frac{4}{52}
+\end{align*}
+Note: $A_2 = A_1$!\\
+Implication: in a poker game, seating does not matter.
+
+\example
+Ex.~2.27 in Chap.~2.4.
+
+
+\example
+The probability that a randomly selected family belongs to the AAA auto club
+is 0.25 (\textit{Source}: American Automobile Association). If a family
+belongs to AAA, the probability that they have more than one car is 0.45.
+Suppose a family is randomly selected.
+What is the probability they have more than one car and belong to AAA?
+
+\textbf{Answer}:
+$A = \text{belong to AAA}$.
+$M = \text{have more than one car}$.
+
+\[
+P(M \cap A)
+= P(A) P(M \given A)
+= 0.25 \times 0.45
+= 0.1125.
+\]
+
+Note: It is also true that
+$P(M \cap A) = P(M) P(A \given M)$,
+but it is not useful for this question,
+because $P(M)$ and $P(A \given M)$ are unknown.
+
+
+% \section{Bayes' Theorem}
+% 
+% Bayes' Theorem is just a different way of using the conditional
+% probability:
+% \[
+% P(A \given B) = \frac{P(A) P(B \given A)}{P(B)}
+% \]
+% $P(A)$ is the \emph{prior} probability of $A$.
+% After observing $B$ (say data), our knowledge about $A$ is improved
+% from the prior to the \emph{posterior} probability,
+% $P(A \given B)$.
+% The posterior is proportional to the product
+% of the prior, $P(A)$, and the \emph{likelihood},
+% $P(B \given A)$.
+% 
+% The formula above is verified by noticing
+% \[P(A \given B) P(B) = P(A \cap B) = P(A) P(B \given A).\]
+% 
+% Bayesian analysis is a major branch of statistics.
+% In this course we do not worry about it.
+% 
+% \exercise
+% Ex.~2.30 (7th ed) or Ex.~2.31 (8th ed) in Chap.~2.4.
+
+\example
+\textbf{A Traveling Salesperson}\ \ During frequent trips to a certain
+city a traveling salesperson stays at hotel A 50\% of the time,
+at hotel B 30\% of the time, and at hotel C 20\% of the time.
+When checking in, there is some problems with the reservation 3\%
+of the time at hotel A, 6\% of the time at hotel B,
+and 10\% of the time at hotel C.
+Suppose the salesperson travels to this city.
+
+(a) Find the probability that the salesperson stays at hotel A and has a
+problem with the reservation.\\
+(b) Find the probability that the salesperson has a problem with the
+reservation.\\
+(c) Suppose the salesperson has a problem with the reservation, what is
+the probability that the salesperson is staying at hotel A?
+
+
+
+\section{Independence}
+
+If $P(A \given B) = P(A)$,
+that is, the probability of $A$'s occurrence is not affected by whether
+$B$ occurs or not (or, knowing that $B$ occurs gives us no info
+about the probability of $A$), we say $A$ and $B$ are \emph{independent}.
+
+Definition of independence:
+\[ P(A \cap B) = P(A) P(B) \]
+\indentblock{This definition includes the (uninteresting) situations
+$P(A) = 0$ and $P(B) = 0$.}
+
+\alert
+1. If $P(A) \ne 0$ and $P(B) \ne 0$,
+the following three relations are equivalent:
+\[ P(A \cap B) = P(A) P(B) \]
+\[ P(A \given B) = P(A) \]
+\[ P(B \given A) = P(B) \]
+
+\exercise
+Prove their equivalence, that is,
+from one you can derive the other two.
+
+2. Independence is not the same as disjoint.
+Actually if $A \cap B = \emptyset$, the two events are
+\emph{dependent}.
+Knowing that $B$ has occurred certainly tells us about the
+occurrence of $A$: $A$ will not occur.
+
+3. There is no useful way to indicate ``independence'' by a Venn
+diagram.
+
+4. In the definition of independence, we can replace any event by its
+complement. For example, if $A$ and $B$ are independent, then $A'$ and
+$B$ are independent, because
+
+\begin{gather*}
+P(A' \cap B) = P(A') P(B) \\
+\Leftrightarrow\quad
+P(B) - P(A \cap B) = \bigl(1 - P(A)\bigr) P(B) \\
+\Leftrightarrow\quad
+P(A \cap B) = P(A) P(B)
+\end{gather*}
+
+5. Generalization: independence between more than two events
+(Chap.~2.5).
+Not required.
+\end{document}

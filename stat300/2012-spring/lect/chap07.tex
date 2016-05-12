@@ -1,0 +1,373 @@
+\documentclass[12pt]{article}
+\usepackage{coursenote}
+\begin{document}
+\title{STAT 300 Chapter 7}
+\subtitle{Confidence Intervals}
+\maketitle
+
+\section{Concept of confidence intervals (CI)}
+
+Section 7.1 of the textbook through first half of p.~258 (7th ed)
+or p.~271 (8th ed)
+is very readable and makes things quite clear.
+
+
+Confidence interval is in contrast to \emph{point estimation},
+which uses a single value to estimate a population parameter.
+
+\emph{Confidence interval (CI)}: an interval constructed such that it
+contains the true value of the population parameter with a specified
+degree of confidence (a percentage).
+
+This ``degree of confidence'' is the \emph{probability}
+that the CI so constructed contains the true parameter value
+\emph{in repeated samplings}.
+
+Imagine a synthetic problem in which we know the true
+population parameter $\theta$.
+We obtain a random sample from this distribution,
+pretending we don't know the true value of $\theta$,
+and follow a chosen method to construct a CI for $\theta$.
+The CI is a (bivariate) statistic.
+Because CI is random, we can talk about probabilities about it.
+In particular, we are interested in the probability that
+the CI covers the (unknown, fixed) $\theta$.
+Suppose a particular method of constructing the CI
+(that is, how to define this interval, which is a function of the data!)
+makes this probability equal to 0.95.
+Then,
+if we repeatedly draw random samples (of the same size, say $n$)
+and obtain the CI based on each sample by the same procedure,
+some of the CI's will contain $\theta$
+whereas some others will miss.
+If we're able to do this repeated sampling many,
+many, many times, the ``success rate'' will converge to 0.95
+(this is simply the ``limiting relative frequency'' interpretation of
+probability).
+This 95\% is called the \emph{confidence level}.
+
+Confidence level (say 95\%), confidence coefficient (0.95).
+(But I don't think such distinction is anything important.)
+
+A CI is usually around a point estimator, $\hat{\theta}$,
+symmetrically or not.
+
+\section{CI for mean when variance is known}
+
+\subsection{Normal population}
+
+\example
+95\% CI for $\mu$ of a normal population with known $\sigma^2$.
+
+Use $\overline{X}$ as an estimator of $\mu$.
+Construct the interval $(\overline{X} - \Delta, \overline{X} + \Delta)$
+such that as we do the sampling repeatedly (hence we'll get many values
+of the random variable $\overline{X}$, and subsequently many different
+CI), there is a 0.95 probability that the CI encloses $\mu$.
+
+\begin{align*}
+P(\text{CI encloses $\mu$}) = 0.95\quad
+&\Longleftrightarrow\quad
+    P(|\mu - \overline{X}| < \Delta) = 0.95
+\\
+&\Longleftrightarrow\quad
+    P\left(\left|\frac{\overline{X} - \mu}{\sigma/\sqrt{n}} \right| <
+        \frac{\Delta}{\sigma/\sqrt{n}} \right) = 0.95
+\\
+&\Longleftrightarrow\quad
+    P\Bigl(|Z| < \frac{\Delta}{\sigma/\sqrt{n}}\Bigr) = 0.95
+\\
+&\Longleftrightarrow\quad
+    \frac{\Delta}{\sigma/\sqrt{n}} = \Phi^{-1}\bigl(0.95 + (1-0.95)/2\bigr)
+\\
+&\Longleftrightarrow\quad
+    \Delta = \Phi^{-1}(0.975) \frac{\sigma}{\sqrt{n}}
+            = 1.96\frac{\sigma}{\sqrt{n}}
+\end{align*}
+
+Hence the 95\% CI is
+$\Bigl(
+    \overline{x} - 1.96\frac{\sigma}{\sqrt{n}},\,
+    \overline{x} + 1.96\frac{\sigma}{\sqrt{n}}
+\Bigr)$.
+Two ways to word this: top box on p.~257 (7th ed) or p.~270 (8th ed).
+
+\example
+Ex.~7.2 in Chap.~7.1.
+
+For another confidence level, say $1 - \alpha$,
+replace $1.96$ by $\Phi^{-1}(1 - \alpha/2)$.
+This is called \emph{critical value} and is denoted $z_{\alpha/2}$.
+
+Note the definition of critical value $z_{\alpha/2}$:
+it is defined as the value $z$ such that $P(Z < z) = 1 - \alpha/2$.
+In other words, $z_{\alpha/2} = \Phi^{-1}(1 - \alpha/2)$.
+
+\emph{General pattern}:
+
+\[ \overline{x} \pm z_{\alpha/2} \frac{\sigma}{\sqrt{n}}
+\]
+where $\frac{\sigma}{\sqrt{n}}$ is actually
+$\sigma_{\overline{X}}$.
+(Note we're using lower-case letters because
+we're supposed to plug in actual values now.)
+
+\emph{Interpreting a Confidence Interval}: in Chap.~7.1.
+
+Note a somewhat common misinterpretation:
+2nd paragraph of that section.
+
+Figure 7.3 in Chap.~7.1.
+
+
+\example
+Ex.~7.3 in Chap.~7.1.
+
+
+% \subsection{Sample size for desired precision of CI}
+% 
+% The width $w$ of the CI speaks of its ``precision''.
+% It's a trade-off: based on a particular sample (hence the sample size
+% $n$ is fixed), $w$ increases as $\alpha$ decreases
+% (\ie the confidence level increases), that is,
+% a wider interval has a higher probability to contain the truth.
+% 
+% If we want to achieve a certain level of confidence by designating
+% $\alpha$ (say $\alpha = .01$, hence a 99\% CI),
+% and at the same time we require a certain precision by
+% specifying the max interval width to be $W$, then
+% we can find out the sample size $n$ that is needed to achieve this goal.
+% 
+% For the normal-mean example,
+% \[ 2\Delta = 2\, z_{\alpha/2}\, \frac{\sigma}{\sqrt{n}} \le W \]
+% \[ n \ge \Bigl(\frac{2\, \sigma\, z_{\alpha/2}}{W} \Bigr)^2 \]
+% Take the rounded-up integer:
+% \[ n = \left\lceil\Bigl(
+%     \frac{2\, \sigma\, z_{\alpha/2}}{W}
+%     \Bigr)^2\right\rceil \]
+
+
+
+\subsection{Non-normal population but large sample}
+
+Suppose we don't know the distribution of the population,
+but the sample size $n$ is large (say $\ge 30$).
+In this situation the Central Limit Theorem (CLT)
+provides the \emph{approximate}
+distribution of $\overline{X}$:
+\[
+\frac{\overline{X} - \mu}{\sigma/\sqrt{n}} \sim N(0,1)
+\]
+Then, the same derivation leads to the same CI
+\[
+\overline{x} \pm z_{\alpha/2} \frac{\sigma}{\sqrt{n}}
+\]
+
+
+\section{CI for mean when variance is unknown}
+
+In reality, we almost never know $\sigma^2$,
+and what we do naturally is to use $s^2$ in place of $\sigma^2$.
+After this substitution, however,
+we need to make some other adjustments to the formula.
+
+\subsection{Normal population}
+
+The distribution of $T = \frac{\overline{X} - \mu}{S/\sqrt{n}}$ is
+\emph{not} $N(0,1)$.
+Since $\frac{\overline{X} - \mu}{\sigma/\sqrt{n}}$ is $N(0,1)$,
+we understand $T$ have more variation than $Z$ because of the randomness
+in $S$ (although $S$ varies around $\sigma$).
+
+Fortunately, the distribution of $T$ is known \emph{when $X$ is normal}.
+The distribution is called $t$ with $n-1$ \emph{degrees of freedom}:
+\[
+T = \frac{\overline{X} - \mu}{S/\sqrt{n}} \sim t_{n-1}
+\]
+
+\emph{Properties of $t$ distributions}: in Chap.~7.3.
+
+Note: it's a family of distributions, family members being distinguished
+by the sole parameter $\nu$---degrees of freedom.
+
+By a similar derivation we get the CI for $\mu$:
+\[
+\overline{x} \pm t_{\alpha/2,n-1} \frac{s}{\sqrt{n}}
+\]
+where $t_{\alpha/2,n-1}$ indicates the critical value
+on a $t$ curve with df $n-1$.
+
+Box on p.~271, 7th ed, or p.~287, 8th ed.
+
+Learn to use table A.5.
+
+\example Ex.~7.11 in Chap.~7.3.
+
+
+\subsection{Non-normal population but large sample}
+
+In this case,
+$\frac{\overline{X} - \mu}{\sigma/\sqrt{n}}$ is approximately
+$N(0,1)$, and
+$\frac{\overline{X} - \mu}{S/\sqrt{n}}$ is approximately
+$t_{n-1}$.
+So, we can use the approximate interval
+\[
+\overline{x} \pm t_{\alpha/2, n-1}\frac{s}{\sqrt{n}}
+\]
+
+In fact,
+if $n$ is sufficiently large (e.g.\@ $\ge 40$),
+$S$ is a pretty accurate and stable estimator for $\sigma$,
+then the distribution of
+$\frac{\overline{X} - \mu}{S/\sqrt{n}}$ is approximately $N(0,1)$,
+hence we could simply use the interval
+\[
+\overline{x} \pm z_{\alpha/2} \frac{s}{\sqrt{n}}
+\]
+at the $1-\alpha$ confidence level.
+
+\example
+Ex.~7.6 in Chap.~7.2.
+
+
+%  \subsection{Prediction interval for a single future value}
+%  
+%  (Self reading)
+%  
+%  Suppose we have observed $x_1,\dotsc,x_n$ from a normal population,
+%  and we're about to get a new value of this random variable.
+%  Denote the variable, which will take a random value and be observed, by
+%  $X_{n+1}$.
+%  We want to construct a \emph{prediction interval} for the new value.
+%  This task is NOT ``estimation of an unknown, constant population
+%  property'' and the interval is NOT called ``confidence interval''.
+%  
+%  Let $\overline{X} = \frac{1}{n}\sum_{i=1}^n X_i$.
+%  A natural ``point prediction'' for $X_{n+1}$ is $\overline{X}$.
+%  Examine the error of this prediction:
+%  \[
+%  E(\overline{X} - X_{n+1})
+%  = E[\overline{X}] - E[X_{n+1}]
+%  = \mu - \mu
+%  = 0
+%  \]
+%  \[
+%  \var(\overline{X} - X_{n+1})
+%  = \var(\overline{X}) + \var(X_{n+1})
+%  = \frac{\sigma^2}{n} + \sigma^2
+%  \]
+%  because of the independence between $\overline{X}$ and $X_{n+1}$.
+%  
+%  Moreover,
+%  noticing that $\overline{X}$ and $X_{n+1}$ are both normal,
+%  so their difference (a \emph{linear} combination) is also normal.
+%  Then
+%  \[
+%  \frac{\overline{X} - X_{n+1} - E(\overline{X} - X_{n+1})}
+%      {\sqrt{\var(\overline{X} - X_{n+1})}}
+%  = \frac{\overline{X} - X_{n+1}}
+%      {\sigma\bigl(1 + \frac{1}{n}\bigr)}
+%  \sim N(0,1)
+%  \]
+%  and
+%  \[
+%  \frac{\overline{X} - X_{n+1}}
+%      {s\bigl(1 + \frac{1}{n}\bigr)}
+%  \sim t_{n-1}
+%  \]
+%  
+%  A similar argument leads to a \emph{prediction interval}
+%  \[
+%  \overline{x} \pm t_{\alpha/2,n-1}\cdot s\cdot \sqrt{1 + \frac{1}{n}}
+%  \]
+%  
+%  \example
+%  Ex.~7.12 and Ex.~7.13 in Chap.~7.3.
+%  
+%  \alert
+%  $\sqrt{1 + \frac{1}{n}} > \frac{1}{\sqrt{n}}$.
+%  So the uncertainty is larger than if we know the true mean.
+%  Interval width decreases as $n$ increases,
+%  but has a limit.
+%  $t_{\alpha/2,n-1}\, s\, \sqrt{1 + \frac{1}{n}} \to z_{\alpha/2}\, \sigma$
+%  as $n \to \infty$.
+%  
+% \subsection{CI for population variance}
+% 
+% Regarding the variance $\sigma^2$ and
+% its estimator $S^2$ of a normal population,
+% we have the following result:
+% \[
+% \frac{(n-1)S^2}{\sigma^2}
+% = \frac{\sum (X_i - \overline{X})^2}{\sigma^2}
+% \sim \chi^2_{n-1}
+% \]
+% 
+% $\chi^2$ is a family of distributions with one parameter $\nu$---degrees
+% of freedom. It's for \emph{positive} variables.
+% See p.~278 (7th ed) or p.~294 (8th ed).
+% 
+% The sum of $n$ \emph{squared} independent standard normal variables
+% has a $\chi^2_n$ distribution (with $n$ degrees of freedom),
+% that is, $Z_1^2+\dotsc+Z_n^2 \sim \chi^2_n$.
+% 
+% % Note $\sum_{i=1}^n \frac{(X_i - \mu)^2}{\sigma^2}$ would be $\chi^2_n$,
+% % because $\frac{X_i - \mu}{\sigma} \overset{\text{i.i.d.}}{\sim} N(0,1)$.
+% % In the above,
+% % $\frac{X_i - \overline{X}}{\sigma} \sim N\bigl(0, 1 - \frac{1}{n}\big)$
+% % is only ``close'' to standard normal and is not independent.
+% % It can be shown (using some nontrivial math) that
+% % $\sum_{i=1}^n \frac{(X_i - \overline{X})^2}{\sigma^2}$
+% % is equivalent to the sum of $n-1$ squared i.i.d.\@ standard normals,
+% % hence it is $\chi^2_{n-1}$.
+% $\sum_{i=1}^n \frac{(X_i - \overline{X})^2}{\sigma^2}$
+% is equivalent to the sum of $n-1$ independent, squared standard normals,
+% hence its distribution is $\chi^2_{n-1}$.
+% Note the degree of freedom is $n-1$, not $n$.
+% If we knew the population mean and used $\mu$ instead of
+% the estimate $\overline{x}$, the sum would be a $\chi^2_{n}$.
+% 
+% \exercise
+% Show that
+% $\var\Bigl(\frac{X_i - \overline{X}}{\sigma}\Bigr) = 1 - \frac{1}{n}$.
+% 
+% $\chi^2$ critical values: $\chi^2_{\alpha, \nu}$.
+% Learn to use table A.7.
+% 
+% Note: $\chi^2$ is not symmetric.
+% We have $z_{\alpha} = -z_{1-\alpha}$ and $t_{\alpha} = -t_{1-\alpha}$.
+% But $\chi^2_{\alpha,\nu}$ and $\chi^2_{1-\alpha,\nu}$ are both positive,
+% and have no clear relationship.
+% 
+% Using
+% \[
+% P\bigg(\chi^2_{1-\alpha/2,n-1}
+%     < \frac{(n-1)S^2}{\sigma^2}
+%     < \chi^2_{\alpha/2,n-1}\bigg)
+% = 1 - \alpha
+% \]
+% we get a CI for $\sigma^2$ at the $(1-\alpha)$ confidence level:
+% \[
+% \bigl(
+%     (n-1)s^2 / \chi^2_{\alpha/2,n-1},\,
+%     (n-1)s^2 / \chi^2_{1-\alpha/2,n-1}
+% \bigr)
+% \]
+% 
+% \example
+% Ex.~7.15 in Chap.~7.4.
+
+\section{Useful \texttt{R} functions}
+
+\texttt{pnorm}, \texttt{pt}: CDF.
+
+\texttt{qnorm}, \texttt{qt}: quantile (\ie inverse CDF).
+
+To calculate the critical values, use
+
+\texttt{qnorm(1 - alpha/2)},
+\texttt{qt(1 - alpha/2, n - 1)}
+
+\end{document}
+

@@ -1,0 +1,571 @@
+\documentclass[12pt]{article}
+\usepackage{coursenote}
+\begin{document}
+\title{STAT 300 Chapter 5}
+\maketitle
+
+There are three main themes in this chapter:\\
+(1) Various aspects of multivariate distributions;\\
+(2) Interactions between two variables in a joint distribution;\\
+(3) Distribution of functions (or combinations) of random variables.
+
+
+\section{Joint distributions}
+
+Univariate versus multivariate.
+
+Multivariate random variable a.k.a.\@ ``random vector''.
+
+\subsection{Discrete: pmf}
+
+The distribution of a \emph{univariate} discrete RV $X$ is specified
+by the \emph{probability of every value} of the variable:
+\[
+p(x) = P(X = x)
+\]
+where $p(x) \ge 0$ and $\sum_x p(x) = 1$.
+
+The distribution of a \emph{bivariate} discrete RV $(X, Y)$
+is specified by the \emph{probability of every pair of values}
+of $X$ and $Y$, or every value of the vector $(X,Y)$:
+\[
+p(x,y) = P(X = x \text{ and } Y = y)
+\]
+where $p(x,y) \ge 0$ and $\sum_x \sum_y p(x,y) = 1$.
+
+We call this either
+the ``distribution of \emph{a bivariate} random variable'' or
+the ``\emph{joint} distribution of two (univariate) random variables''.
+
+\example
+Ex.~5.1 in Chap.~5.1.
+$X$: car insurance deductible;
+$Y$: home insurance deductible.
+
+\begin{center}
+\begin{tabular}{cc|ccc}
+     &          &       & $y$   &  \\[1pt]
+     & $p(x,y)$ &  0    & 100   & 200\\[1pt] \hline
+$x$  & 100      & .20   & .10   & .20\\
+     & 250      & .05   & .15   & .30
+\end{tabular}
+\end{center}
+
+\exercise
+Verify this specifies a valid joint distribution.
+Hint: check two things: (1) all $p$'s are $\ge 0$;
+(2) all $p$'s sum to 1.
+
+Generalization to more than two variables: straightforward.
+
+\subsection{Continuous: pdf}
+
+The distribution of a \emph{univariate} continuous RV $X$
+is  specified by a \emph{density function} $f(x)$ such that
+\[
+P(a < X < b) = \int_{a}^b f(x) \diff x
+\]
+where
+$f(x) \ge 0$ and $\int_{-\infty}^{\infty} f(x) \diff x = 1$
+(the latter is implied by the relation above).
+
+\textbf{\emph{Visualization}}: a curve; area under it.
+
+\indentblock{%
+Remember it's not useful to talk about the probability
+that $X$ takes a particular value, because
+$P(X = x) = 0$ for any particular value $x$.
+Hence we turn to an integral on an interval.}
+
+The distribution of a \emph{bivariate} continuous RV $(X, Y)$
+is specified by a \emph{density function} $f(x, y)$ such that
+\[
+P\bigl[(X, Y) \in A\bigr] = \iint\limits_{A} f(x,y) \diff x \diff y
+\]
+where
+$f(x,y) \ge 0$ and
+$\int_{-\infty}^{\infty} \int_{-\infty}^{\infty} f(x,y) \diff x \diff y = 1$;
+$A$ is a 2-D set.
+For example,
+$A = \{(x,y): a \le x \le b, c \le y \le d\}$.
+
+\indentblock{%
+A is a contiguous region, or union of such regions.
+It's not a set of discrete points.
+Again, $P\bigl((X,Y) = (x,y)\bigr) = 0$ for any specific value $(x,y)$.}
+
+\textbf{\emph{Visualization}}: a surface; volume under it.
+
+\alert Following the concept above,
+calculating probabilities involves integration,
+e.g.\\
+$P(a<X<b, c<Y<d) = \int_c^d \int_a^b f(x,y) \diff x\diff y$,\\
+$P(a<X<b) = \int_{-\infty}^{\infty} \int_a^b f(x,y) \diff x\diff y$,\\
+$P(c<Y<d) = \int_c^d \int_{-\infty}^{\infty} f(x,y) \diff x\diff y$,\\
+$P(X > 3) = \int_{-\infty}^{\infty} \int_{3}^{\infty} f(x,y) \diff x\diff y$.
+
+\example
+Ex.~5.3 in Chap.~5.1.
+$X$: proportion of time the drive-up is busy;
+$Y$: proportion of time the walk-up is busy.
+\[
+f(x,y) = \begin{cases}
+        \frac{6}{5}(x + y^2),
+            & 0\le x \le 1,\; 0\le y \le 1\\
+        0,   & \text{otherwise}
+    \end{cases}
+\]
+
+\exercise
+Verify this specifies a valid distribution.
+Hint: check two things:
+(1) $f(x,y) \ge 0$;
+(2) $\int_{-\infty}^{\infty} \int_{-\infty}^{\infty} f(x,y) \diff x\diff
+y = 1$.
+
+Generalization to more than two variables:
+natural, but hard to visualize.
+
+% \subsection{Discrete or continuous: cdf}
+% 
+% \[
+% F(x) \equiv P(X \le x)
+% \]
+% \[
+% F(x,y) \equiv P(X \le x \text{ and } Y \le y)
+% \]
+% 
+% Discrete: add up probabilities.
+% 
+% Continuous: integrate probability density.
+% 
+% Generalization to more than two variables: straightforward.
+% 
+% CDF is most useful for \emph{univariate} variables.
+
+
+\section{Expected values}
+
+Discrete:
+
+\[
+E[h(X)] = \sum_x h(x) \, p(x)
+\]
+\[
+E[h(X,Y)] = \sum_x \sum_y h(x,y) \, p(x,y)
+\]
+
+Continuous:
+
+\[
+E[h(X)] = \int_{-\infty}^{\infty} h(x) f(x) \diff x
+\]
+
+\[
+E[h(X,Y)]
+= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty}
+    h(x,y) f(x,y) \diff x \diff y
+\]
+
+Note, $h(X,Y)$ is a \emph{function} that evaluates to \emph{one value}.
+While for univariate we can define $h(X) = X$ and get the expected value
+of $X$, there is no way to define $h(X,Y) = (X,Y)$ and get the
+expected value of the variable \emph{pair} at once.
+
+However, it's no problem to define $h(X, Y) = X$.
+Then
+\[
+E[X] = \sum_x \sum_y x\cdot p(x,y)
+\]
+\[
+E[X] = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} x \cdot f(x,y) \diff x \diff y
+\]
+Similarly,
+\[
+E[Y] = \sum_x \sum_y y\cdot p(x,y)
+\]
+\[
+E[Y] = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} y \cdot f(x,y) \diff x \diff y
+\]
+Then we may say
+\[
+E\bigl[(X, Y)\bigr]
+= \bigl(E(X), E(Y)\bigr)
+\]
+
+
+\example Ex.~5.14 in Chap.~5.2. (Optional)
+
+%\section{Marginals, conditionals, independence}
+% Skipped.
+% See 2011 version of lecture notes.
+
+
+\section{Covariance and correlation}
+
+If we consider $X$, ignoring $Y$,
+the variance of $X$ is defined as before, that is,
+take $h(X, Y) = \bigl(X - E(X)\bigr)^2$ and define
+\[
+\var(X)
+= E\bigl(h(X, Y)\bigr)
+= \sum_{x}\sum_{y} \bigl(x - E[X]\bigr)^2 \cdot p(x,y)
+\]
+in the discrete case and
+\[
+\var(X)
+= E\bigl(h(X, Y)\bigr)
+= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty}
+    \bigl(x - E[X]\bigr)^2 \cdot f(x,y) \diff x\diff y
+\]
+in the continuous case.
+
+However, our interest now is more in the ``joint'' behavior of $X$ and
+$Y$.
+The most important summary measure of the ``association'' between $X$
+and $Y$
+(that is, relation like ``$Y$ tends to be big when $X$ is big''
+or the other way around)
+is the covariance or correlation.
+
+\subsection{Covariance}
+
+Covariance describes the ``association'' between
+$X$ and $Y$ (in a statistical sense, as both vary randomly).
+
+\alert[Definition]%
+Covariance:
+\[
+\cov(X,Y) = E\bigl[(X - \mu_X)(Y - \mu_Y)\bigr]
+\]
+
+\text{Rational}: p.~198 (7th ed) or p.~208 (8th ed).
+
+\textbf{A useful formula}
+\[
+\cov(X,Y) = E(XY) - E(X)\,E(Y)
+\]
+
+\exercise
+Prove the equality above.
+Hint:
+\[
+\cov(X,Y)
+= E\bigl[XY - X\mu_Y - \mu_X Y + \mu_X\mu_Y\bigr]
+= E[XY] - E[X\mu_Y] - E[\mu_X Y] + E[\mu_X\mu_Y]
+= \dotsb
+\]
+
+\alert[Remark]%
+In the univariate case we learned the definition
+$\var(X) = E\bigl[(X - \mu_X)^2\bigr]$ and the relation
+$\var(X) = E(X^2) - \mu_X^2$.
+Compare them with the definition of and relation about
+covariance above.
+In particular, if you take
+$\var(X)$ to be $\cov(X, X)$ and use the definition of and relation
+about covariance above, what do you get?
+
+
+\example
+Ex.~5.16 in Chap.~5.2. (Optional)
+\[
+f(x,y) = \begin{cases}
+        24xy,\quad  & 0\le x \le 1,\, 0\le y \le 1,\, x + y \le 1 \\
+        0,          & \text{otherwise}
+    \end{cases}
+\]
+
+
+\subsection{Correlation coefficient}
+
+One can tell the ``direction'' (positive or negative)
+of the association based on $\cov(X, Y)$.
+But
+it is hard to tell the \emph{strength} of the association
+from the magnitude of $\cov(X,Y)$.
+% because its value depends on the \emph{units} of $X$ and $Y$.
+% In fact, the covariance could take any real number.
+
+To eliminate this difficulty,
+we strive to ``standardize'' $\cov(X,Y)$ so that
+its value is restricted to a certain range,
+and then we can tell the strength of the association
+by observing whether the value is near the limits.
+This ``standardized'' version of covariance is called the ``correlation
+coefficient''.
+
+\[
+\rho_{X,Y} = \frac{\cov(X,Y)}{\sigma_X \cdot \sigma_Y}
+\]
+
+\alert[Remarks]%
+1. Sometimes written as $\operatorname{cor}(X,Y)$ or
+    $\operatorname{corr}(X,Y)$.
+
+2. $-1 \le \rho \le 1$.
+
+3. $\rho$ does not change with linear transform, that is,
+    $\operatorname{cor}(aX + b, cY + d) = \operatorname{cor}(X, Y)$.
+
+    \indentblock{%
+    To prove this property, notice\\
+    $\cov(aX+b, cY+d) = \cov(aX, cY) = ac\cov(X,Y)$\\
+    and
+    $\var(aX + b) = a^2\var(X)$,
+    $\var(cY + d) = c^2\var(Y)$.}
+
+4. Empirical interpretation:
+    $|\rho| > .8$: strong correlation;
+    $.5 < |\rho| < .8$: moderate correlation;
+    $|\rho| < .5$: weak correlation.
+
+5. Correlation coefficient describes \emph{linear association only}.
+    ``No linear association'' can be totally different from
+    ``no association''.
+
+6. Association does not establish causality.
+
+7. When $\rho = 0$ we say $X$ and $Y$ are \emph{uncorrelated}.
+   Hence being uncorrelated means no \emph{linear} relation.
+
+8. ``Uncorrelated'' is different from ``independent''.
+    Being ``uncorrelated'' does not mean ``un-related''!
+
+
+\subsection{Independence}
+
+Without introducing the definition of independence between two random
+variables,
+we make a few points.
+(We learned the definition of independence between two
+events.)
+
+If $X$ and $Y$ are independent, then
+\begin{enumerate}
+\item
+\[
+    P(X\in A, Y\in B) = P(X\in A) P(Y\in B)
+\]
+In words, events about $A$ and events about $B$
+are independent.
+\item
+\[
+E(XY) = E(X)\cdot E(Y)
+\]
+\item
+and, consequently,
+\[
+\cov(X, Y) = 0
+\]
+and
+\[
+\rho(X,Y) = 0
+\]
+\item
+But, the converse is not true.
+$\cov(X, Y) = 0$ does not prove independence between $X$ and $Y$.
+\end{enumerate}
+
+
+\section{Distribution of a linear combination}
+
+\subsection{Linear combination of arbitrary RV}
+
+Let $X_1,\dotsc, X_n$ be different RV (meaning ``random variables'')
+with means $\mu_1,\dotsc, \mu_n$
+and variances $\sigma^2_1,\dotsc, \sigma^2_n$.
+
+\indentblock{%
+Note on notation: $X_1,\dotsc,X_n$ are random variables.
+They do not need to have any specific relation.
+Don't be confused by the common $X$ in the symbols.}
+
+Let $Y = \sum_{i=1}^n a_iX_i$, where $a_i$ are constants.
+Note that $Y$ is a univariate RV.
+
+\alert[Proposition]%
+\[
+E(Y)
+= \sum_{i=1}^n E(a_iX_i)
+= \sum_{i=1}^n a_iE(X_i)
+\]
+\[
+\var(Y)
+= \sum_{i=1}^n \sum_{j=1}^n a_i a_j \cov(X_i, X_j)
+\]
+
+\alert The double summation above contains terms
+where $i = j$; in those terms
+$a_ia_j\cov(X_i,X_j)$ is just $a_i^2\var(X_i)$.
+
+Special case: if $X_1$,..., $X_n$ are \emph{independent},
+then
+$\cov(X_i, X_j) = 0$ for $i \ne j$, hence
+\[
+\var(Y)
+= \sum_{i=1}^n a_i^2 \var(X_i)
+\]
+
+\indentblock{%
+Since the constants $a_i$ can be negative,
+the statements above include situations of ``subtractions''.}
+
+\alert[Proof]%
+For the case $n = 2$: end of Chap.~5.5.
+
+\subsection{Linear combination of \emph{normal} RV}
+
+The preceding statements are still correct, of course.
+
+In fact we know something much stronger:
+\emph{$Y$ is normal}. In words,
+\emph{a linear combination of normal random variables is normal}
+(whether the variables are independent or not).
+
+As a result $E(Y)$ and $\var(Y)$ completely describe the distribution
+of $Y$.
+
+\section{Statistics and sampling distributions}
+
+\alert[Definition]%
+Statistic: a function of sample data.
+
+The sample data are uncertain prior to the actual sampling,
+and their values vary as the same sampling procedure is repeated.
+Consequently, the value of a statistic is also random.
+Therefore,
+\emph{a statistic is a RV}.
+
+\example Sample mean,
+$\overline{X} = \frac{1}{n}(X_1 + \dotsc X_n)$,
+is a statistic. Hence it's a RV and has a \emph{distribution},
+known as the \emph{sampling distribution}
+(which describes the variation of the statistic during sampling).
+
+\alert[Definition]%
+The RV's $X_1,\dotsc,X_n$ form a \emph{simple random sample} if\\
+1. The $X_i$'s are independent;\\
+2. Every $X_i$ has the same probability distribution.
+
+This is called an \emph{``iid'' (independent, identically distributed)}
+sample.
+
+\indentblock{
+Read: paragraph after definition box in section ``Random Samples'',
+Chap.~5.3.
+
+Nice explanations on notation:
+first paragraph of Chap.~5.3;
+paragraph below definition box for ``statistic'' in first section of
+Chap.~5.3.
+}
+
+% \subsubsection{Deriving a sampling distribution}
+% 
+% Two methods: (1) by probability rules; (2) by computer simulation experiment (Monte
+% Carlo methods).
+% 
+% \example
+% Ex.~5.20 in Chap.~5.3.
+% 
+% \example
+% Ex.~5.21 in Chap.~5.3.
+% 
+% \alert
+% In Example~5.21, we are actually deriving the distribution of a new RV,
+% $Y = X_1 + X_2$. We approach the task via cdf (NOT pdf).
+% Once the cdf is derived, the distribution is known.
+% Whether or not to write out the pdf is secondary
+% (although it is usually useful and intuitively informative).
+
+\example
+Ex.~5.22 and 5.23 in Chap.~5.3. (Self reading.)
+
+\section{Distribution of sample mean}
+
+\[
+\overline{X} = \frac{X_1 + \dotsc X_n}{n}
+\]
+where $X_i$'s are iid with mean $\mu$ and variance $\sigma^2$.
+
+Since this is a linear combination of RV's, we've learned
+\[\begin{split}
+E\bigl(\overline{X}\bigr)
+&= \frac{E(X_1) + \dotsc + E(X_n)}{n} = \mu
+\\
+\var\bigl(\overline{X}\bigr)
+&= \frac{\var(X_1) + \dotsc + \var(X_n)}{n^2}
+= \sigma^2/n
+\quad\text{(using ``independence'')}
+\end{split}
+\]
+
+In addition, if $X_i \sim N(\mu, \sigma^2)$, then
+\[
+\overline{X} \sim N(\mu, \sigma^2/n)
+\]
+
+\indentblock{%
+The sample mean is an important statistic.
+It is used for estimating the population mean, $\mu$.}
+
+\example
+Ex.~5.25 in Chap.~5.4.
+
+
+\section{Central limit theorem (CLT)}
+
+\alert[Theorem]%
+Let $X_1,\dotsc,X_n$ be an iid sample from a distribution
+with mean $\mu$ and variance $\sigma^2$.
+Then we already know
+$E\bigl(\overline{X}\bigr) = \mu$ and
+$\var\bigl(\overline{X}\bigr) = \sigma^2/n$.
+Moreover, we know that $\overline{X}$ has
+the normal distribution, $N(\mu, \sigma^2/n)$,
+if the $X_i$'s are normal.
+Now if the $X_i$'s are not normal,
+CLT states that $\overline{X}$ is
+\emph{approximately normal when $n$ is ``sufficiently large''},
+regardless of the original distribution of the $X_i$'s
+(it can be continuous or discrete, symmetric or skewed, close to normal
+or rather different).
+In symbols,
+\[
+\overline{X} \longrightarrow N(\mu, \sigma^2/n)
+\quad\text{and}\quad
+\frac{\overline{X} - \mu}{\sigma/\sqrt{n}} \longrightarrow N(0,1)
+,
+\qquad\text{as $n\to \infty$}
+\]
+
+\alert
+1. $n$ need not be huge. Rule of thumb: $n > 30$ is usually large
+enough.
+
+2. The quality of the normal approximation
+depends on how severely the original distribution differs from normal,
+and how large $n$ is.
+
+3. The theorem requires $X_i$'s to be \emph{independent} and
+\emph{identically distributed}.
+
+4. This theorem is the basis of why the normal distribution is so
+commonly applicable, and so fundamental.
+
+5. Note that if the $X_i$'s are normal, we don't need to invoke CLT.
+In that case we know $\overline{X}$ is (exactly, not approximately)
+normal however large or small $n$ is;
+moreover, the $X_i$'s do not need to be independent,
+and their normal distributions do not need to be identical.
+
+\example
+Ex.~5.26 in Chap.~5.4.
+
+\exercise
+Compare Ex.~5.26 and Ex.~5.25. What are the differences in the given
+conditions?
+
+\end{document}
+

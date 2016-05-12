@@ -1,0 +1,486 @@
+\documentclass[12pt]{article}
+\usepackage{coursenote}
+\begin{document}
+\title{STAT 300 Chapter 12}
+\maketitle
+
+
+\section{Linear probabilistic model}
+
+$X$: predictor, independent/explanatory variable\\
+$Y$: response, dependent variable
+
+We consider $X$ to be under our control; it can take various values
+but it is not random. To reflect this view,
+we use $x$ when the predictor corresponding to a particular $Y$
+is needed, and use $X$ mostly as the \emph{name} of the predictor
+variable only.
+
+Deterministic linear relationship: $y = \beta_0 + \beta_1x$
+
+Non-deterministic (probabilistic) linear relationship:
+see Ex.~12.1 and Ex.~12.2 in Chap.~12.1.
+
+We model the response $Y$ by the following
+\emph{assumed} relationship between $Y$ and $X$:
+\begin{equation}\label{eq:model}
+Y = \beta_0 + \beta_1x + \epsilon,
+\quad
+\text{where $\epsilon\sim N(0,\sigma^2)$}
+\end{equation}
+
+We can understand this model from several perspectives.
+\begin{enumerate}
+
+\item
+The model says that $Y$ is a linear function of $x$ plus
+a random fluctuation, $\epsilon$.
+Moreover, the model assumes
+the fluctuation is normal, centered at 0,
+with variance $\sigma^2$ \emph{that does not change with the value of
+$X$}.
+
+\item
+From the model~(\ref{eq:model}) we see
+\[
+E(Y) = E(\beta_0 + \beta_1 x + \epsilon)
+    = \beta_0 + \beta_1 x + E(\epsilon)
+    = \beta_0 + \beta_1 x
+\]
+and
+\[
+\var(Y) = \var(\beta_0 + \beta_1 x + \epsilon)
+        = \var(\epsilon)
+        = \sigma^2
+\]
+In addition, because $\epsilon$ is a normal random variable,
+so is $Y$.
+Hence,
+the model~(\ref{eq:model}) is equivalent to
+\begin{equation}\label{eq:model-N}
+Y \sim N(\beta_0 + \beta_1 x,\; \sigma^2)
+\end{equation}
+
+After all, the focus of our concern is $Y$ rather than $\epsilon$,
+which is a device created in order to study $Y$.
+In general, the center of a statistical model
+is an assumption about the distribution of the variable of interest
+(here, $Y$).
+
+The model~(\ref{eq:model}) is a probabilistic one:
+given a particular value of $X$, we can't determine $Y$---$Y$ is still
+uncertain. But we have an assumption about the statistical behavior
+(\ie distribution) of $Y$ conditional on the particular value of $X$,
+as in~(\ref{eq:model-N}).
+
+See Figure 12.4 in Chap.~12.1.
+
+\item
+The $Y$s are independent of each other,
+because the $\epsilon$s are independent.
+
+\item
+The expected value of $Y$ has a deterministic, linear relation with $X$:
+$E(Y) = \beta_0 + \beta_1 x$.
+The model~(\ref{eq:model}) is a \emph{linear regression} model.
+Because there is only one $X$ variable,
+it's called \emph{simple} linear regression.
+
+The line
+\[
+y = \beta_0 + \beta_1x
+\]
+is called the ``regression function''.
+
+\item
+Interpretation of $\beta_0$ (intercept)
+and $\beta_1$ (slope):
+see p.~451 (7th ed) or p.~473 (8th ed).
+Usually we care more about $\beta_1$ than about $\beta_0$.
+\end{enumerate}
+
+\emph{If} we know the model parameters
+($\beta_0$, $\beta_1$, and $\sigma^2$),
+we have a complete description of the behavior
+of the random variable $Y$,
+hence we can make certain probabilistic statements about $Y$,
+\eg what is $P(Y > 3 \given x = 1.3)$?
+
+\example Ex.~12.3 in Chap.~12.1.
+
+
+\section{Estimating the regression coefficients}
+
+Suppose we have observed a bunch of $y$'s at corresponding $x$ values.
+We \emph{assume} each $y$ is a random ``realization'' (or ``sample'')
+of the \emph{conditional} random variable
+$Y\given x$, whose distribution is $N(\beta_0 + \beta_1 x,\, \sigma^2)$.
+
+\alert
+We are assuming a ``data-generating'' mechanism.
+By this assumption,
+corresponding to any fixed $X$ level, say $x$,
+$Y$ is a normal variable $N(\beta_0 + \beta_1 x, \sigma^2)$;
+our observed value $y$ is a random sample from this distribution.
+(This also reinforces the interpretation about $X$:
+it's not a random variable; it's whatever level of the predictor
+that we ``use''.)
+
+However, we don't know the true model,
+\ie, the parameters $\beta_0$, $\beta_1$, $\sigma^2$.
+We need to \emph{estimate} them based on the data,
+$(x_1,y_1)$,..., $(x_n, y_n)$.
+What would be a sensible estimate?
+
+The criterion: \emph{least squares}.
+See first box in Chap.~12.2.
+
+\indentblock{%
+Least squares estimation is an optimization problem.
+Take derivative, set to zero,
+and solve the so-called ``normal equations'' for the optimal values.
+See after box 1 and through box 2 in Chap.~12.2.}
+
+We may use the symbols $\hat{\beta}_0$ and $\hat{\beta}_1$
+for the \emph{estimators} (the general formulas)
+and $b_0$, $b_1$ for the \emph{estimates} (the particular values after
+plugging in the actual data).
+% The following estimators $\hat{\beta}_0$, $\hat{\beta}_1$
+% are \emph{unbiased}.
+% (Recall the definition of unbiased estimators?
+% Interpretation in the current context?)
+
+The LS estimators are (see (12.2)--(12.3) in Chap.~12.2.):
+\begin{equation}\label{eq:LS-estimator}
+\begin{split}
+\hat{\beta}_1 &= \frac{\sum(x_i - \overline{x})(Y_i - \overline{Y})}
+        {\sum(x_i - \overline{x})^2}
+    = \frac{S_{xy}}{S_{xx}}
+\\
+\hat{\beta}_0 &= \overline{Y} - \hat{\beta}_1\overline{x}
+\end{split}
+\end{equation}
+The estimates may be written as
+\begin{align*}
+b_1 &= \frac{\sum(x_i - \overline{x})(y_i - \overline{y})}
+        {\sum(x_i - \overline{x})^2}
+    = \frac{S_{xy}}{S_{xx}}
+\\
+b_0 &= \overline{y} - b_1\overline{x}
+\end{align*}
+
+\alert
+(1) Get $b_1$ first, then $b_0$.\\
+(2) The formula for $b_0$ suggests that
+\emph{the estimated regression line goes through
+the ``average point'' $(\overline{x}, \overline{y})$}.\\
+(3) Remember the definitions for the symbols $S_{xx}$ and $S_{xy}$.
+
+\alert[Cautions]%
+(1) Always make a \emph{scatter plot} and get an intuitive sense of the
+relation.\\
+(2) Danger of extrapolation (p.~458, 7th ed, or p.~480, 8th ed).
+
+\example Ex.~12.4 in Chap.~12.2.
+
+\example Ex.~12.5 in Chap.~12.2.
+
+\section{Estimating the variance}
+
+Following estimation of the regression coefficients, we have
+the \emph{fitted values}
+$\hat{y}_i = \hat{\beta}_0 + \hat{\beta}_1x_i$
+and \emph{residuals} (or ``errors'')
+$e_i = y_i - \hat{y}_i$
+(could be written as $\hat{\epsilon}_i$).
+
+\alert
+The residual is pointing from the fitted value
+(which lies on the fitted line) to the observed value.
+It is the deviation of $y$ from its (estimated) expected value.
+
+\example
+Ex.~12.6 in Chap.~12.2.
+
+The variance $\sigma^2$ in the model~(\ref{eq:model}) is estimated by
+\begin{equation}\label{eq:S2}
+\hat{\sigma^2} = S^2 = \frac{\sum e_i^2}{n-2}
+\end{equation}
+%This estimator is unbiased.
+$S^2$ (or $s^2$) is called the MSE (mean squared error).
+
+Why dividing by $n-2$? See top of p.~461 (7th ed) or middle of p.~483
+(8th ed).
+
+
+\section{ANOVA for the simple regression model}
+
+\alert[Fact]%
+The LS regression function guarantees that
+$\sum e_i = 0$.
+Equivalently,
+$\sum \hat{y}_i = \sum y_i$
+and
+$\overline{\hat{y}} = \overline{y}$.
+
+Define
+\begin{align*}
+\text{SST} &= \sum (y_i - \overline{y})^2\\
+\text{SSE} &= \sum (e_i - \overline{e})^2 = \sum e_i^2\\
+\text{SSR} &= \sum (\hat{y}_i - \overline{\hat{y}})^2
+            = \sum (\hat{y}_i - \overline{y})^2
+\end{align*}
+These quantities measure variations.
+Specifically,
+SST (total sum of squares) measures
+the total variation in the data.
+SSE (error sum of squares) measures
+variation in the data that is not ``explained'' by the regression model.
+SSR (regression sum of squares) measures
+variation ``explained'' by the linear relationship,
+\ie, variation in the
+fitted (or regressed, or predicted) $Y$s.
+
+\alert
+$s^2 = \frac{\text{SSE}}{n-2}$
+
+A fundamental relation:
+\[
+\text{SST} = \text{SSE} + \text{SSR}
+\]
+This is a \emph{decomposition} of the total variation
+into two parts, one part is explained by the model
+and the other is unexplained by the model.
+
+\exercise
+Can you prove this relation?
+
+%Recall similar things we learned in Chapter~10.
+%Also see section ``Regression and ANOVA'' in Chap.~12.3.
+
+\example Ex.~12.7 in Chap.~12.2.
+
+\example Ex.~12.8 in Chap.~12.2.
+
+\emph{Coefficient of determination}
+\[
+R^2 = \frac{\text{SSR}}{\text{SST}}
+    = 1 - \frac{\text{SSE}}{\text{SST}}
+\]
+\emph{Interpretation}: see definition box (and after the box)
+on p.~463 (7th ed) or p.~485 (8th ed).
+
+%F test for\\
+%$H_0: \beta_1 = 0$ vs $H_a: \beta_1 \ne 0$:
+%final section of Chap.~12.3.
+
+\example Ex.~12.9 in Chap.~12.2.
+
+\section{Some useful relations in computation}
+
+We first get data summaries
+$n$, $\sum x_i$, $\sum y_i$, $\overline{x}$, $\overline{y}$,
+$\sum x_iy_i$, $\sum x_i^2$, $\sum y_i^2$,
+then compute the following quantities,
+which is useful for various things.
+Below we list some useful or interesting relations.
+
+\[
+\begin{split}
+S_{xy}
+&= \sum (x_i - \overline{x})(y_i - \overline{y})
+\\
+&= \sum (x_iy_i - x_i\overline{y} - \overline{x}y_i +
+    \overline{x}\,\overline{y})
+\\
+&= \sum x_iy_i - n\overline{x}\,\overline{y} - n\overline{x}\,\overline{y}
+    + n\overline{x}\,\overline{y}
+\\
+&= \sum x_iy_i - n\overline{x}\,\overline{y}
+\\
+S_{xx}
+&= \sum x_i^2 - n(\overline{x})^2
+\\
+\hat{\beta}_1
+&= \frac{S_{xy}}{S_{xx}}
+\\
+\hat{\beta}_0
+&= \overline{y} - \hat{\beta}_1 \overline{x}
+\\
+e_i
+&= \hat{\beta}_0 + \hat{\beta}_1x_i - y_i
+\\
+&= \overline{y} - \hat{\beta}_1\overline{x}
+    + \hat{\beta}_1x_i - y_i
+\\
+&= \hat{\beta}_1(x_i - \overline{x})
+    - (y_i - \overline{y})
+\intertext{(Hence $\sum e_i = \hat{\beta}_1 \sum(x_i - \overline{x})
+    - \sum(y_i - \overline{y}) = 0$.)}
+\text{SSE}
+&= \sum e_i^2
+\\
+&= {\hat{\beta}_1}^2\sum (x_i-\overline{x})^2
+    + \sum (y_i - \overline{y})^2
+    - 2\hat{\beta}_1 \sum (x_i-\overline{x})(y_i - \overline{y})
+\\
+&= {\hat{\beta}_1}^2S_{xx} + S_{yy} - 2\hat{\beta}_1S_{xy}
+\\
+&= S_{yy} - \hat{\beta}_1 S_{xy}
+\\
+&= \sum y_i^2 - n\bigl(\overline{y})^2
+    -\hat{\beta}_1 \Bigl(\sum x_iy_i - n\overline{x}\,\overline{y}\Bigr)
+\\
+&= \sum y_i^2 - \hat{\beta}_1 \sum x_iy_i
+    - n\overline{y}\bigl(\overline{y} - \hat{\beta}_1 \overline{x}\bigr)
+\\
+&= \sum y_i^2 - \hat{\beta}_1 \sum x_iy_i - \hat{\beta}_0\sum y_i
+\\
+\text{SST}
+&= \sum (y_i - \overline{y})^2
+\\
+&= S_{yy}
+\\
+&= \sum y_i^2 - n\bigl(\overline{y}\bigr)^2
+\\
+\text{SSR}
+&= \text{SST} - \text{SSE}
+\end{split}
+\]
+
+
+\section{Inferences about the slope parameter}
+
+``Inferences'' include estimation, confidence interval, and hypothesis
+tests.
+\emph{The ability to do CI and tests relies on knowing the sampling
+distribution of the point estimator.}
+
+\example Ex.~12.10 in Chap.~12.3.
+
+The sampling distribution of $\hat{\beta}_1$
+(see~(\ref{eq:LS-estimator}))
+is normal.
+Why? P.~469--470 (7th ed) or p.~491--492 (8th ed).
+
+$\hat{\beta}_1$ is a linear function of the $Y$s:
+\[
+\hat{\beta}_1 = \sum_i c_iY_i,
+\quad \text{where } c_i = (x_i - \overline{x})/S_{xx}
+\]
+Because $X$ is not random,
+every term involving $X$ only is just a fixed number.
+Because the $Y_i$s are normal variables,
+$\hat{\beta}_1$, which is a linear combination of the $Y_i$s, is also normal.
+Its expected value is
+\[
+E(\hat{\beta}_1)
+= E\Bigl(\sum c_iY_i\Bigr)
+= \sum c_iE(Y_i)
+= \sum \frac{x_i - \overline{x}}{S_{xx}} (\beta_0 + \beta_1x_i)
+= \dotsb
+= \beta_1
+\]
+Therefore $\hat{\beta}_1$ is an \emph{unbiased} estimator.
+Its variance is
+\[
+\var(\hat{\beta}_1)
+= \var\Bigl(\sum c_iY_i\Bigr)
+= \sum c_i^2 \var(Y_i)
+= \sum \frac{(x_i - \overline{x})^2}{S_{xx}^2} \sigma^2
+= \frac{\sigma^2}{S_{xx}}
+\]
+(In this derivation we have used the independence between the $Y_i$s.)
+
+To sum up, the sampling distribution of $\hat{\beta}_1$ is
+\[
+\hat{\beta}_1 \sim N\bigl(\beta_1,\, \sigma^2/S_{xx}\bigr)
+\]
+
+\textbf{Interpretation}:
+$\hat{\beta}_1$ is a random variable
+as we re-sample $Y$ from the conditional distributions
+$p(Y\given x)$ (sticking with the set of fixed $x$ values)
+and re-calculate the LS estimates.
+
+% The standard error of $\hat{\beta}_1$ is
+% $\sigma_{\hat{\beta}_1} = \sigma/\sqrt{S_{xx}}$.
+Standardize:
+\[
+\frac{\hat{\beta}_1 - \beta_1}{\sigma / \sqrt{S_xx}}
+\sim N(0,1)
+\]
+
+In all realistic situations,
+$\sigma$ is unknown.
+Plug in its estimate, $s = \sqrt{s^2}$
+as defined in~(\ref{eq:S2}).
+% Then we write (an estimate of) the standard error of
+% $\hat{\beta}_1$ as $s_{\hat{\beta}_1}$.
+% Substitute $s_{\hat{\beta}_1}$ for the unknown $\sigma_{\hat{\beta}_1}$.
+Then, like before, we have a $t$ variable
+(p.~471, 7th ed.; p.~493, 8th ed.):
+\[
+\frac{\hat{\beta}_1 - \beta_1}{s / \sqrt{S_{xx}}}
+\sim t_{n-2}
+\]
+%The df of the $t$ is the df of the $S^2$ that is substituted for
+%$\sigma^2$.
+(The df of this $t$ distribution is related to the $n-2$
+that appears in the definition of $s^2$.)
+
+With the sampling distribution of $\hat{\beta}_1$
+and the re-arrangements above,
+CI and tests for $\beta_1$ are similar to what we have learned
+in Chaps.~7.3 and~8.2.
+See formulas in boxes on p.~471 and p.~474 (7th ed) or
+p.~493--494 and p.~496.
+
+\example Ex.~12.11 in Chap.~12.3.
+
+\example Ex.~12.12 in Chap.~12.3.
+
+\section{Correlation}
+
+\subsection{Sample correlation coefficient}
+
+\definition%
+\[
+r = \frac{S_{xy}}{\sqrt{S_{xx}}\sqrt{S_{yy}}}
+\]
+
+For interpretations of the numerator,
+and the rational for the normalization by such denominator:
+see p.~485--486 (7th ed) or p.~508--509 (8th ed).
+
+\example
+Ex.~12.15 in Chap.~12.5.
+
+\emph{Properties of $r$} and interpretations:
+in Chap.~12.5.
+
+
+\subsection{Population correlation coefficient}
+
+\definition
+\[
+\rho = \frac{\cov(X,Y)}{\sigma_X\cdot \sigma_Y}
+\]
+
+A usual estimator of $\rho$ is the sample correlation coefficient $R$.
+(Write the estimator as $R$ and the estimate as $r$.)
+
+\example
+Ex.~12.16 in Chap.~12.5.
+
+(Skip inferences about $\rho$.)
+
+\section{Useful \texttt{R} functions}
+
+\texttt{lm, coef, fitted, resid, abline, cor}
+
+Read a short and nice tutorial at
+\url{http://www.cyclismo.org/tutorial/R/linearLeastSquares.html}.
+
+\end{document}
+

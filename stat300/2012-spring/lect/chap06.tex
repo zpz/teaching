@@ -1,0 +1,271 @@
+\documentclass[12pt]{article}
+\usepackage{coursenote}
+\begin{document}
+\title{STAT 300 Chapter 6\\ Point Estimation}
+\maketitle
+
+\section{Point estimate, point estimator}
+
+Suppose we want to ``estimate'' some unknown
+quantitative property,
+say mean, variance, upper quartile, whatever,
+of the population.
+
+Usually we're interested in estimating the
+``parameter(s)'' that we use to describe the distribution.
+For example,
+if the population distribution is normal, we want to estimate
+mean ($\mu$) and variance ($\sigma^2$);
+if the population distribution is binomial, we want to estimate
+the success rate ($p$);
+if the population distribution is exponential, we want to estimate
+the parameter $\lambda$ (reciprocal of mean).
+
+However, the concept of ``estimation'' is not restricted to such
+``characteristic properties''; it can be about any quantitative property
+(e.g.\@ the 93th percentile of the population distribution).
+
+For generality, let's use $\theta$ to denote the population parameter to
+be estimated.
+
+\alert[Definition]%
+\emph{Point estimate} and \emph{point estimator}.
+A point estimate is a single number that is regarded a sensible value
+for $\theta$.
+An estimate is necessarily a function of the sample data.
+This function (the formula; before plugging in the actual data) is
+called the \emph{point estimator} of $\theta$.
+
+We first have an \emph{estimator} (that is, what function of the sample data we
+will use to estimate $\theta$);
+then we plug in the actual sample data to get a specific value---the
+\emph{estimate}.
+Both the estimator and the estimate are denoted by $\hat{\theta}$.
+(We may also choose to use a different symbol for the estimate.)
+
+\alert A ``point estimator'' is in contrast to an ``interval estimator''
+(or ``confidence interval''), to be discussed later.
+
+A point estimator is a random variable because it is a function of a random sample.
+% As we repeat the actual data sampling and value plugging-in,
+% the ``value of the estimator'' (i.e.\@ the ``estimate'') will vary.
+The distribution of this random variable
+(realized in in repeated sampling) is called its \emph{sampling distribution}.
+As with any random variable we want to examine its distribution.
+
+There are multiple functions of the sample data that may appear as
+reasonable estimators of $\theta$.
+This section is about the criteria of a ``good'' estimator.
+
+\example
+Ex.~6.1 in Chap.~6.1.
+Estimating success rate, $p$, of a binomial distribution.
+
+\example
+Ex.~6.2 in Chap.~6.1.
+Estimating population mean $\mu$.
+Candidates: sample mean, sample median, trimmed mean, middle point of
+extremes, etc.
+
+\example
+Estimating population variance, $\sigma^2$.
+Candidates:
+$\frac{1}{n-1}\sum (X_i - \overline{X})^2$
+(the sample variance) and
+$\frac{1}{n}\sum (X_i - \overline{X})^2$
+(something slightly different from the sample variance).
+
+
+\section{Criteria for ``good'' estimators}
+
+\subsection{Criterion 1: unbiasedness}
+
+We like an estimator to be \emph{unbiased}, that is,
+$E(\hat{\theta}) = \theta$.
+
+\example
+Estimating $p$ of binomial:
+$\hat{p} = X/n$ is unbiased
+(because $E(X/n) = E(X) / n = (np) / n = p$).
+
+\example
+Estimating $\mu$:
+sample mean $\overline{X}$ is unbiased
+(because $E(\overline{X}) = \mu$).
+
+\example
+Estimating $\sigma^2$:
+$S^2 = \frac{1}{n-1} \sum (X_i - \overline{X})^2$
+is unbiased
+(but $\frac{1}{n} \sum (X_i - \overline{X})^2$).
+% Proof on page~233 (7th ed) or page~245 (8th ed).
+
+\alert
+$S = \sqrt{S^2}$ is the usually adopted estimator for $\sigma$.
+It is biased.
+$E(S) = E(\sqrt{S^2}) \ne \sqrt{E(S^2)} = \sqrt{\sigma^2} = \sigma$.
+
+Now we have one criterion.
+Unfortunately this will not settle things yet,
+because for a specific $\theta$ there could be more than one unbiased estimator.
+For example, the proposition on page~233 (7th ed) or page~246 (8th ed).
+%Ex.~6.5 in Chap.~6.1.
+
+\subsection{Criterion 2: small variance}
+
+Among all unbiased estimators of $\theta$,
+the one whose sampling variance is the smallest
+is called the \emph{minimum variance unbiased estimator},
+\textbf{MVUE}.
+
+\alert For a particular $\theta$,
+if we know of a MVUE for it, we usually use it.
+For some problems, we may not know whether a MVUE exists or
+what it is. (See MLE below.)
+
+\indentblock{%
+Sometimes an estimator is called ``best'';
+that often means MVUE.
+(Usually nothing is absolutely ``best'' in every sense.
+Find out what is meant in the context and forget about
+``best''.)}
+
+\example
+For normal distribution,
+sample mean $\overline{X}$ is the MVUE for $\mu$.
+
+\alert
+$\overline{X}$ is always an unbiased estimator for $\mu$,
+but it is not necessarily MVUE.
+For normal, it is.
+Ex.~6.7 in Chap.~6.1 gives examples where it is not.
+
+\indentblock{%
+When presenting an estimator,
+we need to report on its bias (but we usually strive to use
+unbiased estimators) and variance. The former provides a measure of
+``correctness'' whereas the latter, ``precision''.}
+
+As a measure of precision, we often report the standard deviation of
+$\hat{\theta}$, denoted by $\sigma_{\hat{\theta}}$.
+This is called the \emph{standard error}.
+The standard error is typically connected to the unknown population
+distribution, in particular population variance (or standard deviation),
+and other population properties.
+In addition, $\sigma_{\hat{\theta}}$ is (perhaps)
+always related to sample size ($n$):
+$\sigma_{\hat{\theta}}$ decreases as $n$ increases.
+
+In order to report $\sigma_{\hat{\theta}}$, we often need to use
+estimates of population properties that are needed but unknown,
+that is, we often provide an \emph{estimate of $\sigma_{\hat{\theta}}$}
+(which may be denoted by $\hat{\sigma}_{\hat{\theta}}$).
+
+\example
+Ex.~6.9 in Chap.~6.1.
+
+\example
+Ex.~6.10 in Chap.~6.1.
+
+(Skip the material on bootstrap.)
+
+\section{Maximum Likelihood Estimation (MLE)}
+
+We've learned some criteria for ``good'' estimators
+and examined several particular estimators (and judged whether they are
+biased, unbiased, good, bad, etc.).
+Now comes a recipe for actually
+\emph{finding} an estimator (without relying on others to tell us to check this
+form, that form, etc.).
+
+\definition%
+\textbf{Likelihood function}:
+(joint) pdf or pmf of the \emph{sample data}, viewed as
+a \emph{function of the parameter(s) $\theta$}.
+
+A customary way to write it is
+$L(\theta; x_1, \dotsc, x_n)$.
+
+\alert
+The value of $L(\theta;\, x_1,\dotsc,x_n)$ is just the joint density function
+of $x_1,\dotsc,x_n$. BUT, here the data $x_1,\dotsc,x_n$
+are fixed, whereas the parameter $\theta$ is viewed as a variable.
+One may try different values of $\theta$ to get different values of $L$.
+%$L(\theta)$ is usually not a density function (of variable $\theta$);
+%integrating it over $\theta$ usually does not obtain 1.
+
+\definition%
+\textbf{MLE}:
+find the value of $\theta$ that maximizes the likelihood function;
+take that value as the estimate of $\theta$;
+denote the estimate by $\hat{\theta}$.
+Mathematically, this is written as
+\[
+\hat{\theta} = \argmax_{\theta} L(\theta;\, x_1,\dotsc,x_n)
+\]
+
+Suppose the density (or mass) of $X_i$ is $f(x_i; \theta)$,
+then because the sample is usually iid, the likelihood is typically
+\[
+L(\theta; x_1,\dotsc, x_n) = \prod_i f(x_i; \theta)
+.
+\]
+(The \emph{joint} pdf or pmf of independent variables is equal to
+the product of the pdf or pmf of each individual variable.)
+
+\remark
+\begin{enumerate}
+\item We need to know the pdf or pmf in order to proceed with MLE.
+\item The likelihood function (joint pdf or pmf) is usually a big product,
+    because the sample is usually independent.
+\item To find the $\hat{\theta}$ that maximizes $L(\theta)$,
+    it's usually more convenient to maximize
+    $\log L(\theta)$ (the \textbf{log likelihood}).
+\item Procedure for finding MLE:
+    \begin{enumerate}
+        \item Write out the log likelihood function.
+        \item Take derivative of $\log L(\theta)$ w.r.t.\@ $\theta$.
+        \item Set the derivative to 0 and solve for $\theta$
+            (using calculus or numerical optimization algorithms),
+            denoting the solution by $\hat{\theta}$.
+        \item Check that the $\hat{\theta}$ just found is indeed
+            a maximizer (instead of a minimizer) of $\log L(\theta)$.
+    \end{enumerate}
+    If the unknown $\theta$ is a vector,
+    we need to set to 0 the derivative of $\log L$ w.r.t.\@ each
+    element of $\theta$, and solve an equation system.
+\end{enumerate}
+
+\example
+Ex.~6.15 in Chap.~6.2.
+
+% \example
+% Ex.~6.16 in Chap.~6.2.
+
+\example
+Ex.~6.17 in Chap.~6.2.
+
+Example~6.17 tells us that a MLE may be a biased one.
+But it can't be too bad, because---
+
+\alert[Proposition]%
+\textbf{Large sample behavior of MLE}:
+when sample size $n$ is large,
+mle~$\hat{\theta}$ is approximately the MVUE of $\theta$,
+under very general conditions and for any parameter $\theta$.
+
+\alert[Proposition]%
+\textbf{Invariance of MLE}:
+suppose $\hat{\theta}$ is the MLE for $\theta$,
+then $h(\hat{\theta})$ is the MLE for $h(\theta)$.
+
+\indentblock{%
+MLE is a great thing mainly because of the two properties provided
+by these propositions.
+Of course, it's also very nice that finding MLE is a \emph{routine} procedure.}
+
+\example
+Ex.~6.20 in Chap.~6.2.
+
+\end{document}
+

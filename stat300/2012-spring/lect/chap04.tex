@@ -1,0 +1,562 @@
+\documentclass[12pt]{article}
+\usepackage{coursenote}
+\begin{document}
+\title{STAT 300 Chapter 4}
+\maketitle
+
+
+
+\section{Probability density function (pdf) of a continuous distribution}
+
+In contrast to discrete distributions,
+which is specified by the ``probability mass'' $p(x)$ for each possible value
+of $X$, continuous distributions can not be specified this way.
+The reasons?
+Informally speaking, there are too many possible values for $X$.
+Actually, $P(X = x) = 0$, for any particular value $x$.
+
+Solution: specify the probability of an interval, $P(a < X < b)$.
+
+The \emph{density function}, $f(x)$ is such that
+\begin{enumerate}
+\item $f(x) \ge 0$.
+\item $P(a \le X \le b) = \int_a^b f(x) \diff x$.
+\item $\int_{-\infty}^{\infty} f(x) \diff x = 1$.
+\end{enumerate}
+
+\indentblock{%
+Note the logic here:
+knowing a distribution completely is equivalent to knowing
+$P(a \le X \le b)$ for any $a < b$.
+We find a function $f(x)$
+that conveys this knowledge.
+
+Suppose on some interval $[a,b]$, the ``chance'' of $X$ falling anywhere
+is the same. Then $P([a,b]) = \int_a^b f(x)\diff x = (b-a)f(x)$.
+It follows that $f(x) = \frac{P([a,b])}{b-a}$.
+Hence $f(x)$ indicates the ``density'' of probability on the interval
+$[a,b]$.
+Although we can't expect the ``chance'' to be the same on all intervals,
+a similar argument still makes sense if we consider increasingly small
+(narrow) intervals.
+This explains why the function $f(x)$ indicates the \emph{density}.
+
+We often use $p(x)$ for pmf and $f(x)$ for pmf.
+But this distinction is not absolute.
+}
+
+\emph{Density curve} is the plot for the function $f(x)$,
+and has the same properties as above. Visually speaking,
+\begin{enumerate}
+\item No part is below the horizontal axis.
+\item $P(a \le X \le b)$ equals the area on the interval $[a,b]$ below the
+curve.
+\item The total area below the curve is 1.
+\end{enumerate}
+
+\textbf{An important technical point}:
+for a continuous rv (meaning random variable) $X$,
+the probability that $X$ takes any
+\emph{particular value} is 0.
+\[
+P(X = a) = \int_a^a f(x) \diff x = 0
+\]
+In a continuous distribution,
+no single value has a positive probability.
+Only \emph{intervals} have positive probabilities.
+
+\textbf{Implication}:
+when we write the probability (of a continuous rv) for an interval,
+openness or closeness at the end points does not matter.
+\[
+P\bigl([a,b]\bigr) = P\bigl((a, b]\bigr) = P\bigl((a,b)\bigr) = P\bigl([a,b)\bigr)
+\]
+For a continuous distribution,
+we talk about the probability of an \emph{interval}, not that of any single
+value.
+
+\example
+The simplest continuous distribution is the
+\emph{uniform distribution}: $X$ takes values on interval $[a,b]$
+and is equally likely anywhere on this interval.
+\[
+f(x; a, b) =
+\begin{cases}
+    \frac{1}{b-a},\quad & a \le x \le b\\
+    0                   & \text{otherwise}
+\end{cases}
+\]
+What does the density curve of a uniform distribution look like?
+
+
+
+\section{Cumulative distribution function (cdf)}
+
+Definition (for both discrete and continuous rv's):
+\[
+F(x) = P(X \le x)
+\]
+
+
+\subsection{Obtain cdf from pdf}
+
+\[
+F(x) = P(X \le x) = \int_{-\infty}^x f(y) \diff y
+\]
+On the pdf plot, $F(x)$ is the area under the density curve to the left
+of $x$.
+Note it's a ``$\le$'', not ``$<$'', in the definition of cdf.
+(This detail is especially important for \emph{discrete} distributions.)
+
+The plot of $F(x)$ is a \emph{non-decreasing} curve.
+
+% \alert CDF identifies a distribution.
+% To show two variables have the same distribution,
+% show their CDF's are the same.
+
+\example The uniform distribution.
+
+\example Ex.~4.7 in Chap.~4.2.
+
+\example Ex.~4.9 in Chap.~4.2.
+
+\alert Whenever possible, use a graph to help yourself.
+
+\subsection{Obtain pdf from cdf}
+
+Suppose the continuous $X$ has pdf $f(x)$ and cdf $F(x)$.
+At any $x$ where the derivative $F'(x)$ exists, we have (or define)
+\[
+f(x) = F'(x)
+\]
+This is going in the opposite direction of the definition of $F(x)$.
+Note all the conditions:
+\begin{enumerate}
+\item This is for continuous variable.
+\item The pdf exists. (The cdf always exists; pdf may not.
+The pdf requires $F'(x)$ to exist.)
+\end{enumerate}
+
+\indentblock{%
+The continuous distributions we encounter will all meet these
+requirements.
+
+For our purpose, the caution is mainly about discrete
+distributions.
+Discrete distributions do not have pdf (their counterpart is
+pmf); the cdf of a discrete distribution is not everywhere
+differentiable.
+}
+
+\example Uniform distribution.
+
+\example The distribution whose cdf is $F(x) = 1 - e^{-3x}$ for $x \ge 0$
+and $F(x) = 0$ for $x < 0$.
+
+
+\note Discrete rv has probability \emph{mass};
+continuous rv has probability \emph{density}.
+Use summation and subtraction for discrete rv;
+use integral and derivative for continuous rv.
+
+\subsection{Obtain probabilities from cdf}
+
+\[\begin{split}
+P(X > a) &= 1 - F(a) \\
+P(a < X \le b) &= P(X \le b) - P(X \le a) = F(b) - F(a)
+\end{split}
+\]
+
+
+\subsection{Percentiles}
+
+The $(100p)$th percentile, $0 < p < 1$,
+is the value $x$ such that $F(x) = p$.
+For example, the 74th percentile is the value $x$ such that
+$F(x) = 0.74$.
+This is also called the $p$ \emph{quantile}.
+
+Actually it's more convenient to use ``quantile'',
+because you'll announce $p$ directly without converting to $100p$.
+
+On a pdf curve, find a quantile by requiring the area to the left of $x$
+to be $p$.
+
+On a cdf curve, the $p$ quantile is the $x$ whose $y$ is $p$, that is,
+$F^{-1}(p)$ (the quantile function is the inverse of the cdf).
+It's more direct.
+
+\example Find percentiles on a cdf curve.
+
+\note Percentiles and quantiles for a discrete rv are defined similarly,
+but their determination is trickier due to the discreteness.
+
+
+\section{Mean and variance}
+
+\subsection{The expected value of a function of $X$}
+
+\begin{equation}\label{eq:E[h(X)]-cont}
+E\bigl[h(X)\bigr]
+= \int_{-\infty}^\infty h(x) \cdot f(x) \diff x
+\end{equation}
+
+\exercise Compare with the ``weighted average'' definition
+in the discrete case and observe the analogy.
+
+\subsection{Mean}
+
+Its definition is obtained by taking $h(X)$ to be $X$
+in~(\ref{eq:E[h(X)]-cont}), that is,
+\[
+E[X]
+= \int_{-\infty}^{\infty} x \cdot f(x) \diff x
+\]
+
+\example
+Uniform distribution.
+
+\example
+Ex.~4.10 in Chap.~4.2.
+
+\subsection{Variance}
+
+\begin{equation}\label{eq:var-def-cont}
+\var(X)
+\equiv E\bigl[(X - \mu_X)^2\bigr]
+= \int_{-\infty}^{\infty} (x - \mu)^2 \cdot f(x) \diff x
+\end{equation}
+
+It is almost always preferred to use the formula
+\[
+\var(X) = E\bigl[X^2\bigr] - \mu^2
+\]
+
+\section{Uniform distribution}
+
+(This is the simplest continuous distribution.)
+
+PDF:
+\[
+f(x) = \begin{cases}
+    \frac{1}{b-a},  & a \le x \le b\\
+    0,              & \text{otherwise}
+    \end{cases}
+\]
+where $-\infty < a < b < \infty$.
+
+\example Derive the cdf, mean, and variance of the uniform distribution.
+(You should be familiar with these results.)
+
+\section{Normal distribution}
+
+This is the most important distribution in all of probability and
+statistics.
+Its importance stems from very high visibility:
+many (continuous) numerical populations have approx a normal distribution.
+Even discrete numerical populations often have a shape similar to
+normal.
+Measurement errors or things of a similar nature (random fluctuation
+influenced by many factors) usually have a normal distribution.
+There are theoretical reasons for this high visibility:
+Central Limit Theorem (later).
+
+\alert[Definition]%
+A continuous rv $X$ defined on $(-\infty, \infty)$ has a
+normal distribution with parameters $\mu$ and $\sigma^2$
+if its pdf is
+\[
+f(x) = \frac{1}{\sqrt{2\pi \sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
+\]
+This distribution is almost always written as $N(\mu, \sigma^2)$.
+That $X$ has this distribution is usually written as
+$X \sim N(\mu, \sigma^2)$.
+
+$\mu$ and $\sigma^2$ are the mean and variance of this distribution.
+
+\exercise
+Verify $E(X) = \mu$ and $\var(X) = \sigma^2$,
+using the definitions of mean and variance and the formula of
+$f(x)$ above.
+
+The density curve is a nice ``bell shape'',
+centered at and symmetric about $\mu$.
+%The reflection points are $\mu \pm \sigma$.
+$\sigma$ is a signature length indicating the ``spread'' of the
+distribution.
+
+\alert You should remember the normal pdf formula.
+
+
+\subsection{Standard normal distribution}
+
+\subsubsection{pdf}
+A \emph{standard normal} variable is often denoted by $Z$:
+$Z \sim N(0, 1)$.
+\[
+f(z) = \frac{1}{\sqrt{2\pi}} e^{-z^2/2}
+\]
+
+
+\subsubsection{cdf}
+
+Often denoted by $\Phi(z)$:
+\[
+\Phi(z) = P(Z \le z)
+\]
+There is no analytical form.
+Calculation of it (numerically) is a basic function
+of every statistical software package.
+Also pre-computed and tabulated.
+
+\subsubsection{Learn to use a normal cdf table}
+
+Table~A.3.
+
+\example
+Ex.~4.13 in Chap.~4.3.
+Calculating probabilities of intervals.
+
+
+\example
+Ex.~4.14 in Chap.~4.3.
+Finding percentiles.
+
+
+\subsubsection{The $z_\alpha$ notation}
+
+$z_\alpha$ is the value such that
+$P(Z > z_\alpha) = \alpha$.
+In other words, it is the $1-\alpha$ quantile.
+
+\indentblock{%
+$z_\alpha$ is very useful in \emph{hypothesis tests} (later).
+In that context it is called the ``critical value''.
+}
+
+\alert Always visualize.
+
+\subsection{Nonstandard normal distribution}
+
+\subsubsection{Conversions between nonstandard and standard normal
+distributions}
+
+% Take a linear function of a standard normal variable,
+% \[
+%     X = a + bZ,\quad b \ne 0.
+% \]
+% What's the distribution of $X$?
+% 
+% Let's find its CDF and PDF.
+% 
+% \[\begin{split}
+% F_X(x)
+% &= P(X \le x)
+% \\
+% &= P(a + bZ \le x)
+% \\
+% &= P\Bigl(Z \le \frac{x-a}{b}\Bigr) \quad\text{(assuming $b > 0$)}
+% \\
+% &= \Phi\Bigl(\frac{x-a}{b}\Bigr)
+% \\
+% f_X(x)
+% &= F_X'(x)
+% \\
+% &= \Phi'(y)\Bigm|_{y = \frac{x-a}{b}} \, \frac{\diff \frac{x-a}{b}}{\diff x}
+% \\
+% &= \frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2}\Bigl(\frac{(x-a)^2}{b^2}\Bigr)}
+%     \, \frac{1}{b}
+% \\
+% &= \frac{1}{\sqrt{2\pi}b} e^{-(x-a)^2/(2b^2)}
+% \end{split}
+% \]
+% 
+% Note $X$ is a re-scaled and shifted version of $Z$.
+% Depending on the values of $a$ and $b$, there are infinite possibilities
+% of this transform.
+% (There is no point in calling this transformed version a different,
+% totally separate distribution.)
+% The distribution of $X$ is called (nonstandard) \emph{normal}.
+% 
+% \exercise
+% Prove that $E(X) = a$, $\var(X) = b^2$.
+% 
+% Instead of $a$ and $b$, we usually
+% directly choose the symbols $\mu$ and $\sigma$, and
+% write
+% \[
+% X = \sigma Z + \mu
+% \]
+
+Let $X \sim N(\mu, \sigma^2)$ and $Z \sim N(0,1)$.
+
+\emph{Standardizing} $X$ leads to $Z$:
+\[
+X \sim N(\mu,\sigma^2)
+    \quad\Rightarrow\quad
+        Z = \frac{X - \mu}{\sigma} \sim N(0,1)
+\]
+
+Scaling and shifting $Z$ leads to $X$:
+\[
+Z \sim N(0,1)
+    \quad\Rightarrow\quad
+        X = \mu + \sigma Z \sim N(\mu,\sigma^2)
+\]
+(First, scale $Z$ by $\sigma$, then shift by $\mu$.)
+
+The above suggests that a linear transform of $Z$ is a (non-standard)
+normal variable, say $X$. A linear transform of $X$ is again a linear
+transform of $Z$. Therefore we have the following general fact:
+
+\emph{A linear function of a normal variable is a normal variable}.
+(Later we'll learn a more general fact, which says that
+a linear combination of normal random variables is a normal random
+variable.)
+
+All computations about a nonstandard normal distribution
+is relegated to the standard normal via \emph{standardization}.
+
+% To show this, just show the cdf of $\frac{X-\mu}{\sigma}$
+% is the same as that of $Z$:
+% \[
+% P\Bigl(\frac{X-\mu}{\sigma} \le z\Bigr)
+% = P(X \le \mu + z\sigma)
+% = \int_{-\infty}^{\mu + z\sigma}
+%     \frac{1}{\sqrt{2\pi \sigma^2}} e^{-\frac{(x - \mu)^2}{2\sigma^2}}
+%     \diff x
+% ,
+% \]
+% then make a change of variable, let $y = (x - \mu)/\sigma$.
+
+% Therefore we sometimes replace $\frac{X-\mu}{\sigma}$
+% directly by the symbol $Z$.
+
+\emph{Convert probability statements of $X$ to those of $Z$} (page 149,
+box, 7th ed.; page 157, box, 8th ed):
+\[\begin{split}
+P(a \le X \le b)
+&= P\Bigl(\frac{a-\mu}{\sigma} \le Z \le \frac{b-\mu}{\sigma}\Bigr)
+\\
+&= \Phi\Bigl(\frac{b-\mu}{\sigma}\Bigr) - \Phi\Bigl(\frac{a-\mu}{\sigma}\Bigr)
+\\
+P(X \le a)
+&= \Phi\Bigl(\frac{a-\mu}{\sigma}\Bigr)
+\\
+P(X > b)
+&= 1- \Phi\Bigl(\frac{b-\mu}{\sigma}\Bigr)
+\end{split}
+\]
+
+\alert
+Be very familiar with these conversions.
+
+\example Ex.~4.16 in Chap.~4.3.
+
+\subsubsection{Compute quantiles}
+
+It is by the same strategy that we find percentiles (or
+quantiles) of a nonstandard normal.
+
+Note quantile function is the inverse of CDF, e.g.\@
+the 0.78 quantile is $F^{-1}(0.78)$.
+
+Denote $F^{-1}_X(q)$, $0<q<1$, by $q_X$.
+By definition,
+\[
+F_X(q_X) = q
+\]
+that is
+\[
+P(X \le q_X) = q,
+\]
+or equivalently,
+\[
+P\left(Z = \frac{X-\mu}{\sigma} \le \frac{q_X - \mu}{\sigma}\right)
+= q
+\]
+hence
+\[
+\frac{q_X - \mu}{\sigma} = \Phi^{-1}(q)
+\]
+and
+\[
+q_X = \mu + \sigma \Phi^{-1}(q)
+\]
+or
+$q_X = \mu + \sigma z_{1-q}$.
+
+\textbf{Percentiles of a nonstandard normal}:
+\begin{multline*}
+(100p)\text{th percentile of $N(\mu,\sigma)$}\\
+= \mu + \bigl[(100p)\text{th percentile of $N(0,1)$}\bigr] \cdot \sigma
+\end{multline*}
+
+\textbf{Empirical rule}: p.~151 (7th ed) or p.~159 (8th ed).
+(Good to know; no need to memorize.)
+
+
+% The relation between $N(\mu, \sigma^2)$ and $N(0,1)$
+% is one of \emph{shifting and rescaling}.
+% If we think of a nonstandard normal in terms of number of standard
+% deviations from the mean (taking $\mu$ as the origin, or reference point,
+% and $\sigma$ as the unit of distance),
+% then we're thinking in terms of standard normal.
+
+\example Ex.~4.18 in Chap.~4.3.
+
+
+\alert
+This happens a lot in applications:
+a quantity that is positive by nature is modeled by a normal
+distribution. In theory, this can only be approximate.
+In practice, it's often good enough if the normal distribution with the
+given mean and variance has virtually zero area to the left of value $0$.
+
+\example Ex.~4.17 in Chap.~4.3.
+
+
+\section{The exponential distribution}
+
+A very important distribution for positive variables.
+
+pdf: with parameter $\lambda > 0$,
+\[
+f(x) = \lambda e^{-\lambda x}, \quad x \ge 0
+\]
+cdf:
+\[
+F(x) = 1 - e^{-\lambda x}, \quad x \ge 0
+\]
+
+The first two moments:
+\[
+E(X) = \frac{1}{\lambda},\quad
+\var(X) = \frac{1}{\lambda^2}
+\]
+
+Plot the pdf curve.
+
+
+\alert
+Some books parameterize the pdf as
+$\frac{1}{\lambda} e^{-x/\lambda}$.
+Then $E(X)$, $\var(X)$, and interpretation of $\lambda$
+change accordingly.
+
+\exercise
+(1) Derive the exponential cdf from its pdf,
+and vice versa.\\
+(2) Derive $E(X)$ and $\var(X)$.
+(Calculus needed.)
+
+
+\section{Useful \texttt{R} functions}
+
+\texttt{runif}
+
+\texttt{rnorm, dnorm, pnorm, qnorm}
+
+\end{document}
+
+

@@ -1,0 +1,638 @@
+\documentclass[12pt]{article}
+\usepackage{coursenote}
+\begin{document}
+\title{STAT 300 Chapter 3}
+\maketitle
+
+\section{Random variables}
+
+\alert[Definition]%
+A rule that associates a number with each outcome in the
+sample space $\mathcal{S}$ of a given experiment
+(Chap.~3.1).
+It is a \emph{function} whose domain is $\mathcal{S}$ and whose range is
+$\mathcal{R}$.
+
+It's a \emph{variable} because there are more than one value it can
+assume.
+It's \emph{random} because its value depends on the outcome, which is
+uncertain before the experiment is conducted.
+
+This definition distinguishes the ``outcome'' of an experiment and the
+``number'' associated with it. While the outcome may have clear
+descriptions, one has flexibilities in what rule to use to assign a
+number to it.
+For example, the experiment is to randomly pick a student ID number and
+record the gender of the student. The outcomes are ``male'' and
+``female''.
+One may associate these outcomes with 0 and 1, respectively,
+or 1 and 2, or 2 and 1, or -1 and 1, etc.
+
+This definition is the more formal way.
+In actual thinking we often jump over the
+``function'' notion and think of each outcome as a number directly.
+
+There are several situations in this function assignment.
+For example:\\
+(1) Sample space is small, the number association is explicitly
+listed; Ex.~3.1 in Chap.~3.1.\\
+(2) Number association is described in words; Ex.~3.2 in Chap.~3.1.\\
+(3) Number association is defined in some more quantitative form;\\
+(4) The outcome is the measurement of something (say temperature),
+and the variable is naturally the measured value;
+Ex.~3.5 in Chap.~3.1.\\
+(5) One outcome may be associated with more than one number,
+i.e.\@ a vector; then the random variable may be multivariate;
+Ex.~3.3 in Chap.~3.1.\\
+(6) Infinitely many possible values: Ex.~3.4 in Chap.~3.1.
+
+
+{\large\textbf{Discrete vs continuous random variables}}
+
+\emph{Discrete} random variable: finite or countably infinite possible
+values.
+
+\emph{Continuous} random variable: range is \emph{all} numbers in an
+interval on $\mathcal{R}$ or union of intervals.
+
+\example \emph{Bernoulli} random variable: binary.
+
+\alert[Notation]%
+Use upper case
+($X$, $Y$, $Z$, ...) for a \emph{random variable}
+and the corresponding lower case ($x$, $y$, $z$, ...)
+for a particular value of the variable.
+For example,
+$P(X = x)$ means the probability that the random variable $X$ takes
+the particular value $x$.
+Further, suppose we know
+\[
+    P(X = x) = 0.3^{x}\, 0.7^{1-x},\quad x = 0,1
+\]
+Then we know
+\[ P(X = 0) = 0.3^0\, 0.7^{1-0} = 0.7\]
+and
+\[ P(X = 1) = 0.3^1\, 0.7^{1-1} = 0.3\]
+Note that we should not write
+$P(x = 0) = 0.7$ or $P(x = 1) = 0.3$.
+Strictly speaking, the notation $P(x=0)$ is meaningless,
+because $x$ is not (or should not be used to denote)
+a random variable.
+
+
+\section{Probability mass function (pmf) of a discrete distribution}
+
+For a discrete random variable $X$,
+$p(x)$ is the probability that $X$ takes value $x$,
+or, more rigorously, probability of the event that consists
+of the outcome(s) that is associated with the value $x$.
+If multiple outcomes are associated with the same value $x$,
+then $p(x)$ is the probability of the event defined by those outcomes.
+
+A function that specifies the value $p(x)$ for every possible value $x$ of
+the discrete variable $X$ is called the
+\emph{probability mass function}.
+(Sometimes also called the ``probability distribution function'',
+but pmf is better).
+
+This function describes how the total probability $1$ is allocated to
+the various values of $X$.
+Value $x$ gets \emph{probability mass} $p(x)$.
+This may be an exhaustive listing (when $X$ can take only a few values)
+or a formula.
+
+\textbf{Conditions (or properties)}:\\
+(1) $p(x) \ge 0$;\\
+(2) $\sum_{\text{all possible $x$}} p(x) = 1$.
+
+\example
+Ex.~3.8 in Chap.~3.2.
+
+\example
+Ex.~3.10 in Chap.~3.2.
+
+
+\subsection{Parameter of a distribution}
+
+For example,
+a Bernoulli variable takes value $0$ with probability $a$
+and $1$ with probability $1 - a$.
+$a$ is a \emph{parameter}.
+When $a$ takes any specific value in the set of its permissible values
+(here $[0, 1]$), we get a specific distribution (a Bernoulli
+distribution).
+We say all the distributions with $a$ taking different values
+constitute a distribution \emph{family} (here, the Bernoulli family).
+
+\example
+Ex. 3.12 and~3.14 in Chap.~3.2.
+
+
+
+
+\section{Cumulative distribution function (cdf)}
+
+Definition (for both discrete and continuous rv's):
+\[
+F(x) = P(X \le x)
+\]
+
+In the discrete case:
+box on p.~97 (7th ed) or p.~104 (8th ed).
+
+\subsection{Obtain cdf from pmf}
+
+\[
+F(x) = \sum_{t:\, t\le x} p(t)
+\]
+
+\subsection{Obtain pmf from cdf}
+
+\[
+p(x) = F(x) - F(x-)
+\]
+where we use $x-$ to indicate the possible value of $X$
+that is ``immediately'' smaller than $x$.
+
+\subsection{Obtain probabilities from cdf}
+
+Using the same notation,
+for any $a \le b$:
+\[ P(a \le X \le b) = F(b) - F(a-) \]
+In particular,
+if $X$ takes integer values, then for integers $a \le b$:
+\[ P(a \le X \le b) = F(b) - F(a - 1) \]
+
+\exercise How do you obtain probabilities from pmf?
+
+\example
+Ex.~3.13 in Chap.~3.2.
+
+
+
+\section{Mean and variance}
+
+We learn two basic properties, or characteristics,
+of a distribution: mean and variance.
+Mean describes the ``center'' of the distribution;
+variance describes the ``spread'', or variability, or dispersion,
+of the random variable around its mean.
+
+Both mean and variance are the ``expected values'' of something.
+They are collectively called the first two ``moments'' of the
+distribution.
+
+
+\subsection{The expected value of a function of $X$}
+
+Since the value of a rv $X$ is determined by chance,
+if we ``draw'' many samples of $X$
+(meaning, behind the scene, perform the experiment many times),
+it will take various values, hence any function of $X$,
+\eg $X^2$ or $\sin X + 3$, will also take various values.
+The average value of this function will converge to a stable value if
+the sample size tends to infinity.
+The ``limiting average'' is called the ``expected value'' or
+``expectation'' or ``mean''.
+
+Let $h(X)$ be a function of $X$, then the \emph{expected value}
+of $h(X)$ is denoted by $E\bigl[h(X)\bigr]$.
+Since we typically use $\mu$ to denote the expected value,
+this can also be written as $\mu_{h(X)}$
+(note that $h(X)$ is in the subscript).
+
+In the discrete case,
+\begin{equation}\label{eq:E[h(X)]-disc}
+E\bigl[h(X)\bigr] = \sum_{\text{all possible value $x$}}  h(x)\cdot p(x)
+\end{equation}
+This is the \emph{weighted average} of $h(x)$,
+using the pmf as the weight.
+
+\indentblock{%
+One may be interested in any function of $X$, e.g.\@
+$h(X) = \log(X)$, $h(X) = X^2$, $h(X) = e^X + 3$, and so on.}
+
+
+\subsection{Linearity of expected values}
+
+If $g(X)$ and $h(X)$ are any functions of $X$,
+and $a$, $b$, $c$ are constants,
+then the expected value of a \emph{linear} function of
+$g(X)$ and $h(X)$, say $ag(X) + bh(X) + c$,
+is
+\[
+E\bigl[a g(X) + b h(X) + c\bigr]
+= aE\bigl[g(X)\bigr] + bE\bigl[h(X)\bigr] + c
+\]
+
+\textbf{Proof}: use definition (\ref{eq:E[h(X)]-disc}).
+
+We say the ``expectation'' function $E(\cdot)$ is \emph{linear}.
+
+A special case is the following relation:
+\[
+E[aX + b] = aE[X] + b
+.
+\]
+
+\subsection{Mean}
+
+The \emph{expected value} or \emph{expectation}
+or \emph{mean} of the random variable $X$ itself is denoted by
+$E(X)$ (or $E[X]$) or $\mu$ or $\mu_X$.
+
+Its definition is obtained by taking $h(X)$ to be $X$ in~(\ref{eq:E[h(X)]-disc}),
+that is,
+\[
+E[X]
+= \sum_{\text{all $x$}} x\cdot p(x)
+\]
+
+This is the most commonly used measure of the \emph{location} or
+\emph{center} of a distribution.
+Other measures of center include median, etc.
+
+\example
+Ex.~3.18 in Chap.~3.3. (Bernoulli)
+
+
+\indentblock{%
+About math symbols or notation:
+one may choose one's own notation as long as the usage is clear and
+consistent. However, common usage should be followed whenever possible,
+to minimize confusion and ease understanding.
+For example, $\pi$. Using $\mu$ to mean ``population mean''
+(not sample mean) is pretty established, although not as unshakable as
+$\pi$.
+}
+
+\note
+Distinguish between population mean $E[X]$ and sample mean
+$\overline{X}$.
+Population mean is known only if the distribution is known.
+Sample mean is the simple arithmetic average calculated for a given data
+set (i.e.\@ sample).
+
+\alert[Caution]%
+$E(X)$ does not need to be a permissible value for
+$X$. This happens especially often with discrete random variables.
+For example, if $X$ takes integer values, $E(X)$ often is not an
+integer.
+
+\subsection{Variance}
+
+Take $h(X) = (X - \mu)^2$, then $E\bigl[h(X)\bigr]$ is called
+the \emph{variance}, denoted by $\var(X)$ or $\sigma^2$.
+
+In the discrete case, using definition~(\ref{eq:E[h(X)]-disc})
+one obtains
+\begin{equation}\label{eq:var-def-disc}
+\var(X)
+\equiv E\bigl[(X - \mu)^2\bigr]
+= \sum_{\text{all possible $x$}} (x - \mu)^2 \cdot p(x)
+\end{equation}
+
+Variance is the expected value of the squared deviation of $X$ from the
+mean.
+It measures the ``spread'', or ``variability'', or ``dispersion''
+of $X$ about its mean.
+This is the most commonly used measure of \emph{spread}
+of a distribution.
+Other useful measures of variability include
+``mean absolute deviation (mad)'',
+$E\bigl[|X - \mu|\bigr]$,
+and ``inter-quartile range'' (IQR),
+$Q_3 - Q_1$.
+
+The (positive) square root of variance is called
+\emph{standard deviation}, denoted by $\sigma$.
+$\sigma = \sqrt{\var(X)}$.
+
+The unit of $\sigma^2$ is that of $X$ squared.
+The unit of $\sigma$ is that of $X$.
+
+\note
+Distinguish population variance $\sigma^2$ from the sample variance
+$s^2$.
+
+
+\subsubsection{Non-linearity of variance}
+
+What is the variance of a \emph{linear function} of $X$?
+In general, we have
+\[
+\var(aX + b) = a^2\var(X)
+\]
+
+\textbf{Proof}
+
+\begin{align*}
+\var(aX + b)
+&= E\bigl[(aX + b) - E(aX + b)\bigr]^2 \quad
+    &\text{(definition of variance)}
+\\
+&= E\bigl[(aX + b) - aE(X) - b\bigr]
+    &\text{(property of $E(\cdot)$)}
+\\
+&= E(aX - a\mu)^2
+\\
+&= a^2 E(X - \mu)^2
+    &\text{(property of $E(\cdot)$)}
+\\
+&= a^2 \var(X)
+    &\text{(definition of variance)}
+\end{align*}
+
+This indicates that the variance function $\var(\cdot)$
+is \emph{nonlinear}.
+
+\indentblock{%
+In words,
+adding a constant does not change the variance
+(it just ``shifts'' the distribution but does not
+change its spread);
+multiplying a factor gets the variance multiplied by the factor
+squared.}
+
+\note In the proof above, we did not use definitions specific for
+discrete or continuous cases, hence
+the result holds in both discrete and continuous cases.
+
+More generally, we have
+\[
+\var\bigl[ag(X) + b\bigr]
+= a^2 \var\bigl[g(X)\bigr]
+\]
+where $g(X)$ is a function of $X$,
+and $a$, $b$ are constants.
+
+
+\subsubsection{A property useful for calculation}
+
+\begin{equation}\label{eq:var-shortcut}
+\var(X) = E(X^2) - [E(X)]^2
+\end{equation}
+
+\textbf{Proof}
+\[\begin{split}
+\var(X)
+&= E[(X - \mu)^2]
+\\
+&= E[X^2 - 2\mu X + \mu^2]
+\\
+&= E[X^2] - 2\mu E[X] + \mu^2
+\\
+&= E[X^2] - 2\mu^2 + \mu^2
+\end{split}
+\]
+
+\indentblock{%
+Formula~(\ref{eq:var-shortcut}) saves us from doing the subtractions in
+the definition~(\ref{eq:var-def-disc}).}
+
+\note In the proof above, we did not use the particular forms
+of definition for the discrete or continuous case, hence
+the result hold in both discrete and continuous cases.
+
+\exercise Prove the relation above for the discrete case
+using the definition~(\ref{eq:var-def-disc}).
+
+\example
+Let $X$ = the number of cylinders in the engine of the next car
+to be tuned up at a certain facility.
+The distribution of $X$ is given by its pmf:
+\begin{tabular}{c|ccc}
+$x$ & 4 & 6 & 8\\ \hline
+$p(x)$ & .5 & .3 & .2
+\end{tabular}
+\begin{enumerate}
+\item Calculate $E[X]$.
+\item The cost of a tune-up is related to $X$ by
+    $h(X) = 20 + 3X + .5X^2$. Calculate $E[h(X)]$.
+\item Calculate $\var[X]$ by definition~(\ref{eq:var-def-disc}).
+\item Calculate $\var[X]$ by formula~(\ref{eq:var-shortcut}).
+\end{enumerate}
+
+
+\section{Bernoulli distribution}
+
+(This is the simplest discrete distribution. And it's useful.)
+
+\example
+    Toss an unbalanced coin,
+    assume $P(\{H\}) = 0.48$ and $P(\{T\}) = 0.52$.
+    Assign numerical values $0$ and $1$ to head and tail, respectively,
+    then we have a discrete (binary, to be specific)
+    random variable. Its distribution is
+    \[
+        p(x) = \begin{cases}
+                    0.48, & x = 0\\
+                    0.52, & x = 1
+                \end{cases}
+    \]
+    In general, if $p(1) = r$, where $0 < r < 1$, we can write
+    \[
+        p(x) = \begin{cases}
+                    1 - r, & x = 0\\
+                    r, & x = 1
+                \end{cases}
+    \]
+    or more concisely,
+    \[
+        p(x) = r^x (1-r)^{1-x},\quad x=0,1
+    \]
+    This is called the Bernoulli distribution.
+
+\example The mean and variance of a Bernoulli variable.
+
+Using the definitions of mean and variance, we get
+\[
+E[X] = 1\times r + 0\times (1-r) = r
+\]
+and
+\[
+\var[X] = (1 - r)^2 r + (0 - r)^2 (1-r) = r(1-r)
+\]
+
+\section{Binomial distribution}
+
+\subsection{Definition}
+
+\subsubsection{Binomial experiment}
+
+Satisfies all the following requirements
+\begin{enumerate}
+\item Consists of $n$ sub-experiments, called ``trials''.
+    $n$ is fixed prior to the experiment.
+\item Each trial can result in one of two possible outcomes,
+    referred to as $S$ (success) and $F$ (failure).
+
+    \indentblock{%
+    The notation $S$ and F are just for the purpose of distinguishing two
+    outcomes. It does not need to mean $S$ is good, F is bad, and so
+    on.}
+\item Trials are independent. The outcome of one trial is not affected
+by the other trials.
+\item The probability of $S$ is constant from trial to trial.
+    This probability is denoted by $r$.
+    (Often denoted by $p$; but we want to avoid confusion with
+    the pmf symbol $p$.)
+\end{enumerate}
+
+\subsubsection{Binomial random variable}
+
+In a binomial experiment, the focus of interest is usually
+\emph{how many $S$ have resulted in the $n$ trials}.
+This count of $S$ is called a ``binomial random variable'', $X$,
+denoted by
+\[
+X \sim \text{Binom}(n, r)
+\]
+Note: we do not care which trials are $S$ and which ones are $F$;
+we only care about the total number of $S$.
+
+\example
+The same coin is tossed successively and independently $n$ times.
+Call head a $S$ and tail a $F$; suppose $r = .5$.
+
+\subsection{The distribution}
+
+Following the textbook, we use
+$b(x; n, r)$ and $B(x; n, r)$ to denote binomial
+pmf and cdf, respectively.
+
+First, the possible values of $X$ are $0, 1,\dotsc, n$.
+
+Second, to calculate the probability $P(X = x)$, notice the event
+contains $n\choose x$ mutually exclusive sub-events (situations),
+and the probability of each of them is $r^x (1-r)^{n-x}$.
+Hence
+\[
+b(x; n, r)
+= {n\choose x} r^x (1-r)^{n-x} \quad x=0,1,2,\dotsc,n
+\]
+\[
+B(x; n, r)
+\equiv P(X \le x)
+= \sum_{y=0}^x b(y; n, r),
+\quad x=0,1,\dotsc,n
+\]
+
+Computing $B(x; n,r)$ by its definition (see above)
+is almost always too tedious.
+There are three alternatives:
+(1) look up pre-made tables;
+(2) use a statistical computer package;
+(3) use normal approximation.
+This material is not required.
+
+\subsection{Mean and variance}
+
+If $X \sim \text{Binom}(n,r)$, then
+\[
+E[X] = nr,\quad
+\var[X] = nr(1-r)
+\]
+
+\textbf{Proof}
+
+The $\text{Binom}(n,r)$ variable $X$ can be written as
+$X = Y_1 + Y_2 + \dotsb + Y_n$, where $Y_i$ are independent
+Bernoulli random variables with success rate $r$.
+We know $E[Y_1]=\dotsb=E[Y_n] = r$ and
+$\var[Y_1]=\dotsb=\var[Y_n] = r(1-r)$.
+
+Using properties of expectation and variance, we have
+\[
+E[X] = E[Y_1] + E[Y_2] + \dotsb + E[Y_n] = nr
+\]
+\[
+\var[X] = \var[Y_1] + \var[Y_2] + \dotsb + \var[Y_n] = nr(1-r)
+\]
+
+These two properties of the $E$ and $\var$ operators will be introduced
+later. They hold for both discrete and continuous distributions.
+\emph{The first property does not require the $Y_i$'s to be independent.
+The second does.}
+
+\subsection{A typical \emph{approximate} binomial experiment}
+
+Suppose there are $N$ identical balls except for color:
+$k$ of the balls are red and the others are blue.
+Thoroughly mix the balls.
+Randomly pick $n$ balls and denote the number of red ones picked by $X$.
+
+\textbf{Rule of thumb}:
+if $n \le .05 N$ and $r$ is not too close to 0 and 1,
+then the experiment
+can be considered a binomial experiment and $X$ is distributed
+approximately as $\text{Binom}(X; n, r)$, where $r = k/N$.
+
+An alternative statement of the condition is
+$n \ll Nr$ and $n \ll N(1-r)$.
+
+% \textbf{Remarks}
+% \begin{enumerate}
+% \item Imagine the $n$ balls are picked one at a time in sequence,
+%     and regard each pick as a ``trial''.
+%     This experiment is \emph{sampling without replacement},
+%     meaning after one is picked, it is not placed back (``re-placed'')
+%     into the pool.
+%     Therefore, the probability of getting a red ball in the second pick
+%     is \emph{dependent} on the result of the first pick, that is,
+%     $P(S \given S) = \frac{k - 1}{N - 1}$ whereas
+%     $P(S \given F) = \frac{k}{N - 1}$.
+% \item
+%     Although $P(\text{red on trial 2})$
+%     is dependent on the outcome of trial 1,
+%     the influence of trial 1 is not necessarily big.
+%     For example,
+%     \[
+%     P(\text{red 2} \given \text{red 1})
+%     = \frac{k-1}{N-1}
+%     \]
+%     \[
+%     P(\text{red 2} \given \text{blue 1})
+%     = \frac{k}{N-1}
+%     \]
+%     Both are $\approx \frac{k}{N}$.
+% 
+%     However, if $n$ is large,
+%     the influence of earlier trials on later trials
+%     becomes significant.
+%     For example,
+%     \[
+%     P(\text{red on last trial} \given
+%       \text{red on all earlier trials})
+%     = \frac{k - (n-1)}{N - (n-1)}
+%     \]
+%     If $n \ll k$, then the above probability
+%     is close to $\frac{k}{N}$; otherwise it's not.
+%     In the former case, the trials are close to being independent;
+%     in the latter, they are clearly not independent.
+% \end{enumerate}
+
+\example
+Ex.~3.30 in Chap.~3.4.
+
+\example
+Polls.
+Suppose Gallup polls Americans on a certain policy,
+and proportion $r$ of population are for it and $1-r$ against.
+Suppose 2000 Americans are randomly chosen from the population
+such that for any person surveyed, the chance that this is
+a supporter is $r$.
+Now this is sampling \emph{without replacement},
+but the sample size is much smaller than the population.
+
+\section{Useful \texttt{R} functions}
+
+\texttt{choose, factorial, combn}
+
+\texttt{sample} (take a look at its argument \texttt{prob})
+
+\texttt{rbinom, dbinom, pbinom, qbinom}
+
+\end{document}
+
+
