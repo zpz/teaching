@@ -1,0 +1,229 @@
+\documentclass{article}
+\usepackage{techart}
+\parindent=0pt
+\parskip=5pt
+
+\begin{document}
+\title{STAT F401: Regression and Analysis of Variance, Fall 2010}
+\author{%
+Lectures: MWF 11:45--12:45 Chapman 106\\
+Labs: M 2:15--5:15 (F02), Tu 9:40--12:40 (F01) Bunnell 407\\
+Final exam: 10:15--12:15, Wed Dec.~15 Bunnell 407}
+\date{}
+\maketitle
+
+\textbf{\large Instructor: Zepu Zhang.}
+
+zzhang6@alaska.edu;
+306A Chapman, 474-7605.
+Mail box: Chapman 101.
+
+Office Hours: MWF 2:30--3:30,
+or by appointment.
+
+\bigskip
+\textbf{\large Teaching Assistant: Jason Waite.}
+
+jason.waite@alaska.edu;
+303 Chapman, 474-6174;
+108 O'Neill, 474-7839.
+Mail box: Chapman 101.
+
+Office hours: Tu 1:30--4:30,
+or by appointment.
+
+\bigskip
+\textbf{\large Textbook}:
+
+Required:
+\begin{itemize}
+\item
+\textit{Applied Linear Statistical Models}, 5th edition, by Michael~Kutner,
+Christopher~Nachtsheim, John~Neter, and William~Li.  McGraw-Hill/Irwin,
+2005.
+\item
+\textit{An Introduction to R}, available at
+\texttt{http://www.r-project.org}.
+\end{itemize}
+
+\bigskip
+\textbf{\large Blackboard}:
+Use the Blackboard site for this course to access
+schedule, announcements, lecture notes, homework assignments and
+solutions, grades, and other related materials.
+Some documents may see small modifications/updates after first posting.
+
+\bigskip
+\textbf{\large Prerequisites:}
+Stat 200, Stat 300 or an equivalent course is necessary preparation; a grade of B
+or better in the previous course is recommended.  If you have not had a statistics
+course, or if it has been a long time since you've had a statistics course or used
+statistics, you are strongly advised to take Stat 200 or Stat 300 before taking
+Stat 401.  Appendix A in the KNNL text may be useful for reviewing.
+
+\bigskip
+\textbf{\large Goals and expected learning outcomes:}
+\begin{itemize}
+\item Learn simple and multiple regression, including multiple and
+partial correlation, the extra sum of squares principle, indicator variables,
+and model selection techniques.
+\item Learn how to conduct one-way analysis of variance for
+completely randomized designs.
+\item Learn how to use graphics and specific tests to determine if the 
+modeling assumptions are met.
+\item Learn to use \texttt{R} for general computation, graphics, and
+simple programming in the context of fitting and assessing linear
+models.
+\end{itemize}
+
+\bigskip
+\textbf{\large Computation and software:}
+
+We will use the free software \texttt{R}.
+Every student should download it from
+\texttt{http://www.r-project.org} and install it on their own computer.
+If \texttt{R} is whole new software to you,
+the available classroom time will NOT be enough to get you really
+comfortable with it.
+Expect to spend time learning and exploring \texttt{R} on your own.
+However, the instructor and TA will be able to help you in learning
+\texttt{R}.
+
+Although the course treats \texttt{R}
+more as a tool than as a topic in itself,
+no previous experience with \texttt{R} is assumed.
+Previous experience in computer programming will be very helpful.
+
+\textbf{Note on learning \texttt{R}}:
+all \texttt{R} handouts (such as lab handouts) are supposed to
+be \emph{tried}, not just \emph{read}.
+
+
+\bigskip
+\textbf{\large Lab and homework:}
+
+The computer labs are designed for you to\\
+(1) learn to use \texttt{R};\\
+(2) learn to use \texttt{R} to conduct computations pertaining to
+the lectures' content;\\
+(3) do homework problems and get help from the TA.
+
+The labs are required regardless of whether a particular lab session
+assigns a write-up to submit.
+
+Each homework assignment consists of questions, problems,
+and possibly write-up from the most recent lab session.
+Exact content of the lab write-up, if any,
+will be announced.
+
+Homework should be typeset/word-processed (preferred) or hand-written neatly.
+Turn in hard copies only. Remember to number the pages and use a stapler.
+Homework should be submitted to the instructor or the TA
+in class or in mailbox.
+
+Show middle steps, formulas, main \texttt{R} code and output,
+for each homework problem.
+
+Special note about computer output in homework submission:\\
+(1) Never print the computer output directly; instead, include it in
+your write-up and perform necessary editing, omission, decoration as
+explained below.\\
+(2) Only include sections of the output that show significant steps, final
+results, etc. Never list whole datasets; instead, keep the first few and
+last few numbers and use ``...'' to signal omission.\\
+(3) Do not let one graph consume a whole page unless the amount of
+information in the graph justifies this size. Usually the graph should
+be resized and integrated into the document.\\
+(4) Use circles and arrows to mark out important numbers in the computer output.
+
+\bigskip
+\textbf{\large Lecture notes:}
+Lecture notes serve as outlines and pointers.
+They are not meant to be a polished reader.
+Unless otherwise announced,
+the notes mention all required topics,
+and textbook topics not mentioned in the notes are less important.
+It may happen that certain content of the notes
+do not get enough discussion time in the lectures;
+that content is still required material.
+
+Lab handouts should be treated similarly.
+
+\bigskip
+\textbf{\large Policy on late homework:}
+Late homework will result in the loss of 20\% of the points each additional
+(business) day that it is late (weekend counts as one business day);
+thus homework that is more than one full week late will receive no credit.
+Exceptions are made
+on a case-by-case basis by the instructor and typically are made only for
+documented health or university-sponsored activies.
+
+
+\bigskip
+\textbf{\large Grading policy:}
+
+There will be two in-class hour-long midterm exams
+and one two-hour final exam.
+Coverage of each exam will be announced later;
+the final exam will in principal cover the entire course.
+
+The exams will be closed-book. You may use notes \emph{prepared by
+yourself} on
+two sheets of $8 \frac{1}{2} \times 11$ inch paper (both sides).
+You may not use a computer in the exams.
+You may use a calculator.
+(It must be a calculator only; it must not be a device that can store
+notes.)
+
+In all homework and exams,
+messy presentation and incomplete/unclear writing, as determined by the
+grader, may cost partial credit.
+
+In all homework and exams,
+intermediate steps that show your understanding
+of the topic and procedure are as important as the final answer.
+Both the procedure and the final answer carry credit.
+
+Your final grade will be calculated based on the following proportions:
+
+\hskip2cm
+\begin{tabular}{ll}
+Homework (incl labs) & 40\%\\
+Midterms & 30\% ($15\% \times 2$)\\
+Final & 30\%
+\end{tabular}
+
+Grading scale:
+A (honor grade): 90--100;
+B (outstanding): 80--89.99;
+C (average): 70--79.99;
+D (below average): 60--69.99;
+F (failure): 0--59.99.
+
+\bigskip
+\textbf{\large Ethics}:
+Studying together, and getting study assistance from a tutor, is allowed
+and encouraged. Copying someone else's work and representing it as your
+own is plagiarism. Plagiarism and other forms of cheating in homework
+and exams may result in a 0 (zero) score for the homework/exam
+involved.
+
+Please read ``Student Code of Conduct'' on pages~117--118 of the
+\emph{Class Schedule}, and policies of the Department of Math and Stats
+at www.dms.uaf.edu/dms/Policies.html.
+
+
+\bigskip
+\textbf{\large Disability Services}:
+If you have a physical handicap or learning disability, please make me
+and the Office of Disabilities Services (474-7043) aware of the
+situation so that reasonable accommodations can be made.
+
+
+\bigskip
+\textbf{\large Withdrawal:}
+I may withdraw any student from class who
+(1) misses an exam without a valid reason OR
+(2) misses three homework assignments.
+
+\end{document}

@@ -1,0 +1,22 @@
+STAT 621 HW 4
+
+1. Prove the following statement:
+If X and Y have a monotonic relation, then rank(X) and rank(Y) have a
+linear relation.
+
+2. Write an R function to calculate Kendall's tau, then call the
+function with the data of Example 3, page 320, to get the result (0.4355).
+In writing the function, you need to keep things like the sample size
+general and handle possible ties in the data.
+(Also refer to the lecture notes.)
+
+3. Use R to implement the two topics in section 5.6, page 344, that is,
+(1) predict Y for a particular X; (2) obtain a entire regression curve;
+(3) plot the curve.
+The implementation should keep things like sample size general, and
+handle special situations such as ties and out-of-range predictors.
+Make use of R functions related to linear regression.
+(For interpolation, check out the function 'approx'.)
+(Also refer to the lecture notes.)
+With your R functions, plug in the data of Example 1, page 346, and
+generate the Figure 4.

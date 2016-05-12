@@ -1,0 +1,298 @@
+\documentclass[12pt]{article}
+\usepackage{techart}
+\parskip=8pt
+\parindent=0pt
+
+\begin{document}
+\title{STAT 651 HW 7 Solution}
+\maketitle
+
+\begin{enumerate}
+\item Describe the scale-location family associated with the standard pdf
+given by $f(x) = \frac{1}{2}\exp(-|x|)$, $-\infty < x < \infty.$
+
+\texttt{The family of distributions are the densities
+$f(x) = \frac{1}{2\sigma} \exp\Bigl(-\frac{|x - \mu|}{\sigma}\Bigr)$,
+$\mu \in R$, $\sigma > 0$, $x \in R$.
+}
+
+
+\item Let $X$ be a random variable having
+pdf $f_X(x) = c \exp(-x/3) x^d I(0\le x < \infty)$,
+where $c$ and $d$ are positive constants.
+If $E(X) = 7$ and $\var(X) = 21$, then:
+  \begin{enumerate}
+  \item Find $c$ and $d$.  Identify the distribution by name.
+
+  \texttt{$X$ has a gamma distribution with parameters
+  $\alpha = d+1$ and $\beta = 3$.
+  From $E(X) = \alpha \beta = 3\alpha = 7$ we get $\alpha = 7/3$,
+  and this is consistent with the other condition since
+  $\var(X) = 7 = \alpha \beta^2 = \frac{7}{3} 3^2 = 21$.
+  \[c = \frac{1}{\Gamma(\alpha)\beta^{\alpha}}
+    = \frac{1}{\frac{4}{3}\frac{1}{3}\Gamma(1/3) 3^{7/3}}
+    = \frac{1}{4\cdot 3^{1/3}\Gamma(1/3)}
+  \,\quad
+  d = \alpha - 1 = 4/3.
+  \]
+  }
+  \item Find $E(X^3)$.
+
+  \texttt{The mgf of $X$ is
+  \[
+    M_X(t) = (1 - \beta t)^{-\alpha}, \quad t < 1/\beta.
+    \]
+  From $\log M_X(t) = -\alpha \log(1 - \beta t)$ we have
+  \[
+  \frac{1}{M} \frac{\diff M}{\diff t} = -\alpha\frac{1}{1 - \beta t}
+      (-\beta) = \frac{\alpha\beta}{1 - \beta t}
+  \]
+  hence
+  \[
+  \frac{\diff M}{\diff t} = \frac{\alpha\beta}{1 - \beta t}M
+  \]
+  then
+  \[
+  \frac{\diff^2 M}{\diff t^2}
+  = \alpha\beta\left\{
+    \frac{\beta}{(1-\beta t)^2} M
+    + \frac{1}{1 - \beta t} \frac{\alpha\beta}{1 - \beta t} M
+    \right\}
+  = \alpha(1 + \alpha) \beta^2 \frac{1}{(1 - \beta t)^2} M
+  \]
+  and
+  \[
+  \frac{\diff^3 M}{\diff t^3}
+  = \alpha(1+\alpha) \beta^2 \left\{
+    \frac{2\beta}{(1 - \beta t)^3} M
+    + \frac{1}{(1 - \beta t)^2} \frac{\alpha\beta}{1 - \beta t} M
+  \right\}
+  = \frac{\alpha (\alpha+1) (\alpha+2) \beta^3}{(1 - \beta t)^3} M
+  \]
+  hence
+  \[
+  E(X^3)
+  = \frac{\diff^3 M_X(t)}{\diff t^3} \Bigm|_{t=0}
+  = \alpha (\alpha+1) (\alpha+2) \beta^3
+  = 910
+  \]
+  }
+  \end{enumerate}
+
+\item If $X$ is a random variable having
+pdf $f_X(x) = k x^{3}(1-\frac{x}{12})^4 I(0\le x \le 12)$,
+then:
+  \begin{enumerate}
+  \item Find $k$. (Hint:  Do not expand the expression for $f_X(x)$.
+Instead, figure out how this pdf is related to that of a familiar distribution.)
+
+\texttt{%
+Looks like $X$ has a beta distribution stretched from $[0,1]$ to
+$[0,12]$. We shrink it back by introducing $Y = X/12$, then
+\[
+f_Y(y) = 12^3 k y^3 (1 - y)^4 I(0 \le y \le 1)
+\]
+therefore $Y$ has a beta distribution with $\alpha = 4$ and $\beta = 5$.
+Then
+\[
+12^3 k
+= \frac{1}{B(\alpha,\beta)}
+= \frac{1}{B(4, 5)}
+= \frac{\Gamma(9)}{\Gamma(4)\Gamma(5)}
+= \frac{8!}{3! 4!}
+\]
+hence
+\[
+k = \frac{8!}{3! 4! 12^3} = 35/216
+\]
+}
+
+  \item Find $E(X)$ and $\var(X)$.
+
+  \texttt{We use the formulas for the mean and variance of
+  a beta variable:
+  \[
+  E(X) = 12 E(Y) = 12\frac{\alpha}{\alpha + \beta} = 16/3,
+  \quad
+  \var(X)
+  = 12^2 \var(Y)
+  = 12^2 \frac{\alpha\beta}{(\alpha+\beta)^2 (\alpha + \beta + 1)}
+  = 32/9
+  \]
+  }
+
+  \end{enumerate}
+
+\item For each of the following families, either show why it is
+an exponential family or explain why it is not:
+
+  \begin{enumerate}
+  \item normal family with $\mu$ known.
+
+  \texttt{%
+  \[
+  f(x) = \frac{1}{\sqrt{2\pi} \sigma} e^{-(x - \mu)^2/\sigma^2}
+  \]
+  Let $h(x) = 1$, $c(\theta) = \frac{1}{\sqrt{2\pi}\sigma}$,
+    $w_1(\theta) = 1/\sigma^2$, $t_1(x) = -(x - \mu)^2$.
+    Yes.
+  }
+
+  \item normal family with $\sigma$ known.
+
+  \texttt{%
+  \[
+  f(x)
+  = \frac{1}{\sqrt{2\pi} \sigma} e^{-(x - \mu)^2/\sigma^2}
+  = \frac{1}{\sqrt{2\pi}\sigma}
+    e^{-\frac{x^2}{\sigma^2} + \frac{2\mu x}{\sigma^2} -
+    \frac{\mu^2}{\sigma^2}}
+  \]
+  Let
+    $h(x) = \frac{1}{\sqrt{2\pi}\sigma}$,
+    $c(\theta) = 1$,
+    $w_1(\theta) = 1$,
+    $t_1(x) = -\frac{x^2}{\sigma^2}$,
+    $w_2(\theta) = \mu$,
+    $t_2(x) = \frac{2x}{\sigma^2}$,
+    $w_3(\theta) = -\mu^2/\sigma^2$,
+    $t_3(x) = 1$.
+    Yes.
+  }
+
+
+  \item family of distributions with
+  pdfs $f(x) = \frac{\theta^3}{6}x(\theta-x)I(0 < x < \theta)$,
+  where $\theta > 0$.
+
+  \texttt{No.}
+
+  \item gamma family with both $\alpha$ and $\beta$ unknown.
+
+  \texttt{%
+  \[
+  f(x) = \frac{1}{\Gamma(\alpha) \beta^{\alpha}}
+    x^{\alpha - 1} e^{-x/\beta}
+    = \frac{1}{\Gamma(\alpha) \beta^{\alpha}}
+        e^{(\alpha-1)\log x - 2/\beta}
+  \]
+  Yes.
+  }
+
+\end{enumerate}
+
+\item
+Let the random variable $X$ have the pdf
+\[
+f(x) = \frac{2}{\sqrt{2\pi}}\exp(-x^2/2),
+\quad 0 < x < \infty.
+\]
+\begin{enumerate}
+\item
+Find the mean and variance of $X$.
+(This distribution is sometimes called a {\em{folded normal}}.)
+
+\texttt{%
+\[\begin{split}
+E(X)
+&= \int_0^{\infty} \frac{2}{\sqrt{2\pi}} x \exp(-x^2/2) \diff x
+\\
+&= \int_0^{\infty} \frac{2}{\sqrt{2\pi}} \exp(-x^2/2) \diff (x^2/2)
+\\
+&= -\frac{2}{\sqrt{2\pi}} \exp(-x^2/2) \Bigm|_{x=0}^{\infty}
+\\
+&= \sqrt{\frac{2}{\pi}}
+\end{split}
+\]
+\[\begin{split}
+E(X^2)
+&= \int_0^{\infty} \frac{2}{\sqrt{2\pi}} x^2 \exp(-x^2/2) \diff x
+\\
+&= - \int_0^{\infty} \frac{2}{\sqrt{2\pi}} x \diff \exp(-x^2/2)
+\\
+&= - \frac{2}{\sqrt{2\pi}} x \exp(-x^2/2) \biggm|_{x=0}^{\infty}
+ + \int_0^{\infty} \frac{2}{\sqrt{2\pi}} \exp(-x^2/2) \diff x
+\\
+&= 1
+\end{split}
+\]
+\[
+\var(X) = 1 - \frac{2}{\pi}
+\]
+}
+
+\item If $X$ has the folded normal distribution,
+find the transformation $g(X)=Y$ and values of
+$\alpha$ and $\beta$ so that $Y \sim \text{Gamma}(\alpha,\beta)$.
+
+\texttt{%
+In a gamma distribution,
+the $X$ in the exponent should have power 1.
+This suggests we can try $Y = X^2$, $Y > 0$.
+Then
+\[
+f_Y(y)
+= \frac{1}{\sqrt{2\pi}} y^{-1/2} \exp(-y/2)
+\]
+This is a gamma density with
+$\alpha = 1/2$ and $\beta = 2$.
+Check the normalizing constant is correct,
+noticing $\Gamma(1/2) = \sqrt{\pi}$.
+}
+\end{enumerate}
+
+\item 4.4 on page 192.
+\[
+f(x,y) = \begin{cases}
+    C(x + 2y) & \text{if $0 < y < 1$ and $0 < x < 2$}\\
+    0 & \text{otherwise}
+\end{cases}
+\]
+
+\begin{enumerate}
+\item
+\[
+\int_0^2 \int_0^1 C(x + 2y) \diff y \diff x
+= 4C = 1
+\quad\Rightarrow\quad
+C = 1/4
+\]
+\item
+\[
+f_X(x)
+= \int_0^1 \frac{1}{4}(x + 2y) \diff y
+= \frac{1}{4}x + \frac{1}{4}
+\]
+\item
+\[
+F(x,y)
+=
+\begin{cases}
+ 0,  & x<0\text{ or } y<0\\
+ \frac{1}{8}(2xy^2 + x^2y),    & 0 \le x < 2,\, 0 \le y < 1\\
+ \frac{1}{2}(y+y^2),    & 2 < x,\, 0 \le y < 1\\
+ \frac{1}{8}(2x +x^2),    & 0 \le x < 2,\, 1 < y\\
+ 1,   & 2 \le x,\, 1 \le y
+\end{cases}
+\]
+
+\item
+$z = g(x) = 9/(x + 1)^2$,
+$1 < z < 9$.
+$x = g^{-1}(z) = 3z^{-1/2} - 1$.
+\[
+f_Z(z)
+= \left(
+    \frac{1}{4}(3z^{-1/2} - 1) + \frac{1}{4}
+    \right)
+    (3/2)z^{-3/2}
+= \frac{9}{8}z^{-2}
+,\;
+1 < z < 9.
+\]
+
+\end{enumerate}
+
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,111 @@
+\documentclass[12pt]{article}
+\usepackage{techart}
+\begin{document}
+\title{STAT 651 HW 9}
+\author{Due Friday Dec 3}
+\date{}
+\maketitle
+
+\begin{enumerate}
+\item
+  Let $f(x,y) = 2\exp(-(x+y))I(0 < x < y < \infty))$.  Let $U = X$ and $V=X+Y$.
+  \begin{enumerate}
+  \item Find and sketch the support for $(X,Y)$.
+  \item Are $X$ and $Y$ independent?  Explain.
+  \item Find and sketch the support for $(U,V)$.
+  \item Find $f_{U,V}(u,v)$, the joint density for $(U,V)$.
+  \item Are $U$ and $V$ independent?  Find the marginal distributions, $f_U(u)$ and $f_V(v)$.  (Be sure to state the range of possible values for $U$ and $V$.)
+  \end{enumerate}
+
+\item
+  Let $f(x,y) = k(x+y)$, where $0 < x,y < 1$ and $y<x$.
+  Let $U = X+Y$ and $V = 2X-Y$.
+  \begin{enumerate}
+  \item Find $k$ so that $f(x,y)$ is a density function.
+  \item Find and sketch the support for $(X,Y)$.
+  \item Find and sketch the support for $(U,V)$.
+  \item Find $f_{U,V}(u,v)$, the joint density for $(U,V)$.
+  \item Are $U$ and $V$ independent?  Explain.
+  \end{enumerate}
+
+\item Use mgfs to find the distribution of $X+Y$, where:
+\begin{enumerate}
+\item $X \sim \text{Gamma}(\alpha_X,\beta)$ and
+    $Y \sim \text{Gamma}(\alpha_Y,\beta)$ and $X$ and $Y$ are independent.
+\item $X \sim \text{Poisson}(\theta)$ and $Y \sim \text{Poisson}(\lambda)$
+    and $X$ and $Y$ are independent.
+\end{enumerate}
+
+\item More practice with joint and marginal distributions.
+
+\begin{enumerate}
+\item ``Low correlation'' example.
+Let $A$ be the region in $R^2$ bounded by the lines $x=0$, $x=1$, $y=2-x$ and $y=1-x$.
+Let $f(x,y) = 1$, $(x,y) \in A$, be the joint density of $(X,Y)$.
+
+\begin{enumerate}
+\item Show that $X \sim \text{unif}(0,1)$ and $E(X)=1/2$, $V(X)=1/12$.
+\item Show that $E(Y)=1$, $E(Y^2)=7/6$ so that $V(Y)=1/6.$
+\item Show that $E(XY) = 5/12.$
+\item Show that, consequently,
+    $\cov(X,Y) \approx -.08333$ and
+    $\operatorname{cor}(X,Y)\approx -.7071$.
+\end{enumerate}
+
+\item ``High correlation'' example.
+Let $B$ be the region in $R^2$ bounded by the lines $x=0$, $x=1$, $y=1.6-x$ and $y=1.4-x$.
+Let $f(x,y) = 5$, $x \in B$, be the joint density of $(X,Y)$.
+
+\begin{enumerate}
+\item Show that $X \sim \text{unif}(0,1)$ so that $E(X)=1/2$ and
+    $V(X)=1/12$.
+\item Show that $E(Y)=1$, $E(Y^2) = 1.086667$
+    so that $V(Y)\approx .086667$.
+\item Show that $E(XY) \approx .416667$.
+\item Show that, consequently,
+    $\cov(X,Y)\approx -.08333$  and $\operatorname{cor}(X,Y)\approx -.9806$.
+\end{enumerate}
+
+\end{enumerate}
+
+\item
+Uncorrelated random variables are not necessarily independent random variables.
+Let $X \sim N(0,1)$ and define $Y = X^2$.
+Show that $E(XY) = E(X)E(Y)$,
+and subsequently $X$ and $Y$ are uncorrelated.
+Also show that $X$ and $Y$ are dependent.
+(Hint:  This is not like the problems you've done with joint distributions.
+Do not try to find the joint distribution of $(X,Y)$.
+Instead, do all your calculations in terms of $X$ and its distribution.
+It's okay to explain the lack of independence informally.)
+
+\item \textbf{Hierarchical models.}
+Consider the following Las Vegas two-stage casino prize selection method.
+A hat has 13 cards in it, numbered from 1--13.  Draw a card at random; let $N$ be the number
+on the card.
+You then draw $N$ many chocolate chip cookies independently
+from an  infinite cookie jar, where the individual
+cookies have a variable number of chocolate chips on them.
+The number of chocolate chips on the $i$th cookie is
+$Y_i \stackrel{\text{iid}}{\sim} \text{Poisson}(10)$.
+For example,
+if you draw the number 7, you then extract 7 cookies
+from a jar in which the cookies have, on average,
+10 chocolate chips apiece.
+Let $Z = \sum_{i=1}^N Y_i$ be the
+total number of chocolate chips on your $N$ many cookies.
+Find $E(Z)$ and $V(Z)$, the mean and variance
+of the number of chocolate chips in your prize.
+
+
+\item
+Show that $\cov(X,c)=0$ for any random variable $X$ with finite mean and any constant $c$.
+
+\item
+Let $X_1$, $X_2$ and $X_3$ be uncorrelated random variables, each with mean $\mu$
+and variance $\sigma^2$.  Find, in terms of $\mu$ and $\sigma^2$, the quantities
+$\cov(X_1+X_2,X_2+X_3)$ and $\cov(X_1+X_2,X_1-X_2)$.
+
+\end{enumerate}
+
+\end{document}

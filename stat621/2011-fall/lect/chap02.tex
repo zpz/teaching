@@ -1,0 +1,133 @@
+\documentclass[12pt]{article}
+\usepackage{coursenote}
+\begin{document}
+\title{STAT 621 Chapter 2}
+\maketitle
+
+
+\section{Measurement scales}
+
+\begin{itemize}
+\item Nominal scale
+\item Ordinal scale
+\item Interval scale
+\item Ratio scale
+\end{itemize}
+
+\section{Random samples}
+
+\emph{Def 1}: p.~70, via ``equally likely draws''
+
+\emph{Def 2}: p.~71, via i.i.d random variables
+
+\emph{with replacement} vs \emph{without replacement}
+
+Effectively ``without replacement'':
+a small sample without replacement out of a large population.
+
+\emph{statistic}: a function of a random sample
+
+a random sample viewed as a multivariate random variable,
+which has a corresponding sample space
+
+\emph{statistic} viewed as a random variable:
+it assigns a value to each point in the sample space
+of the random sample (which is a multivariate random variable)
+
+\emph{order statistic}
+
+\section{Estimation}
+
+\subsection{Empirical distribution function}
+
+\example Ex.~1, p.~79.
+
+sample quantiles
+
+\subsection{Estimator, estimate}
+
+sample mean
+
+sample variance, sample standard deviation
+
+distribution of an estimator (which is a statistic, i.e.\@ random
+variable)
+
+mean of an estimator, \emph{unbiased estimator}
+
+variance of an estimator, \emph{standard error}
+
+point estimator vs interval estimator
+
+\subsection{Confidence interval}
+
+approx CI based on CLT, large $n$ (say 30)
+
+\example Ex.~5, p.~86.
+
+\subsection{Bootstrap}
+
+``computer-intensive statistics''
+
+\subsection{Summary}
+
+parameter estimation in general (p.~88)
+
+\section{Hypothesis testing}
+
+\subsection{Basic terminology (p.~95--96)}
+
+alternative hypothesis\\
+null hypothesis\\
+test statistic\\
+decision rule\\
+accept, or fail to reject, the null
+
+\example Ex.~1, p.~96
+
+simple/composite hypothesis (p.~97)
+
+critical region, rejection region (p.~98)\\
+two-tailed tests,
+one-tailed tests,
+upper-tailed tests, lower-tailed tests
+
+\subsection{Error types}
+
+\emph{Type I error}: def~4, p.~98.
+
+\emph{Type II error}: def~5, p.~99.
+
+\emph{Level of significance}, $\alpha$: def~6, p.~99.
+
+\emph{Power}, $1-\beta$: def~8, p.~100.
+
+Comparison of the two types of errors:
+known or unknown? unique? controlled by the user?
+(These questions have to do with whether the hypotheses are simple or
+composite.)
+
+
+\subsection{Null distribution}
+
+def~7, p.~989.
+
+\subsection{$p$-Value}
+
+def~9, p.~101.
+
+\example Ex.~2, p.~101.
+
+
+\subsection{Some properties of hypothesis tests}
+
+\emph{Power function}
+
+\emph{Relative efficiency}
+
+\section{Remarks on parametric vs nonparametric methods}
+
+p.~114--118.
+
+A definition of nonparametric methods: p.~118.
+\end{document}

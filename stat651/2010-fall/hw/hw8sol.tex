@@ -1,0 +1,251 @@
+\documentclass[12pt]{article}
+\usepackage{techart}
+\parindent=0pt
+\parskip=8pt
+\begin{document}
+\title{STAT 651 HW 8 Solution}
+\maketitle
+
+Note in the solution of question~1 a common strategy in math derivations:
+
+\underline{Delay number plug-in as much as possible}.
+
+It has two advantages:
+(1) The result is more general---it is general until you plug in
+numbers. If you need to plug in different sets of numbers,
+there are fewer steps of calculation you need to do.
+(2) It's easier to check if something goes wrong.
+
+Try to use this strategy in all your math work.
+Not only with number plug-in.
+Work in a general form as far as you can.
+
+\begin{enumerate}
+\item
+\begin{enumerate}
+\item
+\[
+f_X(x)
+= f(x, 1) + f(x, 2)
+= \frac{2x+3}{21}
+= \begin{cases}
+        5/21 & x = 1\\
+        1/3 & x = 2\\
+        3/7 & x = 3\\
+        0 & \text{otherwise}
+    \end{cases}
+\]
+\[
+f_Y(y)
+= f(1, y) + f(2, y) + f(3, y)
+= \frac{y+2}{7}
+= \begin{cases}
+        3/7 & y=1\\
+        4/7 & y=2\\
+        0 & \text{otherwise}
+    \end{cases}
+\]
+\item
+$P(X \le 2) = f_X(1) + f_X(2) = 4/7$.
+$P(Y > 1) = f_Y(2) = 4/7$.
+\item
+\[
+f(x\given y)
+= \frac{f(x,y)}{f_Y(y)}
+= \frac{f(x,y)}{f(1,y) + f(2,y) + f(3,y)}
+= \frac{x+y}{(1+y) + (2+y) + (3+y)}
+= \frac{x+y}{6 + 3y}
+\]
+$x=1,2,3$; $y=1,2$.
+After this point, you may proceed to get specific numbers.
+\[
+f(y\given x)
+= \frac{f(x,y)}{f_X(x)}
+= \frac{f(x,y)}{f(x,1) + f(x,2)}
+= \frac{x+y}{2x + 3}
+\]
+$x=1,2,3$; $y=1,2$.
+\end{enumerate}
+
+\item
+\begin{enumerate}
+\item
+\[
+f_X(x) = \int_0^x 4e^{-2x} \diff y = 4xe^{-2x},
+\quad 0<x<\infty
+\]
+\[
+f(y\given x)
+= \frac{f(x,y)}{f_X(x)}
+= \frac{4e^{-2x}}{4xe^{-2x}}
+= \frac{1}{x},
+\quad
+0 < y < x < \infty
+\]
+This shows that $Y$ is uniform on $(0,x)$ for any specific $x$.
+
+$E(Y\given x) = x/2$.\\
+$E(Y^2\given x) = \int_0^x y^2\cdot (1/x) \diff y = x^2/3$.\\
+$\var(Y\given x) = E(Y^2\given x) - \bigl(E(Y\given x)\bigr)^2 =x^2/12$.
+
+\item
+For uniform on $(a,b)$, we know the mean is $(a+b)/2$ and the variance
+is $(b-a)^2/12$. Now $a=0$ and $b=x$.
+
+\item
+\[
+f_Y(y)
+= \int_y^{\infty} 4e^{-2x} \diff x
+= 2e^{-2y}
+,\quad
+0<y<\infty
+\]
+This is exponential.
+$E(Y) = 1/2$.
+$\var(Y) = 1/4$.
+We see
+$\var(Y) < \var(Y\given x)$ when
+$x < \sqrt{3}$ and
+$\var(Y) \ge \var(Y\given x)$ otherwise.
+This is understandable by looking at the support of the joint distribution.
+\end{enumerate}
+
+\item
+\begin{enumerate}
+\item
+\[
+f_X(x) = \int_0^1 2(1-x) \diff y = 2(1-x),\quad 0<x<1
+\]
+\[
+f_Y(y) = \int_0^1 2(1-x) \diff x = 1,\quad 0<y<1
+\]
+\item
+$E(X) = \int_0^1 2x(1-x) \diff x = 1/3$.
+$E(X^2) = \int_0^1 2x^2(1-x) \diff x = 1/6$.
+$\var(X) = 1/18$.
+
+\item
+$Y$ is uniform on $(0,1)$.
+$E(Y) = .5$. $\var(Y) = 1/12$.
+
+\item
+\[
+f(x\given y)
+= \frac{f(x,y)}{f_Y(y)}
+= 2(1-x)
+,\quad
+0<x<1
+\]
+\[
+f(y\given x)
+= \frac{f(x,y)}{f_X(x)}
+= \frac{2(1-x)}{2(1-x)}
+= 1
+\]
+(Notice the joint density.
+Imagine you cut at a certain $x$ to get the profile of
+$f(y\given x)$---the profile does not depend on where you cut.
+Similarly for $f(x\given y)$.)
+
+\item
+$E(X\given y) = \int_0^1 2x(1-x)\diff x = 1/3$.\\
+$E(X^2\given y) = \int_0^1 2x^2(1-x) \diff x = 1/6$.\\
+$\var(X\given y) = 1/18$.
+\end{enumerate}
+
+\item
+\begin{enumerate}
+\item
+\[
+f_X(x) = \int_0^x 3x\diff y = 3x^2,
+\quad 0<x<1.
+\]
+\[
+f_Y(y) = \int_y^1 3x \diff x = \frac{3}{2}(1 - y^2),
+\quad 0<y<1.
+\]
+
+\item
+\[
+f(x\given y)
+= \frac{f(x,y)}{f_Y(y)}
+= \frac{3x}{(3/2)(1-y^2)} = \frac{2x}{1-y^2}
+,\quad 0<y<x<1
+\]
+\[
+f(y\given x)
+= \frac{f(x,y)}{f_X(x)}
+= \frac{3x}{3x^2}
+= \frac{1}{x}
+,\quad 0<y<x<1
+\]
+
+\item
+Noticing $Y\given X=x \sim \text{uniform}(0,x)$,
+$E(Y \given x) = x/2$.
+$\var(Y\given x) = x^2/12$.
+
+\end{enumerate}
+
+\item
+From a statistical perspective,
+these questions involve integrating the joint density
+over the region that satisfies the condition.
+However, since the density is flat,
+the probability is simple the proportion of the region of interest
+in the entire support.
+\begin{enumerate}
+\item  $\pi/4$.
+\item The condition is $Y < 2X$. This region is half of the support.
+Note as long as you cut through the center,
+the square is divided into two equal parts.
+The probability is $1/2$.
+\item The entire support satisfies this condition, therefore the
+probability is 1.
+\end{enumerate}
+
+\item
+\begin{enumerate}
+\item Integral of the density should be 1. From that we find $C = 1/4$.
+\item
+\[
+f_X(x)
+= \int_0^1 \frac{x+2y}{4} \diff y
+= \frac{x+1}{4},
+\quad 0<x<2
+\]
+\item
+\[
+F(x,y)
+= \frac{1}{4} \int_{-\infty}^x \int_{-\infty}^y (u + 2v) \diff v \diff u
+= \begin{cases}
+    0, & x \le 0 \text{ or } y \le 0\\
+    \frac{1}{8}(x^2 y + 2xy^2), & 0<x\le 2, 0<y\le 1\\
+    \frac{1}{8}(x^2 + 2x), & 0<x\le 2, 1<y\\
+    \frac{y^2 + y}{2}, & 2<x, 0<y\le 1\\
+    1, & 2<x, 1<y
+    \end{cases}
+\]
+\end{enumerate}
+
+\item
+\begin{enumerate}
+\item Rows and columns with 0's are problematic.
+The easiest argument is like this:
+$f(1, 4) = 0$ but obviously $f_X(1) > 0$ and $f_Y(4) > 0$,
+hence $f(1,4) \ne f_X(1) f_Y(4)$.
+
+\item Find the marginals of $X$ and $Y$, which are also marginals of $U$
+and $V$.
+\[
+f_X(x) = 1/4, 1/2, 1/4, \quad \text{for $x=1,2,3$, respectively}
+\]
+\[
+f_Y(y) = 1/3, \quad \text{for $y=2,3,4$}
+\]
+Then find the joint $f(u,v) = f_U(u) f_V(v)$ for each combination of $u$
+and $v$ and make a table.
+\end{enumerate}
+\end{enumerate}
+
+\end{document}

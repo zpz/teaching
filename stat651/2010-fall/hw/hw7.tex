@@ -1,0 +1,65 @@
+\documentclass[12pt]{article}
+\usepackage{techart}
+\parskip=8pt
+\parindent=0pt
+
+\begin{document}
+\title{STAT 651 HW 7}
+\author{Due Friday, 11/5}
+\date{}
+\maketitle
+
+\begin{enumerate}
+\item Describe the scale-location family associated with the standard pdf
+given by $f(x) = \frac{1}{2}\exp(-|x|)$, $-\infty < x < \infty.$
+
+\item Let $X$ be a random variable having
+pdf $f_X(x) = c \exp(-x/3) x^d I(0\le x < \infty)$,
+where $c$ and $d$ are positive constants.
+If $E(X) = 7$ and $\var(X) = 21$, then:
+  \begin{enumerate}
+  \item Find $c$ and $d$.  Identify the distribution by name.
+  \item Find $E(X^3)$.
+  \end{enumerate}
+
+\item If $X$ is a random variable having
+pdf $f_X(x) = k x^{3}(1-\frac{x}{12})^4 I(0\le x \le 12)$,
+then:
+  \begin{enumerate}
+  \item Find $k$. (Hint:  Do not expand the expression for $f_X(x)$.
+Instead, figure out how this pdf is related to that of a familiar distribution.)
+  \item Find $E(X)$ and $\var(X)$.
+  \end{enumerate}
+
+\item For each of the following families, either show why it is
+an exponential family or explain why it is not:
+
+  \begin{enumerate}
+  \item normal family with $\mu$ known.
+  \item normal family with $\sigma$ known.
+  \item family of distributions with
+  pdfs $f(x) = \frac{\theta^3}{6}x(\theta-x)I(0 < x < \theta)$,
+  where $\theta > 0$.
+  \item gamma family with both $\alpha$ and $\beta$ unknown.
+  \end{enumerate}
+
+\item
+Let the random variable $X$ have the pdf
+\[
+f(x) = \frac{2}{\sqrt{2\pi}}\exp(-x^2/2),
+\quad 0 < x < \infty.
+\]
+\begin{enumerate}
+\item
+Find the mean and variance of $X$.
+(This distribution is sometimes called a {\em{folded normal}}.)
+
+\item If $X$ has the folded normal distribution,
+find the transformation $g(X)=Y$ and values of
+$\alpha$ and $\beta$ so that $Y \sim \text{Gamma}(\alpha,\beta)$.
+\end{enumerate}
+
+\item 4.4 on page 192.
+\end{enumerate}
+
+\end{document}

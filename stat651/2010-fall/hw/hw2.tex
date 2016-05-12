@@ -1,0 +1,86 @@
+\documentclass[12pt]{article}
+\usepackage{techart}
+
+\begin{document}
+\title{STAT 651 HW 2}
+\author{Due Friday, 9/20}
+\date{}
+\maketitle
+
+\begin{enumerate}
+\item
+Counting the number of various types of hands in poker
+(drawing 5 cards randomly, without replacement).
+Count the number of ways that a hand can be drawn consisting of
+    \begin{enumerate}
+    \item 3 of a kind + 2 of a kind (full house; ``kind'' means the
+        face number)
+%    \item 3 of a kind plus two singletons (i.e. non-pair)
+    \item two pairs
+    \item five singletons (no pairs, no triplets, etc.)
+    \end{enumerate}
+
+    (Hint: answers are 3744, %54912,
+     123552, and 1317888)
+
+\item
+Two players, $A$ and $B$, alternately and independently flip a coin
+and the first player to obtain a head wins.
+Assume player $A$ flips first.
+  \begin{enumerate}
+  \item If the coin is fair, what is the probability that A wins?
+  \item If $P(\text{head}) = p$, not necessarily $1/2$,
+    what is the probability that $A$ wins?
+  \item Show that for all $p \in (0, 1)$, $P(\text{$A$ wins}) > 1/2$.
+  \end{enumerate}
+
+  (Hint: Try to write $P(\text{$A$ wins})$
+  in terms of the events $E_1, E_2,\dotsc$,
+  where $E_i$ is the event that
+  $A$ wins at her $i$th toss.)
+
+\item
+Suppose that 5\% of men and .25\% of women are color-blind.
+A person is chosen at random and that person is color-blind.
+What is the probability that the person is male?
+(Assume males and females to be in equal numbers.)
+
+\item
+If the probability of hitting a target is $1/5$, and 10 shots are fired
+independently.
+    \begin{enumerate}
+    \item
+    What is the probability of the target being hit at least twice?
+    \item
+    What is the conditional probability that the target is hit at least twice,
+    given that it is hit at least once?
+    \end{enumerate}
+
+\item
+Prove each of the following statements.
+(Assume that any conditioning event has positive probability.)
+  \begin{enumerate}
+  \item If $P(B) = 1$ then $P(A\given B) = P(A)$ for any event $A$.
+  \item If $A \subset B$ then $P(B\given A) = 1$ and
+    $P(A\given B)=P(A) / P(B)$.
+  \item If $A$ and $B$ are mutually exclusive, then
+    $P(A\given A\cup B) = P(A) \bigm/ \bigl(P(A) + P(B)\bigr)$.
+  \end{enumerate}
+
+\item
+A pair of events $A$ and $B$ cannot be simultaneously
+\emph{mutually exclusive} and \emph{independent}.
+Prove that if $P(A) > 0$ and $P(B) > 0$, then:
+  \begin{enumerate}
+  \item If $A$ and $B$ are mutually exclusive, they cannot be independent.
+  \item If $A$ and $B$ are independent, they cannot be mutually exclusive.
+  \end{enumerate}
+
+\item
+If $S = \{ \text{sequences of 4 consecutive tosses of a single coin} \}$.
+Find the cdf and pmf for the random variable $X$, where
+$X(\omega) = (\text{\# heads}) \times (\text{\# tails})$
+for $\omega \in S$.
+\end{enumerate}
+
+\end{document}

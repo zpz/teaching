@@ -1,0 +1,22 @@
+STAT 611 HW 10
+due Friday 4/1
+
+9.10
+9.13
+9.22
+
+You may implement several more (nontrivial) functions,
+if they are not available in R/stats, as drop-in replacement
+of TSA functions. These may include
+(1) coef conversion: MA->AR, AR->MA, ARMA->AR, ARMA->MA
+(2) LS estimation of AR, MA, ARMA models with specified orders
+(3) forecast with AR, MA, ARMA, giving prediction limits
+
+Think carefully
+(1) when separating AR, MA treatments from the general ARMA
+is beneficial, and when making a general ARMA implementation to do all
+is more convenient;
+(2) how your AR and MA modules can be reused in a more
+general ARMA function;
+(3) what operations can be separated out as modular, utility functions to be
+re-used in other functions

@@ -1,0 +1,101 @@
+\documentclass[12pt]{article}
+\usepackage{techart}
+
+\parindent=0pt
+\parskip=8pt
+\begin{document}
+\title{STAT 651 HW 8}
+\author{Due Friday, 11/19}
+\date{}
+\maketitle
+
+\begin{enumerate}
+\item Let $f(x,y) = \frac{1}{21}(x+y)$, $x=1,2,3,$ $y=1,2$.
+ \begin{enumerate}
+ \item Find $f_X(x)$ and $f_Y(y)$.
+ \item Find $P(X\le 2)$ and $P(Y>1)$.
+ \item Find $f(x\given y)$ and $f(y\given x)$.
+ \end{enumerate}
+
+\item Let $f(x,y) = 4\exp(-2x)$, $0<y<x<\infty$.
+  \begin{enumerate}
+  \item Find $E(Y\given x)$, $E(Y^2\given x)$ and $\var(Y\given x)$,
+  using $f(y\given x)$.
+  \item It can be seen that that $Y\given x$ follows a uniform distribution for each $x>0$.
+  With this observation, how could you have calculated $E(Y\given x)$ and
+  $\var(Y\given x)$?
+  \item Compare $\var(Y\given x)$ and $\var(Y)$.  (Which one is smaller, and does this make sense?)
+  \end{enumerate}
+
+\item Consider continuous random variables $X$ and $Y$ whose pdf is given by:
+\[
+f(x,y) = \begin{cases}
+    2(1-x)  & \text{if $0 < x,y < 1$} \\
+    0       & \text{otherwise}
+    \end{cases}
+\]
+
+  \begin{enumerate}
+  \item Find the marginal distributions for $X$ and $Y$.
+  \item Find $E(X)$ and $\var(X)$.
+  \item Find $E(Y)$ and $\var(Y)$.
+  \item Find $f(x\given y)$ and $f(y\given x)$.
+  \item Find $E(X\given y)$ and $\var(X\given y)$.
+  \end{enumerate}
+
+\item Consider continuous random variables $X$ and $Y$ whose pdf is given by:
+$$f(x,y) = \left\{ \begin{array}{ll}
+3x & {\mbox{ if }} 0 < y < x < 1 \\
+ 0 & {\mbox{otherwise}} \end{array}\right.$$
+
+  \begin{enumerate}
+  \item Find the marginal distributions for $X$ and $Y$.
+  \item Find $f(x\given y)$ and $f(y\given x)$.
+  \item Find $E(Y\given x)$ and $\var(Y\given x)$.
+  \end{enumerate}
+
+\item A random point ($X,Y$) is distributed uniformly on the square with
+vertices
+$(1,1)$, $(1,-1)$, $(-1,1)$ and $(-1,-1)$.
+That is, the joint pdf is $f(x,y)=1/4$ on
+the square. Determine the probabilities of the following events:
+
+(a) $X^2 + Y^2 < 1$
+
+(b) $2X-Y>0$
+
+(c) $| X+Y | < 2$
+
+\item A pdf is defined by
+\[
+f(x,y) =
+\begin{cases}
+    C(x+2y) & \text{if $0<y<1$ and $0<x<2$}\\
+    0 & \text{otherwise}
+\end{cases}
+\]
+
+(a) Find the value of $C$.
+
+(b) Find the marginal distribution of $X$.
+
+(c) Find the joint cdf of $X$ and $Y$ (i.e.\ $F(x,y) = P(X\le x, Y\le y)$).
+
+
+\item The random pair $(X,Y)$ has the distribution
+$$\begin{array}{cc|ccc}
+& & & X & \\
+& & 1 & 2 & 3 \\
+\hline
+& 2 & 1/12 & 1/6 & 1/12 \\
+Y & 3 & 1/6 & 0 & 1/6 \\
+& 4 & 0 & 1/3 & 0 
+\end{array}$$
+
+(a) Show that $X$ and $Y$ are dependent.
+
+(b) Give a probability table for random variables $U$ and $V$ that have the
+same marginals as $X$ and $Y$ but are independent.
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,97 @@
+\documentclass[12pt]{article}
+\usepackage{techart}
+
+\parindent=0pt
+\parskip=8pt
+
+\begin{document}
+\title{STAT 651 Midterm 1}
+\author{}
+\maketitle
+
+\textbf{Name}: \underline{\ \ \hskip8cm\ \ }
+\medskip
+
+Answer the following questions.  Be sure to show your work. 
+Closed book, closed notes.  You may use two 8 $\times$ 11 piece of
+paper containing notes you have written.
+Calculators are allowed.
+Time limit: 60 minutes.
+\medskip
+
+\begin{enumerate}
+
+\item(15 pts)  Consider a hand of poker, in which 5 cards are selected at random from a deck of 52 cards.
+  \begin{enumerate}
+  \item Find the number of hands that make a full house (3 of a kind and 2 of a kind).
+  \item Find the number of hands that make a flush (5 cards of the same suit).
+  \item Which type of hand is less likely to occur (and so should have higher value
+    in designing a game)?
+  \end{enumerate}
+
+\item(20 pts)  Consider an experiment in which one 4-sided die and one fair coin are tossed.
+  \begin{enumerate}
+  \item Describe the sample space, $S$; how many elements does $S$ have?
+%  \item How many items does $\cal{B}$, the usual $\sigma$-field have?
+  \item Let $X$ be a random variable associated with the experiment, where:
+%  If $\omega \in S$, we define
+  $$X = \left\{ \begin{array}{ll}
+  j & {\mbox{ if coin is H and we see }} j {\mbox{ spots}} \\
+  2j & {\mbox{ if coin is T and we see }} j {\mbox{ spots}} \\
+  \end{array}\right.$$
+    \begin{enumerate}
+    \item Find $f_X(x)$, the pmf for $X$.
+    \item Sketch the graph of $F_X(x)$, the cdf for $X$.
+    \end{enumerate}
+  \end{enumerate}
+  
+\item (10 pts)  Let $A$ and $B$ be events that are independent {\underline{and}} mutually exclusive.
+\begin{enumerate}
+\item Show that either $P(A)=0$ or $P(B)=0.$
+\item Is it necessarily true that either $A=\emptyset$ or $B=\emptyset$?
+    Explain briefly, or describe a counter example.
+\end{enumerate}
+
+\item (15 pts) It is known that 95\% of children like the movie, 
+Curse of the Were Rabbit (CoTWR), i.e.\ P(enjoy  movie $|$ child) = .95.
+But (just) 90\% of adults like it.  The general population consists of
+40\% children, 60\% adults.
+If a randomly selected person from the population
+likes CoTWR, what is the probability that they are a child?
+
+\item (25 pts) Let $X$ be a random variable that has cdf $F_X(x)$, given by:
+$$F_X(x) = \left\{ \begin{array}{ll}
+ 1-\exp(-3x) & {\mbox{ if }} x \ge 0 \\
+ 0 & {\mbox{ if }} x < 0.
+ \end{array} \right. $$
+  \begin{enumerate}
+  \item Find $f_X(x)$, the pdf of $X$.
+  \item Let $Y = e^X$.
+    \begin{enumerate}
+    \item Find $f_Y(y)$, the pdf of $Y$. (What is the range of values that $Y$ can take?)
+    \item Show that the pdf of $Y$ integrates to 1.
+    \item Find $E\{Y\}$.
+    \end{enumerate}
+  \end{enumerate}
+ 
+\item (15 pts) Let $X \sim {\mbox{Bernoulli}}(p)$, where $0 \le p \le 1.$
+  (I.e.\, $P(X=1)=p$ and $P(X=0)=1-p.$)
+  \begin{enumerate}
+  \item Find $E\{X^m\}$, where  $m = 1,2,3,\ldots.$ (Hint: First, find the pmf of $X$.)
+  \item Find $E\{e^{tX}\}$, where $t$ is a known constant, $-\infty < t < \infty$.
+  \item Use the result above to find
+    $E\{e^{-X}\}$ and $E\{e^{3X}\}$.
+  \end{enumerate}
+
+
+\end{enumerate}
+
+
+\end{document}
+
+\item The variance of an RV $X$ is defined as var($X$) = $E[(X-\mu_X)^2]$, where $\mu_X=E[X]$.
+Let $a$ and $c$ be constants, $-\infty < a < \infty$, $-\infty < c < \infty$.
+  \begin{enumerate}
+  \item Show that var($aX$) = $a^2 {\mbox{var}}(X)$.
+  \item Show that var($X+c$) = var($X$).
+  \end{enumerate}

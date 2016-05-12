@@ -1,0 +1,42 @@
+\documentclass[12pt]{article}
+\usepackage{coursenote}
+\begin{document}
+\title{STAT 611 Chapter 3}
+\maketitle
+
+
+\section{Residual analysis}
+
+Looking at residual plots is a basic and very effective way of spotting
+problems, meaning, possible violation of model assumptions in the data.
+
+Residuals:
+\[
+\hat{X}_t = Y_t - \hat{\mu}_t
+\]
+``Standardized'' or ``studentized'' residuals provide more accurate
+info.
+
+Several things to check:
+\begin{enumerate}
+\item $t$ versus $\hat{X}_t$
+
+    Does it look random? Is there any systematic behavior or pattern,
+    such as continued positive or negative residuals, or cyclical
+    behavior? Outliers?
+    Patterns will defy independence.
+\item $Y_t$ versus $\hat{X}_t$
+
+    Again, any systematic pattern?
+\item Normality plot: QQ plot.
+
+    Quantiles of $\hat{X}_t$ versus
+    corresponding theoretical quantiles of a normal distribution.
+\item Sample autocorrelation function and correlogram
+
+    (3.6.2), p.~46
+
+    Behavior of the correlogram: pace of decay, cyclic?
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,23 @@
+STAT 611 HW 5
+due Friday, 2/25
+
+1. Write a R function, say, is.AR.stationary,
+   that checks whether the AR process identified by the
+   input vector of coefs (phi's) is stationary.
+
+2. Write a R function computing the autocorrelation function
+   of a ARMA(p,q) process, given the vectors of phi's and theta's.
+   See page 85 and handouts.
+   It should call the function above to check stationarity,
+   and aborts if the process is not stationary.
+
+   Construct a couple of examples to verify the correctness of your
+   function by comparing its output with that of a known correct
+   function.
+
+5.1
+
+5.2
+
+5.3
+

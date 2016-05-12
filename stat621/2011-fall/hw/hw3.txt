@@ -1,0 +1,64 @@
+STAT 621 HW 3
+Assigned 10/17; due next Friday
+
+1.
+Contingency tables may be used to present data representing scales of
+measurement higher than the nominal scale. For example, a random sample
+of size 20 was selected from the graduate students who are U.S.
+citizens, and their grade point averages were recorded:
+
+2.42, 3.54, 3.21, 3.63, 3.22, 3.80, 3.70, 3.20, 3.75, 3.31
+3.86, 4.00, 2.86, 2.92, 3.59, 2.91, 3.77, 2.70, 3.06, 3.30
+
+Also, a random sample of 20 students was selected from the non-U.S.
+citizen group of graduate students at the same university. Their grade
+point averages were as follows.
+
+3.50, 4.00, 3.43, 3.85, 3.84, 3.21, 3.58, 3.94, 3.48, 3.76
+3.87, 2.93, 4.00, 3.37, 3.72, 4.00, 3.06, 3.92, 3.72, 3.91
+
+Test the null hypothesis that the proportion of graduate students with
+averages of 3.50 or higher is the same for both the U.S. citizens and
+the non-U.S. citizens.
+
+
+2.
+A random sample of 30 graduating university seniors was categorized by
+college and religious preference as follows. Is there a relationship
+between college and religious preference?
+
+Arts & Sciences: C[atholic], C, J[ewish], C, P[rotestant], P, O[ther],
+P, O
+
+Business: P, C, J, J, P, P, O
+
+Engineering: C, P, P, P, O
+
+Other: P, C, C, O, C, O, C, J, O
+
+
+3.
+Follow Example 3, page 210, to test independence of X and Y given a
+scatter plot of X-Y pairs. Write R function(s) to implement this test.
+Consider the following design issues:
+(1) Write a function that takes parameters: x, y, nbin.x, nbin.y, etc
+(2) It should return a list with info about x, y, nbin.x, nbin.y, the
+test statistic, the p-value, degree of freedom, etc.
+(3) Consider setting default values to 'nbin.x' and 'nbin.y' such that,
+for example, they are equal and they are such that on average each cell
+contains >= 4 points, say.
+
+Functions that might be useful: sort, order, quantile, cut.
+
+Run the code with several examples using data randomly drawn from
+independent normal distributions, a dependent bivariate normal
+distribution, and with a variety of sample sizes.
+
+Show the scatter plots. Report the conclusions of your tests (mainly the
+p-value).
+
+
+4.
+A die was cast 600 times with frequencies 87, 96, 108, 89, 122, 98 for
+the faces 1, 2, 3, 4, 5, 6. Is the die balanced?
+

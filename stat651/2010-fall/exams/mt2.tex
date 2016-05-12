@@ -1,0 +1,85 @@
+\documentclass[12pt]{article}
+\usepackage{techart}
+
+\parindent=0pt
+\parskip=8pt
+
+\begin{document}
+\title{STAT 651 Midterm 2}
+\author{}
+\maketitle
+
+\textbf{Name}: \underline{\ \ \hskip8cm\ \ }
+\medskip
+
+\begin{enumerate}
+
+\item (15 pts)
+We know the moment generating function of a gamma distribution is
+\[
+M_X(t) = (1 - \beta t)^{-\alpha},
+\quad
+t<\frac{1}{\beta},\, 0 < \alpha,\beta < \infty
+\]
+Now suppose the mgf of the distribution of $Y$ is
+\[
+M(t) = \frac{1}{0.25t^2 - t + 1}
+\]
+defined on $(-\delta, \delta)$ for some $\delta > 0$.
+What is the distribution of $Y$?
+What theorem or facts provided support for your conclusion?
+
+\item (20 pts)
+The multinomial pmf is
+\[
+f(x_1,\dotsc,x_k \given p_1,\dotsc,p_k)
+= \frac{n!}{x_1!\dotsm x_k!}\, p_1^{x_1}\dotsm p_k^{x_k}
+,
+\]
+where $n$ is a positive integer,
+$x_1,\dotsc,x_k$ are nonnegative integers summing to $n$,
+and
+$p_1,\dotsc,p_k$ are positive parameters summing to $1$.
+Show that this distribution is or is not a member of the exponential
+family.
+
+\item (45 pts)
+Consider two continuous random variables $X_1$ and $X_2$ whose joint
+distribution is given by the following pdf:
+\[
+f(x_1, x_2) = \begin{cases}
+    3x_1, & \text{if $0 < x_2 < x_1 < 1$}
+    \\
+    0, & \text{elsewhere}
+\end{cases}
+\]
+\begin{enumerate}
+\item Find the marginal pdf of $X_2$.
+\item Find the expectation of $X_2$.
+\item Find the conditional distribution of $X_1 \given X_2$.
+\end{enumerate}
+
+\item (45 pts)
+Suppose that $X_1$ and $X_2$ have joint pdf
+\[
+f(x_1, x_2) =
+\begin{cases}
+    3(x_1 + x_2),
+        & \text{if $0 < x_1, x_2 < 1$ and $0 < x_1 + x_2 < 1$}
+    \\
+    0, & \text{otherwise}
+\end{cases}
+\]
+Let $Y_1 = X_1 + X_2$ and $Y_2 = X_1 - X_2$.
+\begin{enumerate}
+\item
+Find the joint pdf of $Y_1$ and $Y_2$.
+Remember to state the support of the distribution.
+\item
+Are $Y_1$ and $Y_2$ independent? Briefly explain your judgement.
+\end{enumerate}
+
+\end{enumerate}
+
+\end{document}
+

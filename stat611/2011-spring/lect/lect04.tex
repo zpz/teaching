@@ -1,0 +1,269 @@
+\documentclass[12pt]{article}
+\usepackage{coursenote}
+\begin{document}
+\title{STAT 611 Part 4}
+\subtitle{Intervention Analysis}
+\maketitle
+
+``Intervention analysis'' is a special (and simple) case of the
+so-called ``transfer function models''.
+In transfer function models,
+the process $Y_t$ is affected by an input process $X_t$,
+described by
+\[
+Y_t = \sum_{j=0}^\infty \tau_j X_{t-j} + N_t
+,
+\]
+where $N_t$ is an ARMA, or ARIMA, or even SARIMA process.
+The $\sum_{j=0}^\infty \tau_j X_{t-j}$ part is a deterministic function
+(but can use the AR, MA, or ARMA forms of expression).
+
+In intervention analysis, we focus on two types of $X_t$ input:
+a \emph{pulse},
+\[
+P_t^{(T)} =
+\begin{cases}
+    1,\quad & \text{if $t = T$},\\
+    0,      & \text{if $t \ne T$}
+\end{cases}
+\]
+(an instantaneous input at time $T$)
+and a \emph{step function}
+\[
+S_t^{(T)} =
+\begin{cases}
+    1,\quad & \text{if $t \ge T$},\\
+    0,      & \text{if $t < T$}
+\end{cases}
+\]
+(a lasting input starting at time $T$).
+
+Note
+\[
+P_t^{(T)} = (1 - B) S_t^{(T)}
+\]
+and
+\[
+S_t^{(T)}
+= (1 - B)^{-1} P_t^{(T)}
+= (1 + B + B^2 + B^3 +\dotsb) P_t^{(T)}
+\]
+
+\alert
+1. We only consider the case where the time of intervention, $T$, is
+known.
+
+2. There could be multiple interventions with common or different $T$;
+just add them up.
+
+3. The intervention model changes the \emph{mean} of $Y_t$ but not its
+variance.
+
+4. $N_t$ is called the ``background'' process (or ``noise'').
+It is assumed that the behavior of $N_t$ is unchanged,
+hence it is described by one model regardless of the intervention.
+The observed process is the background process plus the varying level of
+$E(Y_t)$ that is caused by the intervention.
+
+
+\section{Formulation}
+
+We examine several typical patterns of intervention impact and come up
+with expressions for them.
+The expressions will contain a small number of parameters,
+which will be estimated subsequently.
+In other words,
+the form of the intervention model is specified based on
+\emph{inspection} of graphics of the process
+(in contrast to the general ARMA modeling, in which we
+``estimate'' the orders before the form of the model can be specified).
+
+Let's write $m_t = \sum_{j=0}^\infty \tau_j X_{t-j}$.
+
+\begin{enumerate}
+\item $m_t = \omega P_t^{(T)}$.
+
+    Variation: say there is a $d$ time unit \emph{delay} between the
+    intervention event and the appearance of its impact, then
+    $m_t = \omega P_{t-d}^{(T)} = \omega B^d P_t^{(T)}$.
+\item $m_t = \omega S_t^{(T)}$.
+
+    It's common that the impact of an intervention that happened at time
+    $T$ was shown only in $Y_{T+1}$,
+    so it's common to see
+    $BS_{t}^{(T)}$ or $BP_t^{(T)}$ in the model.
+
+    Figure 11.3(a), p.~253.
+\item Figure 11.3(b), p.~253: $m_t$ gradually increases to a stable
+    level.
+
+    A geometric series with rate below 1 is the most common way to
+    achieve this pattern.
+    Think of this general solution:
+    \begin{equation}\label{eq:geometric}
+    z_n
+    = a(1 + b + b^2 + \dotsb + b^n)
+    = \frac{a(1 - b^{n+1})}{1 - b}
+    \xrightarrow{n \rightarrow \infty} \frac{a}{1 - b},
+    \qquad 0 < b < 1
+    \end{equation}
+    A recursive definition is
+    \begin{align*}
+        z_0 &= a\\
+        z_n &= a + bz_{n-1},\qquad n=1,2,\dotsc
+    \end{align*}
+    If we want the accumulation to start at time $t$ instead of time 0,
+    we can adjust this to
+    \begin{align*}
+        z_n &= 0, \qquad     &n < t\\
+        z_n &= a + bz_{n-1}, &n \ge t
+    \end{align*}
+    or using the step function,
+    \begin{align*}
+        z_0 &= a S_0^{(T)}\\
+        z_n &= a S_{t}^{(T)} + bz_{n-1},\qquad n=1,2,\dotsc
+    \end{align*}
+
+    Or if we want the accumulation to start at time $t+1$,
+    and use the textbook notation, we have
+    \begin{align*}
+        m_0 &= \omega BS_{0}^{(T)}\\
+        m_t &= \omega BS_{t}^{(T)} + \delta m_{t-1},
+            \qquad t=1,2,\dotsc
+    \end{align*}
+    that is, $m_0 = 0$ and
+    \[
+        (1 - \delta B)m_t = \omega B S_{t}^{(T)}
+    \]
+    or, since we want to express \emph{$m_t$}, we use
+    \begin{equation}\label{eq:increase-1}
+        m_t = \frac{\omega B}{1 - \delta B} S_t^{(T)}
+    \end{equation}
+
+    It might be more intuitive to write this as
+    \[
+        m_t = (1 + \delta B + \delta^2 B^2 +\dotsb) \omega B S_{t}^{(T)}
+    \]
+    In this process, we see
+    $m_t = 0$,
+    $m_{t+1} = \omega$,
+    $m_{t+2} = \omega (1 + \delta)$,
+    $m_{t+3} = \omega (1 + \delta + \delta^2)$,
+    and so on.
+    By adjusting $\omega$ and $\delta$,
+    we can control the magnitude of the first ``jump''
+    and the pace of increase afterwards.
+
+\item Figure 11.3(c), p.~253: $m_t$ increases linearly without bound
+(less realistically).
+
+    Just let $b=1$ in~(\ref{eq:geometric}) or $\delta = 1$ in the
+    previous definition:
+    \[
+        m_t = \frac{\omega B}{1 - B} S_t^{(T)}
+    \]
+
+\item Figure 11.4(a), p.~254: $m_t$ has a jump after the
+intervention, then gradually falls back to the original level.
+
+    This obviously is characterized by
+    \begin{align*}
+        m_{t} &= 0\\
+        m_{t+1} &= \omega\\
+        m_{t+k} &= \delta m_{t+k-1},\qquad t>1, 0<\delta<1.
+    \end{align*}
+    Using the pulse function,
+    we can write this as $m_0 = 0$ and
+    \[
+        m_t = \omega BP_{t}^{(T)} + \delta m_{t-1}
+    \]
+    or
+    \begin{equation}\label{eq:decrease-1}
+        m_t = \frac{\omega B}{1 - \delta B} P_t^{(T)}
+    \end{equation}
+    This is equivalent to
+    \begin{align*}
+        m_t &= (1 + \delta B + \delta^2 B^2 +\dotsb) \omega B
+                P_t^{(T)}\\
+            &= \omega \sum_{j=0}^\infty \delta^j P_{t-1-j}^{(T)}\\
+            &= \omega \delta^{t-T-1}
+                \qquad \text{(b/c we get something only when $t-1-j = T$)}
+    \end{align*}
+    This process clearly decreases from $\omega$ towards 0 as time
+    elapse after $T$.
+
+    On a second thought, we can define
+    \[
+        m_t = \omega \delta^{t-T} B S_t^{(T)}
+    \]
+    which seems to be intuitive.
+
+\item Figure 11.4(b), p.~254: jumps and then gradually falls to a level
+    above the original.
+
+    Simply add a step function onto the previous one:
+    \begin{equation}\label{eq:decrease-2}
+        m_t = \frac{\omega_1 B}{1 - \delta B} P_t^{(T)}
+                + \omega_2 B S_t^{(T)}
+    \end{equation}
+    to uniformly lift the post-intervention level.
+
+    This is the same as the one in the book,
+    noticing $P_t^{(T)} = (1-B)S_{t}^{(T)}$.
+
+\item Gradually decreases after intervention towards a certain stable level.
+
+    Simply lower~(\ref{eq:decrease-1}) to some level below 0 at time $t+1$:
+    \[\begin{split}
+        m_t &= \frac{\omega_1 B}{1 - \delta B} P_t^{(T)}
+                - (\omega_1 + \omega_2) B S_t^{(T)}
+                \\
+            &= \frac{\delta \omega_1 - \omega_2
+                + (\delta \omega_2 - \omega_1)B}
+                {1-\delta B} S_t^{(T)}
+                \qquad \text{(using $P = (1-B)S$)}
+    \end{split}
+    \]
+
+    Better yet, simply negate~(\ref{eq:increase-1}):
+    \[
+        m_t = -\frac{\omega B}{1 - \delta B} S_t^{(T)}
+        ,\qquad \omega > 0, 0<\delta<1.
+    \]
+
+\item Figure 11.4(c), p.~254: a one-time jump,
+    then dips and gradually rises back.
+
+    Use a pulse to represent the one-time jump,
+    followed by a negated~(\ref{eq:decrease-2}):
+    \[
+        m_t = \omega_0 P_t^{(T)} - \omega_1 B S_t^{(T)}
+            - \frac{\omega_2 B}{1 - \delta B} P_t^{(T)}
+        ,\qquad \omega_0,\omega_1,\omega_2 > 0; 0<\delta<1.
+    \]
+
+\end{enumerate}
+
+\section{Estimation}
+
+After we have specified the model for $m_t$ (with unknown parameters),
+the density of $Y_t - m_t$ (that is, $N_t$) can be written.
+Hence a MLE can be attempted.
+
+We use explorations of the series prior to the intervention
+for tentative specification of model for $N_t$.
+
+If the process looks stationary after removing the intervention effect,
+we could try a simple least squares estimation of the intervention model
+parameters.
+After that, get the residual series and check what model is appropriate
+for it.
+(The book does not mention this strategy, and I didn't try it.)
+
+As usual,
+after estimation of the full model,
+various diagnostics should be checked,
+and the model revised (and refitted, and re-checked) if necessary.
+
+\end{document}
+

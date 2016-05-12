@@ -1,0 +1,128 @@
+\documentclass[12pt]{article}
+\usepackage{coursenote}
+\begin{document}
+\title{STAT 621 Chapter 3}
+\maketitle
+
+\section{The Binomial test}
+
+Highlights:
+\begin{enumerate}
+\item Recognize the generality and broad applicability of Binomial-based
+tests.
+\item The test statistic ($T$) and its null distribution.
+\item Normal approximation to binomial.
+    \begin{itemize}
+    \item ``large sample size''
+    \item ``correction for continuity''
+    \end{itemize}
+\item Alternative hypotheses: two-tailed vs one-tailed.
+\item Implications of the discrete nature of $T$:
+    \begin{itemize}
+    \item determination of the rejection region
+    \item the resultant level of significance ($\alpha$)
+    \item to include or not to include ``or equal to''
+    \end{itemize}
+\item How to determine the $p$-value.
+\end{enumerate}
+
+\example Ex.~1, page 127. (Point to learn: how to state (choose) $H_0$
+and $H_1$.)
+
+\example Ex.~2, page 128.
+
+\section{Confidence interval for a probability or population proportion
+($p$)}
+
+Highlights:
+
+\begin{enumerate}
+\item Method A (exact) vs Method B (approx).
+\item Derivation of the formulas for Method B.
+\item How was the table for Method A made?
+\end{enumerate}
+
+\example Ex.~3, page 130.
+
+\section{The sign test}
+
+The sign test is the oldest of all nonparametric tests,
+and it is a special Binomial test. While a Binomial test tests whether
+$p$ is a certain value, say $p_*$,
+the sign test tests whether $p$ is 0.5.
+
+Specifically,
+there exist a sample of a bivariate variable:
+$(x_1, y_1)$, $(x_2, y_2)$,..., $(x_n, y_n)$.
+We want to test whether $X$ on average tends to be larger than $Y$.
+
+Highlights:
+\begin{enumerate}
+\item Convert a bivariate problem to a univariate problem---let
+    $Z = X - Y$, then the bivariate sample induces a univariate sample
+    $z_1,\dotsc, z_n$.
+    The test becomes whether $Z$ tends to be positive or negative.
+\item Get the sign ($+$ or $-$) of $z_i$.
+    Then the test becomes whether there tend to be more $+$'s than
+    $-$'s. Or, in other words, whether $P(+) = 0.5$.
+    Hence this is a Binomial test with $T = \#\{+\}$ and $p_* = 0.5$.
+\item Discard ties; in other words, $z=0$ contains no info about the
+    tendency of the sign of $Z$.
+\item Independent sample: independence between pairs.
+\item ``Internally consistent'': if $P(+) > P(-)$ for one pair, then
+    this is the case for all pairs.
+    This is one of the requirement of a Binomial experiment: constant
+    $p$ in all trials.
+\item How to state the hypothesis: $P(+) = P(-)$ vs alternatives.
+\item An alternative statement of hypothesis: $E(X) = E(Y)$ vs
+    alternatives.
+
+    This involves some assumption about the distribution of $Z = X - Y$.
+    Specifically, it assumes the distribution of $Z$ is symmetric about
+    its mean.
+\end{enumerate}
+
+
+\section{Variation 1 of the sign test: McNemar test for significance of
+change}
+
+The value of some attribute is one of two categories; let's call them
+``0'' and ``1''.
+We take a sample of size $n'$; some have value ``0'' and the others have
+value ``1''.
+After a certain incident,
+the values of this sample is measured again: some will stay the same as
+before, some ``0'' switched to ``1'', and some ``1'' switched to ``0''.
+The counts of ``0''s and ``1''s can be summarized in a \emph{contingency table}:
+
+\begin{center}
+\begin{tabular}{cc|cc}
+    &   & after & \\
+    & & 0   & 1 \\ \hline
+before & 0 & a & b \\
+    & 1 & c &d \\ \hline
+\end{tabular}
+\end{center}
+
+The question is: have the fractions of ``0''s and ``1''s changed?
+
+The test is really whether $b = c$.
+
+Exact test when $b + c \le 20$: use Binomial (or sign) test.
+
+Large sample test when $b + c > 20$: use normal approx.
+
+\example Ex.~1, page 168.
+
+\section{Variation 2 of the sign test: Cox \& Stuart test for trend}
+
+\example Ex.~2, page 171 (the simple case)
+
+\example Ex.~3, page 171 (filtering out periodicity)
+
+\example Ex.~4, page 172 (detecting correlation)
+
+\example Ex.~5, page 173 (testing for the presence of a pattern of
+relation)
+
+\end{document}

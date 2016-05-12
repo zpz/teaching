@@ -1,0 +1,7 @@
+STAT 611 HW 3
+due Friday 2/11
+
+4.1
+4.2 (calculate rho values; briefly comment)
+4.4
+4.7 (a)-(b)

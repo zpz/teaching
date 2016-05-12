@@ -1,0 +1,21 @@
+STAT 611 HW 4
+Due Friday, 2/18
+
+* 4.5
+
+* 4.6
+
+* 4.7
+
+* 4.8 (I don't know what 'first principles' refer to; just use what we
+    learned in this chapter)
+
+* Construct 4 sets of coefficients for AR(3) or AR(4) processes such
+  that 2 are stationary and 2 are nonstationary.
+  Verify, using the 'stationarity conditions', that they are
+  (non)stationary. Show a couple of simulations for each of these
+  processes. Briefly comment on the behavior of the simulated
+  realizations.
+
+* List all the differences you can think of between MA and AR processes.
+

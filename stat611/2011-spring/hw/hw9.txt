@@ -1,0 +1,60 @@
+STAT 611 HW 9
+Due: whenever you have new R code and want me to look at it
+
+R programming practice
+
+Depending on your interest, I suggest using this course's material to
+have some practice in R programming.
+
+You will implement some basic or important functionalities relevant to
+Time Series analysis. You should make use of existing functions
+in R's base and 'recommended' packages as much as you can; do not
+re-implement functions already in the base and recommended packages.
+The package TSA that accompanies the text is a reference;
+but you will implement your own versions as needed.
+
+You will organize your functions is a R package in the following
+structure:
+
+mypackage/
+  DESCRIPTION
+  README
+  R/
+  man/
+  tests/
+  data/
+
+The 'man' and 'data' folders may be empty. 'man/' holds documentation;
+don't worry about it unless you like to. You may take a few data files
+from TSA and put them in 'data/' to play with.
+
+'R/' will be the place to hold your functions.
+I recommend having one function in one file, or a small group of closely
+related functions in one file. Do not put all functions in one big file.
+
+'tests/' will be the place to hold short testing scripts (that are
+relatively final and worth keeping). Usually, one test script file,
+named like 'test.functionname.R', should test one function only.
+
+Aim to write clean, structured, commented code that follow R conventions
+and taste. Learn to make use of such R features as default argument
+values, the dots (...) argument, and returning multiple pieces of
+information in a list.
+
+For assignment, '<-' is preferred to '='.
+
+You will work on recent materials and fill in older ones as needed and
+time-permitted.
+
+Examples of older functions that you can tidy up and include are
+functions for testing stationarity, and simulation of an ARMA process.
+
+A recent function you may start working on is least squares estimation
+of a (stationary) ARMA model.
+
+You should also start doing a survey of all Time Series functionalities
+in 'base', 'stats' and possibly other 'recommended' packages.
+Make a list of these functions, give a short description of what each
+function does (usually this is the first line of its documentation
+page). You may find many things are available; then you'll study them
+and don't need to implement them yourself.

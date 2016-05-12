@@ -1,0 +1,48 @@
+\documentclass[12pt]{article}
+\usepackage{techart}
+
+\parindent=0pt
+\parskip=8pt
+
+\begin{document}
+\title{STAT 651 Final Exam}
+\author{}
+\maketitle
+
+\textbf{Name}: \underline{\ \ \hskip8cm\ \ }
+\medskip
+
+\begin{enumerate}
+\item Let $X_1,\dotsc,X_n$ be iid random variables with continuous cdf
+$F_X$, and suppose $EX_i = \mu$.
+Define the random variables $Y_1,\dotsc,Y_n$ by
+\[
+Y_i = \begin{cases}
+        1 & \text{if $X_i > \mu$,} \\
+        0 & \text{if $X_i \le \mu$.}
+    \end{cases}
+\]
+Find the distribution of $\sum_{i=1}^n Y_i$.
+
+\item
+Consider independent random variables
+$X_1$ and $X_2$ where their respective pdf's are given by
+$f_1(x) = \frac{1}{3}x^2 I(-1 < x < 2)$ and
+$f_2(x) = \frac{5}{33}x^4 I(-1 < x < 2)$.
+Recall here $I(.)$ is the indicator function.
+Let
+\[
+Y = \max(X_1, X_2).
+\]
+Find the pdf of $Y$.
+
+\item
+Suppose that $X_1,\dotsc,X_n$ are iid having the common $N(0,1)$
+distribution, and denote $T_n = n^{-1}\sum_{i=1}^n |X_i|$
+and $U_n = \sqrt{T_n}$.
+Determine the positive real numbers $a$ and $b$ such that
+$T_n \xrightarrow{\;P\;} a$ and $U_n \xrightarrow{\;P\;} b$.
+State the theorems used in your derivations.
+\end{enumerate}
+
+\end{document}

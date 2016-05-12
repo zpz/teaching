@@ -1,0 +1,61 @@
+\documentclass[12pt]{article}
+\usepackage{techart}
+\parskip=10pt
+\parindent=10pt
+
+\begin{document}
+\title{STAT 651 HW 5}
+\author{Due 10/22}
+\date{}
+\maketitle
+
+
+\begin{enumerate}
+\item Let $X \sim$ Uniform(0,1).
+Find $E\{X\}$, $\var\{X\}$,
+$E\{\sin(\pi X) \}$, $E\{X \sin(\pi X)\}$,
+$E\{\cos(\pi X)\}$ and $E\{X \cos(\pi X)\}$.
+
+\item Let $X \sim $N(0,1) and let $Y = \sigma X + \mu$. Find $f_Y(y)$, the pdf of $Y$.
+
+\item Show that if $X$ is a RV and $a$ and $c$ are constants,
+then Var($aX$) = $a^2$ Var($X$); Var($X+c$) = Var($X$); and  Var($aX+c$) = $a^2$ Var($X$).
+
+\item Let $X \sim {\mbox{Poisson}}(\lambda)$.
+  \begin{enumerate}
+  \item Find $M_X(t)$, the moment generating function for $X$.
+  \item Use the mgf to show that $E\{X\}=\lambda$ and Var($X$)=$\lambda$.
+  \end{enumerate}
+
+\item Let $X \sim N(0,1)$.
+  \begin{enumerate}
+  \item Show that $M_X(t) = \exp(t^2/2)$, $-\infty < t < \infty$.
+  \item Use the mgf to find $E(X)$ and Var($X$).
+  \end{enumerate}
+
+\item Let $Y = \sigma X + \mu$ where $X \sim N(0,1)$. Find $M_Y(t)$.
+
+
+\item Suppose the pdf $f_X(x)$ of a random variable $X$ is an even
+function (i.e.\ $f_X(x) = f_X(-x)$ for all $x$.) Show that $X$ and $-X$ are
+identically distributed.
+
+\item
+Let $f(x)$ be a pdf, and let $a$ be a number such that 
+if $a \ge x \ge y$, then $f(a) \ge f(x) \ge f(y)$;
+and if $a \le x \le y$ then $f(a) \ge f(x) \ge f(y)$.
+Such a pdf is called {\em{unimodal}} with a {\em{mode}} equal to $a$.
+(To see why this definition makes sense, think about a pdf that has
+two humps of equal height (so it's bimodal), and see what part of the
+definition of `unimodal' fails.)
+
+(a) Give an example of a unimodal pdf for which the mode is unique.
+
+(b) Give an example of a unimodal pdf for which the mode is not unique.
+
+(d) Consider the pdf $f(x) = \exp(-x)$, $x \ge 0$.  Show that this pdf if unimodal.  What
+is its mode?
+\end{enumerate}
+
+
+\end{document}

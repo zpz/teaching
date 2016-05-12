@@ -1,0 +1,198 @@
+\documentclass[12pt]{article}
+\usepackage{techart}
+\begin{document}
+\title{STAT 651 HW 3 Solution}
+\maketitle
+
+\begin{enumerate}
+\item (5 + 10 points)
+\begin{enumerate}
+\item[(a)]
+We show the independence of $A$ and $\emptyset$ by the definition of
+independence, i.e.\@ $P(A\cap \emptyset) = P(A) P(\emptyset)$.
+
+\[
+P(A \cap \emptyset)
+= P(\emptyset) P(A \given \emptyset)
+= 0\cdot P(A \given \emptyset)
+= 0
+= P(A)P(\emptyset)
+\]
+
+\item[(b)]
+\[\begin{split}
+P(A^c \cap B^c)
+&= P\bigl((A \cup B)^c\bigr)
+\\
+&= 1 - P(A \cup B)
+\\
+&= 1 - P(A) - P(B) + P(A \cap B)
+\\
+&= 1 - P(A) - P(B) + P(A)P(B)
+\\
+&= \bigl(1 - P(A)\bigr) \bigl(1 - P(B)\bigr)
+\\
+&= P(A^c) P(B^c)
+\end{split}
+\]
+hence $A^c$ and $B^c$ are independent.
+In the proof we used
+$P(A\cap B) = P(A)P(B)$, because $A$ and $B$ are independent.
+\end{enumerate}
+
+\item (10 + 10 + 10 points)
+
+\begin{enumerate}
+\item[(a)]
+By Theorem~1.5.3,
+we show $F(x)$ is a cdf by verifying the following facts:
+
+\begin{enumerate}
+\item[(1)] $\lim_{x\to -\infty} F(x) = 0$,
+$\lim_{x\to \infty} F(x) = 1 - \lim_{x\to \infty} \exp(-ax) = 1$.
+
+\item[(2)] $F(x)$ is non-decreasing, because
+
+(a) On $(-\infty, 0)$, $F(x) = 0$.
+
+(b) On $[0, \infty)$,
+$\frac{\diff F(x)}{\diff x} = a e^{-ax} > 0$,
+given $a > 0$.
+
+(c) At $x=0$, $F(x) = 1 - \exp(0) = 0 \ge F(0-)$.
+\item[(3)]
+$F(x)$ is right-continuous,
+because $F(x)$ is continuous on
+$(-\infty, 0)$ and $[0, \infty)$ respectively,
+and is continuous at $x=0$ because
+$F(0) = 0$ while $F(0-) = 0$.
+\end{enumerate}
+
+\item[(b)]
+The pdf is
+\[
+f(x) = \begin{cases}
+    0,          & x < 0\\
+    a e^{-ax},  & x \ge 0
+\end{cases}
+\]
+
+\item[(c)]
+On $(-\infty, 0)$,
+$F_Y(y) = 0$.
+
+On $[0, \infty)$, by Theorem~2.1.3,
+$
+F_Y(y)
+= F_X(\sqrt{y})
+= 1 - e^{-a\sqrt{y}}
+$.
+\end{enumerate}
+
+\item (40 points)
+
+Similar to problem 2(a). Show the three properties listed in
+Theorem~2.1.3.
+
+To show non-decreasing, we do not have to show the derivative (although
+that is the standard way). We could simply say, for example,
+$1/2 + 1/\pi \tan^{-1}(x)$ is an increasing function because
+$\tan^{-1}(x)$ is,
+or $\bigl(1 + \exp(-x)\bigr)^{-1}$ is an increasing function
+because $1 + \exp(-x)$ is positive and decreasing.
+
+To show right-continuity of a function that is defined by a single
+formula on the whole $(-\infty, \infty)$,
+we could simply point out that the function is a continuous one.
+
+Details are omitted.
+
+\item (3 + 3 points)
+
+\begin{enumerate}
+\item[(a)]
+\[
+c
+= \biggl(\int_{0}^{\pi/2} \sin x\diff x\biggr)^{-1}
+= \biggl(-\int_{0}^{\pi/2} \diff \cos x\biggr)^{-1}
+= \bigl(-(0 - 1)\bigr)^{-1}
+= 1
+\]
+\item[(b)]
+\[
+c
+= \biggl(\int_{-\infty}^{\infty} \exp(-|x|) \diff x\biggr)^{-1}
+= \biggl(2\int_{0}^{\infty} \exp(-x)\diff x\biggr)^{-1}
+= \biggl(2\exp(-x)\Bigm|_{\infty}^0\biggr)^{-1}
+= 1/2
+\]
+
+\end{enumerate}
+
+\item (6 + 6 points)
+
+\begin{enumerate}
+\item[(a)]
+\[
+f_Y(y)
+= f_X(y^{1/3}) \cdot \frac{1}{3} y^{-2/3}
+= 42\bigl(y^{1/3}\bigr)^5 \bigl(1 - y^{1/3}\bigr)
+    \cdot \frac{1}{3} y^{-2/3}
+= 14y\bigl(1 - y^{1/3}\bigr)
+,\quad
+0 < y < 1
+\]
+
+\[
+\int_0^1 f_X(x)\diff x
+= 42\int_0^1 x^5(1-x) \diff x
+= 42\biggl(\int_0^1 x^5\diff x - \int_0^1 x^6\diff x\biggr)
+= 42\Bigl(\frac{1}{6} - \frac{1}{7}\Bigr)
+= 1
+\]
+
+\[
+\int_0^1 f_Y(y) \diff y
+= 14 \int_0^1 y\bigl(1 - y^{1/3}\bigr) \diff y
+= 14\biggl(\int_0^1 y\diff y - \int_0^1 y^{4/3}\diff y\biggr)
+= 14\Bigl(\frac{1}{2} - \frac{3}{7}\Bigr)
+= 1
+\]
+
+
+\item[(b)]
+\[
+f_Y(y)
+= f_X\Bigl(\frac{y - 3}{4}\Bigr) \cdot \frac{1}{4}
+= 7\exp\Bigl(-7\frac{y-3}{4}\Bigr) \cdot \frac{1}{4}
+= \frac{7}{4} \exp\Bigl(-\frac{7}{4}(y-3)\Bigr)
+,
+\quad
+3 < y < \infty
+\]
+($X$ is exponential; $Y$ is shifted exponential.)
+
+\[
+\int_0^\infty f_X(x)\diff x
+= \int_0^\infty 7 e^{-7x}\diff x
+= -e^{-7x}\Bigm|_0^\infty
+= -(0 - 1)
+= 1
+\]
+
+\[
+\int_3^\infty f_Y(y)\diff y
+= \int_3^\infty \frac{7}{4} e^{-\frac{7}{4}(y-3)} \diff y
+= \int_0^\infty \frac{7}{4} e^{-\frac{7}{4}x} \diff x
+= -e^{-7x/4}\Bigm|_0^\infty
+= -(0 - 1)
+= 1
+\]
+
+\end{enumerate}
+
+\end{enumerate}
+
+
+
+\end{document}

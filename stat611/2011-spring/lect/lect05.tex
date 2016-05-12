@@ -1,0 +1,690 @@
+\documentclass[12pt]{article}
+\usepackage{coursenote}
+\begin{document}
+\title{STAT 611 Part 5}
+\subtitle{ARCH and GARCH Models}
+\maketitle
+
+\section{ARCH(1)}
+
+Recall the ARMA model:
+\[
+Y_t
+= (\phi_1 B + \phi_2B^2 + \dotsb + \phi_pB^p) Y_t
+  + e_t
+  -
+  (\theta_1B + \theta_2B^2 +\dotsb + \theta_qB^q) e_t
+\]
+Our model for $Y_{t+1}$ given history is
+that the only uncertain part is $e_t$, hence
+\[
+Y_{t+1} \given I_t
+\sim N\bigl(
+  (\phi_1 B + \phi_2B^2 + \dotsb + \phi_pB^p) Y_t
+  -
+  (\theta_1B + \theta_2B^2 +\dotsb + \theta_qB^q) e_t,
+  \;
+  \sigma_e^2
+  \bigr)
+\]
+where $I_t$ is called \emph{``information set''};
+it contains all information in the series up to time $t$,
+including past $Y$'s and $e$'s.
+Because $e_t$ is an iid (normal) white noise,
+this ARMA model is a model for the \emph{conditional mean},
+whereas the \emph{conditional variance} does not change---it's always
+$\sigma^2_e$.
+
+Recall our ARMA simulations.
+The variability (level of fluctuation, or noisiness) in $Y_t$
+does not change.
+(Do not confuse the variability with change of the mean, or trends.)
+
+However,
+we have seen, or can imagine,
+realistic series that contain periods of large variabilities,
+and periods of small variabilities.
+That is, the variance of $Y$ tends to \emph{cluster},
+implying local correlations.
+
+Such phenomena are studied in financial settings,
+and the variability is called ``volatility'' (think of stock market).
+
+\alert About the ``return'' example in the book:
+articles and textbooks on this topic typically uses
+examples about ``return'' (of investment, say), defined as
+\[
+r_t = \frac{Y_t - Y_{t-1}}{Y_{t-1}}
+\]
+An alternative definition is
+\[
+r_t
+= \nabla \log Y_t
+= \log \frac{Y_t}{Y_{t-1}}
+= \log \biggl(1 + \frac{Y_t - Y_{t-1}}{Y_{t-1}}\biggr)
+\approx \frac{Y_t - Y_{t-1}}{Y_{t-1}}
+\]
+The return, $r_t$, is considered to be a white noise
+(i.e.\@ no serial correlation).
+But now we want to consider its ``conditional variance''.
+To be consistent with notation in the book,
+we'll use $r_t$ in the sequel instead of $e_t$.
+(They mean the same thing.)
+
+The idea is to build a model for the \emph{conditional variance}.
+To simplify the matter,
+let's assume the \emph{conditional mean} has been taken care of;
+the task is then to model the return $r_t$, endowing it with
+a variance that varies conditional on the magnitude of $r_{t-1}$.
+Let's assume
+\begin{align*}
+E(r_t \given r_{t-1}, r_{t-2},\dotsc) &= 0\\
+\var(r_t \given r_{t-1}, r_{t-2}, \dotsc) &= \omega + \alpha r_{t-1}^2
+\end{align*}
+that is, the variance is a simple linear regression model
+of the squared level in the preceding time.
+To ensure $\var(r_t) > 0$,
+we require $\alpha \ge 0$.
+A more conventional way of writing this idea is
+\begin{equation}\label{eq:ARCH-1}
+\begin{split}
+r_{t\given t-1} &= \sigma_{t\given t-1} \epsilon_t,
+    \qquad\text{where
+        $\epsilon_t \overset{\text{iid}}{\sim} N(0, 1)$}
+    \\
+\sigma^2_{t\given t-1} &= \omega + \alpha r_{t-1}^2
+\end{split}
+\end{equation}
+(Here $_{t\given t-1}$ should be understood
+as conditional on all past times up to $t-1$,
+not just time $t-1$.
+In the above, of course,
+the model uses only the time $t-1$ of the history,
+but this does not have to be the case.
+As we'll see shortly, the model can be easily generalized
+to involve longer histories.)
+
+Then, clearly,
+\begin{equation}\label{eq:ARCH-2}
+r_{t \given t-1} \sim N\bigl(0, \omega + \alpha r_{t-1}^2\bigr)
+\end{equation}
+
+In contrast to ARMA,
+this ARCH(1) process has a constant conditional mean
+(always 0) but non-constant conditional variance.
+Therefore, it makes sense to construct
+ARMA models (for the conditional mean) with ARCH errors
+(for the conditional variance).
+
+Note
+\[
+E(r^2_{t\given t-1})
+= \var(r_{t\given t-1})
+= \omega + \alpha r_{t-1}^2
+\]
+
+\subsection{(Weak) Stationarity of the ARCH process}
+
+Let's examine the
+\emph{unconditional} (or marginal)
+mean, variance, and auto-correlation of $r_t$:
+\[
+E(r_t)
+= E_{r_{t-1}}\bigl(E(r_{t \given t-1})\bigr)
+= E_{r_{t-1}}(0)
+= 0
+\]
+\[\begin{split}
+\var(r_t)
+= E(r_t^2)
+= E_{r_{t-1}}\bigl(
+    E(r_{t\given t-1}^2)
+    \bigr)
+&= E_{r_{t-1}}(\omega + \alpha r_{t-1}^2)
+\\
+&= E(\omega + \alpha r_{t-1}^2)
+\\
+&= \omega + \alpha E(r_{t-1}^2)
+\\
+&= \omega + \alpha \bigl(\omega + E(r_{t-2}^2)\bigr)
+\\
+&= \dotsb
+\\
+&= \omega (1 + \alpha + \alpha^2 + \dotsb)
+\\
+&= \frac{\omega}{1 - \alpha}
+\end{split}
+\]
+This requires $0 \le \alpha < 1$.
+Note,
+although $\var(r_t)$ \emph{conditional} on the history
+varies with the previous $r_{t-1}$,
+the marginal distribution of $r_t$ has a constant variance.
+
+$\var(r_t)$ is the marginal (or ``unconditional'') variance
+of the process, and can be denoted by $\sigma^2$.
+
+For $h =1,2,\dotsc$,
+\[
+\cov(r_t, r_{t+h})
+= E(r_t r_{t+h})
+= E_{I_{t+h-1}}\bigl(E(r_t r_{t+h} \given I_{t+h-1})\bigr)
+= E_{I_{t+h-1}}\bigl(r_t\, E(r_{t+h} \given I_{t+h-1})\bigr)
+= 0
+\]
+(using the fact the $r_t$ is part of $I_{t+h-1}$,
+hence $r_t$ is fixed conditional on $I_{t+h-1}$).
+
+Observations:
+\begin{enumerate}
+\item
+The time invariance of $E(r_t)$, $\var(r_t)$,
+and $\cov(r_t, r_{t+h})$
+establishes the \emph{weak stationarity} of $r_t$.
+\item
+$\cov(r_t, r_{t+h}) = 0$ establishes that
+$r_t$ is a \emph{serially uncorrelated} noise process
+(I think ``uncorrelated'' noise is called ``white'' noise),
+although it is not iid.
+Actually, it is \emph{serially dependent}---clearly,
+the variance of $r_t$ depends on $r_{t-1}$.
+\end{enumerate}
+
+It turns out that $0 \le \alpha < 1$
+is a sufficient and necessary condition for the
+(weak) stationarity of the ARCH(1) process.
+
+\subsection{AR representation of $r_t^2$}
+
+Adding
+\begin{align*}
+r_t^2 &= \sigma_{t\given t-1}^2 \epsilon_t^2\\
+\sigma_{t\given t-1}^2 &= \omega + \alpha r_{t-1}^2
+\end{align*}
+we get
+\[
+r_t^2 = \omega + \alpha r_{t-1}^2
+    + \sigma_{t\given t-1}^2 (\epsilon_t^2 - 1)
+\]
+This is an AR(1) model for the \emph{squared process} $r_t^2$,
+but with ``innovations'' (i.e.\@ noises)
+$\sigma_{t\given t-1}^2 (\epsilon_t^2 - 1)$.
+
+This hints at a way to check whether a conditional variance model
+should be considered:
+fit ARMA, get residuals $\hat{e}$, and plot the sample ACF and PACF of
+$\hat{e}^2$.
+
+Let's define
+\[
+\eta_t
+\equiv \sigma_{t\given t-1}^2 (\epsilon_t^2 - 1)
+= r_t^2 - \sigma_{t\given t-1}^2
+\]
+We can treat $\sigma_{t\given t-1}^2$ as
+a prediction of $r_t^2$,
+then $\eta_t$ is the ``prediction error''.
+
+Properties of $\eta_t$:
+(1) $E(\eta_t) = 0$.
+(2) $\{\eta_t\}$ is serially uncorrelated.
+(3) $\eta_t$ is uncorrelated with past squared returns.
+(To be verified: should it be ``returns'' or ``squared returns'' here?)
+
+$\var(r_t)$ can also be obtained
+from the AR(1) formulation of $r_t^2$
+if we already assume $\{r_t\}$ is stationary.
+Taking expectation of both sides of the AR representation,
+\[
+\var(r_t)
+= \omega + \alpha \var(r_t) + E(\eta_t)
+= \omega + \alpha \var(r_t)
+\]
+hence
+\[
+\var(r_t) = \frac{\omega}{1 - \alpha}
+\]
+
+\subsection{Non-normality and fat tails of the ARCH process}
+
+We'll show that the marginal distribution of $r_t$ is not normal.
+Specifically, it has \emph{heavier tails} than normal.
+After some algebra we get
+\[
+E(r_t^4)
+= \frac{3\omega^2}{(1 - \alpha)^2}
+  \frac{1 - \alpha^2}{1 - 3\alpha^2}
+\]
+For this to be finite,
+we need $\alpha^2 < 1/3$.
+In that case,
+the kurtosis of $r_t$ is
+\[
+\kappa
+= \frac{E(r_t^4)}{\bigl[E(r_t^2)\bigr]^2}
+= 3\frac{1 - \alpha^2}{1 - 3\alpha^2}
+> 3
+= \text{kurtosis of normal distribution}
+\]
+(unless $\alpha = 0$),
+proving that $r_t$ has ``fat tails''.
+If $\alpha^2 \ge 1/3$,
+$E(r_t^4)$ is infinite,
+the ``fat tail'' statement is still correct.
+The fat tail is a consequence of ``volatility clustering''.
+
+This shows that to have finite moments in orders higher than 2,
+the coefficients need to be further restricted.
+
+In summary,
+if $0 \le \alpha < 1$, the process $r_t$ is white noise
+and its unconditional distribution is symmetrically distributed
+around zero; this distribution has fat tails (compared to the normal
+distribution).
+
+% If, in addition, $\alpha < 1/\sqrt{3}$, the square of the process,
+% $r_t^2$, follows a causal AR(1) model with ACF given by
+% $\rho_{e^2}(h) = \alpha^h \le 0$ for all $h > 0$.
+% If $1/3 \le \alpha < 1$,
+% then $r_t^2$ is strictly stationary with infinite variance.
+
+Why do we stress ``non-normal'' distribution here?
+Recall when we first introduced time series as a stochastic process,
+we said any group of the variable at a finite number of times
+form a multivariate random variable (or a random vector),
+and a somewhat simple situation is that we assume
+the joint distribution of normal.
+Here we have seen the process modeled by
+ARCH(1) can not be normal, even if the noise $\epsilon$ is normal.
+Normal is a typical distribution with the so-called ``thin tail'',
+which rarely gives rise to values that are extremely far from the mean.
+In comparison, the ARCH(1) process has a ``heavier'' (or ``fatter'')
+tail than a normal process.
+
+
+\subsection{Predicting conditional variances}
+
+\[
+\sigma_{t+1}^2
+= \omega + \alpha e^2_{t}
+= (1-\alpha) \sigma^2 + \alpha e^2_{t}
+\]
+This is a weighted average of the long-term (unconditional)
+variance $\sigma^2$ and the current squared process.
+
+\[\begin{split}
+\sigma_{t+h}^2 \given (r_t, r_{t-1},\dotsc)
+& = E(r^2_{t+h}) \given (r_t,r_{t-1},\dotsc)
+\\
+& = E(\sigma^2_{t+h\given t+h-1} \epsilon^2_{t+h})
+    \given (r_t,r_{t-1},\dotsc)
+\\
+&= E(\sigma^2_{t+h\given t+h-1}) \given (r_t,r_{t-1},\dotsc)
+\\
+&= \omega + \alpha E(r^2_{t+h-1}) \given (r_t, r_{t-1},\dotsc)
+\\
+&= \omega + \alpha \sigma^2_{t+h-1} \given (r_t, r_{t-1},\dotsc)
+\end{split}
+\]
+provides a recursion.
+
+Recursively using this relation, we get
+\[\begin{split}
+\sigma^2_{t+h} \given (r_t,r_{t-1},\dotsc)
+&= \omega + \alpha\bigl(\omega + \alpha \sigma^2_{t+h-2}
+    \given (r_t,r_{t-1},\dotsc)\bigr)
+\\
+&= \dotsb
+\\
+&= \omega + \omega \alpha + \dotsb + \omega \alpha^{h-2}
+    + \alpha^{h-1} (\omega + \alpha r^2_t)
+\\
+&= \omega \frac{1 - \alpha^h}{1 - \alpha} + \alpha^h r_t^2
+\\
+&= (1 - \alpha^h)\sigma^2 + \alpha^h r_t^2
+\end{split}
+\]
+We see the prediction of $h$-step-ahead variance
+is a weighted average of the long-term variance $\sigma^2$
+and the squared return of the current time, $r^2_t$.
+The weight of the latter decreases exponentially with $t$.
+
+\subsection{MLE estimation}
+
+First, before estimation, we need to specify the order of the model.
+This is done through the AR model of $r^2_t$.
+
+The key in writing down the likelihood is
+the conditional distribution
+\[
+r_{t\given t-1} \sim N(0, \omega + \alpha r_{t-1}^2)
+\]
+Note
+\[
+L(\omega, \alpha; r_1,\dotsc,r_n)
+= f(r_1) f(r_2 \given r_1) f(r_3 \given r_2,r_1)
+    \dotsb f(r_n \given r_{n-1}, \dotsc, r_1)
+\]
+All the conditional terms are straightforward,
+whereas the first term, $f(r_1)$, naturally uses the marginal
+distribution
+\[
+r_1 \sim N\Bigl(0, \frac{\omega}{1-\alpha}\Bigr)
+\]
+
+
+\section{ARCH($q$)}
+
+ARCH(1) is generalized to ARCH($q$) in obvious ways:
+\[
+\sigma^2_{t\given t-1}
+= \omega + \alpha_1 r_{t-1}^2 + \alpha_2 r_{t-2}^2 +\dotsb+
+    \alpha_q r_{t-q}^2
+\]
+$q$ is called the ``ARCH order''.
+
+Properties of ARCH($q$) can be discussed.
+For the most part,
+we can embed this discussion in the more general
+GARCH model below.
+But let's look at a few points.
+
+Again define
+$\eta_t \equiv r_t^2 - \sigma^2_{t\given t-1}$,
+we get an AR representation for $r_t^2$:
+\[
+r_t^2
+= \sigma^2_{t\given t-1} + \eta_t
+= w + \alpha_1 r^2_{t-1} + \dotsb + \alpha_q r^2_{t-q} + \eta_t
+\]
+
+Similarly as in AR(1), we have
+$ E(r_t) = 0 $ and $ E(\eta_t) = 0$.
+
+Assuming stationarity,
+we take expectation on both sides of the AR form to get
+\[
+\sigma^2 = \omega + \alpha_1 \sigma^2 + \dotsb + \alpha_q \sigma^2
+\]
+hence the unconditional variance is
+\begin{equation}\label{eq:ARCH(q)-var}
+\sigma^2 = \frac{\omega}{1 - \alpha_1 - \dotsb - \alpha_q}
+\end{equation}
+provided that
+$\alpha_1 + \dotsb + \alpha_q < 1$.
+
+
+Before estimating the model,
+how do we determine the order of the ARCH mode?
+Answer: it is the AR order of the $r^2_t$ process.
+
+For MLE estimation, we use
+\begin{align*}
+\sigma^2_1 &= \sigma^2\\
+\sigma^2_{2\given 1} &=
+    \omega + \alpha_1 r_1^2 + (\alpha_2 +\dotsb + \alpha_q) \sigma^2\\
+\sigma^2_{3\given 2} &=
+    \omega + \alpha_1 r_2^2 + \alpha_2 r_1^2 +
+        (\alpha_3 +\dotsb + \alpha_q) \sigma^2\\
+\dotsb &= \dotsb\\
+\sigma^2_{q\given q-1} &=
+    \omega + \alpha_1 r_{q-1}^2 + \dotsb +
+        \alpha_{q-1} r_1^2
+        + \alpha_q \sigma^2\\
+\sigma^2_{t\given t-1} &=
+    \omega + \alpha_1 r_{t-1}^2 + \dotsb +
+        \alpha_q r_{t-q}^2,
+        \qquad t=q+1,\dotsc,n
+\end{align*}
+Note the marginal variance for
+$r_1$: we would have got the same result if we use
+\[
+\sigma^2_{1\given 0}
+= \omega + \alpha_1 r_0^2 + \dotsb \alpha_q r_{1-q}^2
+\]
+and replace $r^2_i$, $i\le 0$, by its expectation $\sigma^2$,
+noticing the relation~(\ref{eq:ARCH(q)-var}).
+
+To predict a future variance conditional on
+$r_1,\dotsc,r_t$,
+note
+\[\begin{split}
+\sigma^2_{t+h\given t}
+&= E(r^2_{t+h}) \given (r_t,r_{t-1},\dotsc)
+\\
+&= E(\sigma^2_{t+h\given t+h-1} \epsilon^2_{t+h}) \given (r_t,r_{t-1},\dotsc)
+\\
+&= E(\sigma^2_{t+h\given t+h-1}) \given (r_t,r_{t-1},\dotsc)
+\\
+&= E(\omega + \alpha_1 r^2_{t+h-1} + \dotsb + \alpha_q r^2_{t+h-q})
+    \given (r_t,r_{t-1},\dotsc)
+\\
+&= \omega + \alpha_1 \sigma^2_{t+h-1\given t} + \dotsb
+    + \alpha_q \sigma^2_{t+h-q\given t}
+\end{split}
+\]
+gives a recursive formula,
+in which
+$\sigma^2_{s\given t}$ is taken to be
+$r^2_s$ when $1 \le s \le t$
+and
+$\sigma^2$ when $s \le 0$.
+
+In the derivation above,
+\[\begin{split}
+E(\sigma^2_{t+h\given t+h-1} \epsilon^2_{t+h} \given r_t,r_{t-1},\dotsc)
+&=
+E(\sigma^2_{t+h\given t+h-1} \given r_t,r_{t-1},\dotsc)
+    E(\epsilon^2_{t+h} \given r_t,r_{t-1},\dotsc)
+\\
+&=
+E(\sigma^2_{t+h\given t+h-1} \given r_t,r_{t-1},\dotsc)
+\end{split}
+\]
+because of the independence between
+$\sigma^2_{t+h\given t+h-1}$ and $\epsilon^2_{t+h}$.
+A similar fact was used in the ARCH(1) section.
+
+
+\section{GARCH}
+
+The ARCH model is generalized to include auto-regression of
+$\sigma_t^2$:
+\begin{equation}\label{eq:GARCH}
+\sigma^2_{t\given t-1}
+= \omega
+    + \beta_1 \sigma^2_{t-1\given t-2}
+    +\dotsb
+    + \beta_p \sigma^2_{t-p\given t-p-1}
+    + \alpha_1 r^2_{t-1}
+    +\dotsb
+    + \alpha_q r^2_{t-q}
+\end{equation}
+or
+\begin{equation}\label{eq:GARCH-B}
+(1 - \beta_1 B - \dotsb - \beta_p B^p) \sigma^2_{t\given t-1}
+= \omega + (\alpha_1 B + \dotsb + \alpha_q B^q) r_t^2
+\end{equation}
+This is called
+GARCH($p$, $q$)
+(with $p$ GARCH orders and $q$ ARCH orders).
+
+Note: some books and software write ARCH order in front of GARCH order.
+Look carefully!
+
+We assume all the coefficients,
+$\omega$, $\alpha$'s, $\beta$'s, are non-negative
+(which is not absolutely necessary for the model to be meaningful).
+
+
+\alert
+The GARCH generalization, i.e.\@ inclusion of auto-regressive
+conditional variances, enhances the ``memory'' of the variance.
+For example,
+if a small return happens in a high volatility period,
+it will not immediately bring down the conditional variance by too much,
+thanks to the auto-regression in variance.
+
+Unlike the ARMA model,
+which could be AR alone or MA alone,
+a GARCH model will always have the ARCH part
+(but may or may not have the `G' generalization part),
+because we always want the connection between next-step variance
+and current $r^2$.
+
+\subsection{Example}
+
+Pages 290--294 shows exploratory plots for a simulated GARCH(1,~1)
+process.
+
+Main points:
+
+1. Plots 12.13 and 12.14, page~291, are sample ACF and PACF
+of $\{r_t\}$, demonstrating
+that $r_t$ is serially uncorrelated.
+
+2. Plots 12.15 and 12.16, page~292, are sample ACF and PACF
+of $\{|r_t|\}$, demonstrating
+that $|r_t|$ is serially correlated.
+
+3. Plots 12.17 and 12.18, page~293, are sample ACF and PACF
+of $\{r_t^2\}$, demonstrating
+that $r_t^2$ is serially correlated.
+
+\subsection{ARMA representation for $r_t^2$}
+
+Again define
+$\eta_t = r_t^2 - \sigma_{t\given t-1}^2$,
+then every $\sigma^2$ in (\ref{eq:GARCH}) can be
+replaced by $r^2$ and $\eta$,
+leading to an
+ARMA($\max(p,q), p$) representation for $r^2_t$:
+\begin{equation}\label{eq:GARCH-ARMA-square}
+r_t^2
+= \omega
+    + (\beta_1 + \alpha_1) r^2_{t-1}
+    + \dotsb
+    + (\beta_{\max(p,q)} + \alpha_{\max(p,q)}) r^2_{t - \max(p,q)}
+    + \eta_t
+    - \beta_1 \eta_{t-1}
+    - \dotsb
+    - \beta_p \eta_{t-p}
+\end{equation}
+where
+$\beta_k = 0$ for all integers
+$k > p$
+and $\alpha_k = 0$ for all integers
+$k > q$.
+
+Therefore we can use techniques learned before
+to determine $p$ and $\max(p,q)$ based on the
+$\{r_t^2\}$ series.
+If $\max(p,q) = p$, we can first fit a GARCH($p$,$p$) model and then
+estimate $q$ by examining the significance of the resulting
+ARCH coefficient estimates.
+
+
+$\eta_t$ has the same properties as that in the ARCH(1) model:
+(1) $E(\eta_t) = 0$.
+(2) $\{\eta_t\}$ is serially uncorrelated.
+(3) $\eta_t$ is uncorrelated with past squared returns.
+(To be verified: should it be ``returns'' or ``squared returns'' here?)
+
+\subsection{Stationarity and fat tail}
+
+The GARCH process is (weakly) stationary if and only if
+\[
+\sum_{i=1}^p \beta_i + \sum_{j=1}^q \alpha_j < 1
+\]
+(under the assumption that
+$\beta_i \ge 0$ and $\alpha_j \ge 0$).
+
+
+Take expectation on both sides of (\ref{eq:GARCH-ARMA-square}, we get
+the unconditional variance of the process $\{r_t\}$:
+\[
+\sigma^2
+= \frac{\omega}{1 - \sum_{i=1}^q \beta_i - \sum_{j=1}^p \alpha_j}
+\]
+Note the analogy with the result for ARCH(1).
+
+The stationary distribution of a GARCH model is generally fat-tailed.
+
+\subsection{Predicting conditional variances}
+
+Similar arguments give the following recursive formula:
+\begin{align*}
+\sigma^2_{t+h\given t}
+&= E(r^2_{t+h} \given r_t, r_{t-1},\dotsc)
+\\
+&= E(\sigma^2_{t+h\given t+h-1} \given r_t,r_{t-1},\dotsc)
+\\
+&= \omega
+     + \sum_{i=1}^p \beta_i \sigma^2_{t+h-i\given t+h-i-1}
+             \given (r_t,r_{t-1},\dotsc)
+     + \sum_{j=1}^q \alpha_j \sigma^2_{t+h-j\given t}
+\\
+&= \omega
+     + \sum_{i=1}^p \beta_i \sigma^2_{t+h-i\given \min(t+h-i-1,\, t)}
+     + \sum_{j=1}^q \alpha_j \sigma^2_{t+h-j\given t}
+\end{align*}
+where
+$\sigma^2_{u\given v}$
+is taken to be
+$r_u^2$ if $1 \le u \le v$
+and
+$\sigma^2$ if $u \le 0$.
+(If $u > v$, the values needs to be obtained by recursion.)
+
+
+Alternatively, re-arranging~(\ref{eq:GARCH-B}) we get the
+MA($\infty$) form represented by
+\[
+\sigma^2_{t\given t-1}
+= \frac{w}{1 - \beta_1B - \dotsb - \beta_pB^p}
+    + \frac{\alpha_1B + \dotsb + \alpha_qB^q}
+        {1 - \beta_1B -\dotsb - \beta_pB^p} r_t^2
+\]
+(to be continued...)
+
+\subsection{MLE estimation}
+
+First, we need to have an estimate of the orders.
+See page~294, below~(12.3.4).
+
+Like before,
+the likelihood is written based on the conditional distributions.
+The formulas are slightly simpler than those used for
+``predicting conditional variances''
+because we only need one-step-ahead predictions.
+The formulas are still recursive.
+Specifically,
+\[
+\sigma^2_{t\given t-1}
+= \omega
+    + \sum_{i=1}^p \beta_i \sigma^2_{t-i\given t-i-1}
+    + \sum_{j=1}^q \alpha_j \sigma^2_{t-j\given t-1}
+\]
+where
+$\sigma^2_{u\given v}$
+is taken to be
+$r_u^2$ if $1 \le u \le v$
+and
+$\sigma^2$ if $u \le 0$.
+(If $u > v$, the values needs to be obtained by recursion.)
+
+Use the \texttt{R} package \texttt{tseries}.
+
+\section{Model diagnostics}
+
+Standardized residuals. (12.5.1), p~301.
+
+Absolute value and square of residuals.
+
+\section{ARIMA (or even SARIMA) model with GARCH errors}
+
+The basic idea is to fit an ARIMA model first until the model seems
+adequate (i.e.\@ no correlation left in residuals),
+then model the residuals by a GARCH model.
+
+\end{document}

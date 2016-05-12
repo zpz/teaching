@@ -1,0 +1,86 @@
+\documentclass[12pt]{article}
+\usepackage{techart}
+\begin{document}
+\title{STAT 621 HW 1}
+\author{Due Monday, 10/3}
+\maketitle
+
+In your homework writeup,
+write formulas, explanations, etc., just like any other homework you do,
+but use \texttt{R} as much as possible in actually
+carrying out your computations,
+for example sorting, listing combinations, factorial, ``choose''.
+Use this opportunity to discover \texttt{R} functions for your
+particular computational need.
+Include your \texttt{R} code and an appropriate amount of output
+in the writeup.
+
+\begin{enumerate}
+\item
+    To play the lottery game Texas Lotto,
+    a player selects six of the fifty numbers from 1 to 50,
+    without replacement (i.e., without selecting the same number twice).
+    The Lottery Commission then selects six of the numbers from 1 to 50
+    at random (i.e., every six-number combination is equally likely to
+    be selected), also without replacement.
+    The player wins if at least three of the player's numbers match
+    the numbers drawn by the Lottery Commission, in any order.
+
+    Let $X$ equal the number of ``matched numbers'' achieved by the
+    player. The player wins if $X$ equals 3, 4, 5, or 6.
+
+    \begin{enumerate}
+    \item
+        How many combinations of six numbers out of 50 are there,
+        disregarding the order in which they were drawn?
+        What is the possibility of each combination when the numbers are
+        drawn at random?
+    \item
+        What is the probability that all six of the player's numbers
+        match the six drawn at random by the Lottery Commission?
+        That is, what is $P(X=6)$?
+    \item
+        Find the probabilities $P(X=5)$, $P(X=4)$, and $P(X=3)$.
+    \item
+        One drawing produced 241,024 tickets that had exactly three
+        numbers correct (i.e., $X=3$).
+        How many tickets do you think were purchased for that drawing?
+    \item
+        The same drawing referred to in the previous question produced
+        12,422 tickets that had exactly four numbers correct.
+        Is this consistent with the number of tickets that had exactly
+        three numbers correct?
+    \item
+        Use computer simulation to empirically verify
+        the probabilities that $X$ equals 3, 4, 5, and 6.
+    \end{enumerate}
+
+\item
+    Seven male students have interviewed for three positions
+    as summer camp counselors. The students are ranked according to
+    height, from 1 (tallest) to 7 (shortest).
+    The null hypothesis is that each student is equally likely to be
+    selected, while the alternative hypothesis is that the three taller
+    students are twice as likely to be selected as the four shorter
+    students. Assume the students are selected independently of each
+    other. The test statistic is the sum of the ranks of the three
+    students who were selected. The decision rule is to reject the null
+    hypothesis if the test statistic is 6 or less.
+    \begin{enumerate}
+    \item
+        Is the null hypothesis simple or composite?
+    \item
+        Find the level of significance.
+    \item
+        Find the power.
+    \item
+        Find the null distribution of the test statistic,
+        that is, list the probability of each possible value of the test
+        statistic.
+        (Find a way to let \texttt{R} list this for you.)
+    \item
+        Find the ``alternative distribution'' of the test statistic.
+    \end{enumerate}
+\end{enumerate}
+
+\end{document}

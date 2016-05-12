@@ -1,0 +1,175 @@
+\documentclass[12pt]{article}
+\usepackage{coursenote}
+
+\begin{document}
+\title{STAT 621 Chapter 1}
+\maketitle
+
+\section{Counting}
+
+\textbf{Rule 1: multiplication rule}:
+Consider a task that is finished in $n$ successive steps.
+Suppose there are $k_1$ ways to do step 1,
+$k_2$ ways to do step 2,...,
+and
+$k_n$ ways to do step $n$.
+Then there are
+$k_1 k_2\cdots k_n$ possible ways to finish this task.
+
+\textbf{Rule 2: full permutation}:
+$n!$.
+
+\example Derive Rule~2 from Rule~1.
+
+Based on these basic rules, other useful patterns can be derived, including
+\begin{itemize}
+\item Permutation: $P_k^n = n(n-1)\cdots (n-k+1)$
+\item Combination: $C_k^n = {n \choose k} = \frac{n!}{k!(n-k)!}$
+
+Interpretation 1: Choose $k$ out of $n$ distinguishable objects,
+how many choices are there?
+($P_k^n / k!$)
+
+Interpretation 2: There are $n$ balls consisting of $k$ red ones
+and $n-k$ blue ones, where same-colored balls are indistinguishable.
+How many ways are there to arrange all $n$ balls in a row?
+
+Interpretation 3: How many ways are there to divide $n$ people into two
+groups of sizes $k$ and $n-k$?
+\item Multiple combination: $\begin{bmatrix}n\\ n_i\end{bmatrix}$.
+
+Interpretation 1: analogous to `interpretation 2' above.
+
+Interpretation 2: analogous to `interpretation 3' above.
+\end{itemize}
+
+\textbf{Binomial theorem and binomial coefficient}
+
+\[
+(x + y)^n = \sum_{k=0}^n {n\choose k} x^k y^{n-k}
+\]
+
+Multinomial coefficient:
+\[
+(x_1 + \dotsb + x_k)^n = \sum_{n_1,\dotsc,n_k}
+    \begin{bmatrix}n\\ n_i\end{bmatrix} x_1^{n_1}\dotsb x_k^{n_k}
+\]
+where the summation is over all valid combinations of the nonnegative
+integers $n_1,\dotsc,n_k$ that satisfy $\sum_{i=1}^k n_i = n$.
+
+\section{Probability concepts}
+
+trial\\
+experiment
+
+sample space\\
+a point in the sample space
+
+event
+
+probability of an event (the ``limit relative frequency'' interpretation)
+
+conditional probability
+
+independent events
+
+\section{Random variables}
+
+\textbf{Probability function}:
+pmf and pdf
+
+\textbf{Distribution function}:
+cdf
+
+\textbf{Quantiles}: definition; visualization; how to find
+
+\example Ex 1, p.~34.
+
+\textbf{Expectation (mean, location)}
+
+\textbf{Variance (spread, scale)}
+
+\hskip2em Definition: $\var(X) = E\bigl[\bigl(X - E(x)\bigr)^2\bigr]$
+
+\hskip2em Property: $\var(X) = E(X^2) - \bigl(E(X)\bigr)^2$
+
+\textbf{Covariance}
+
+\hskip2em Definition:
+$\cov(X, Y) = E\bigl[\bigl(X - E(x)\bigr)\bigl(Y - E(Y)\bigr)\bigr]$
+
+\hskip2em Property:
+$\cov(X, Y) = E(XY) - E(X)E(Y)$
+
+\textbf{Correlation coefficient}
+
+\hskip2em independence $\Rightarrow$ cov is 0 $\Rightarrow$ corr is 0
+
+\textbf{Mean and variance of the sum of random variables}
+
+\section{Useful distributions}
+
+\subsection{Bernoulli}
+$p$
+
+\example Find mean and variance.
+
+\subsection{Binomial}
+$n$, $p$
+
+\begin{itemize}
+\item Assumptions on the experiment.
+\item Relation with Bernoulli.
+\end{itemize}
+
+\example Find mean and variance. [Hint: use relation with Bernoulli.]
+
+\subsection{Normal}
+$\mu$, $\sigma$
+
+Master the following:
+\begin{itemize}
+\item Remember its pdf formula; recognize $\mu$ and $\sigma$ in a normal
+pdf.
+\item Conversion between standard and non-standard normals.
+\item Find a specified quantile of standard normal,
+    i.e.\@ given $p$, find $z_p$.
+\item Find a specified quantile of a nonstandard normal,
+    i.e.\@ given $p$, find $x_p$.
+\item Given $z$, find tail area, i.e.\@ $F(z)$ or $1-F(z)$.
+\item Given $x$, find tail area, i.e.\@ $F(x)$ or $1-F(x)$.
+\item Table look-up.
+\end{itemize}
+
+\example
+Ex 3--5, p.~55--57.
+
+\subsection{Chi-squared}
+$k$
+
+\begin{itemize}
+\item Remember it's non-neg.
+\item Know its relation with standard normal.
+\item Given $p$, find $x_p$.
+\item Given $x$, find tail area $F(x)$ or $1 - F(x)$.
+\end{itemize}
+\subsection{Central Limit Theorem}
+
+Approximating binomial and $\chi^2$ by normal.
+Understand the reason via CLT.
+
+\example Ex 6, p.~58.
+
+\example Ex 8--9, p.~60--61.
+
+\section{Other useful results}
+
+\[
+1 + 2 + \dotsb + N =
+\]
+
+\[
+1^2 + 2^2 + \dotsb + N^2 =
+\]
+
+\end{document}

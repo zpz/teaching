@@ -1,0 +1,12 @@
+STAT 651 final topics to review:
+
+* Common distributions including Bernoulli, binomial,
+  gamma, normal, exponential, etc.
+
+* Order statistics (largest and smallest).
+
+* Convergence in probability and distribution, and related theorems.
+
+* Weak Law of Large Numbers, Central Limit Theorem.
+
+

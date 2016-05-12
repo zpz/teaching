@@ -1,0 +1,175 @@
+\documentclass[12pt]{article}
+\usepackage{techart}
+\begin{document}
+\title{STAT 651 Midterm 1 Solution}
+\maketitle
+
+\section{}
+
+\begin{enumerate}
+\item[(a)]
+\[
+{13\choose 1}{4\choose 3}\cdot {12\choose 1}{4\choose 2}
+= 13 \times 4 \times 12 \times 6
+= 3744
+\]
+
+\item[(b)]
+\[
+{4\choose 1}{13\choose 5}
+= 4\times \frac{13\cdot 12 \cdot 11 \cdot 10\cdot 9}
+    {1\cdot 2 \cdot 3\cdot 4\cdot 5}
+= 5148
+\]
+
+\item[(c)] Full house is less likely to occur than flush.
+\end{enumerate}
+
+\section{}
+
+\begin{enumerate}
+\item[(a)]
+$S = \{1H, 1T, 2H, 2T, 3H, 3T, 4H, 4T\}$.
+$S$ has 8 elements.
+
+\item[(b)]
+\begin{enumerate}
+\item[i.]
+Corresponding to the 8 elements of $S$ as listed above,
+the values of $X$ are 1, 2, 2, 4, 3, 6, 4, 8.
+Therefore,
+\[
+f_X(x) = \begin{cases}
+    1/8, & x = 1\\
+    1/4, & x = 2\\
+    1/8, & x = 3\\
+    1/4, & x = 4\\
+    1/8, & x = 6\\
+    1/8, & x = 8
+\end{cases}
+\]
+
+\item[ii.]
+\[
+F_X(x) = \begin{cases}
+    0,   & x < 1\\
+    1/8, & 1 \le x < 2\\
+    3/8, & 2 \le x < 3\\
+    1/2, & 3 \le x < 4\\
+    3/4, & 4 \le x < 6\\
+    7/8, & 6 \le x < 8\\
+    1,   & x \ge 8
+\end{cases}
+\]
+Sketch is omitted.
+\end{enumerate}
+\end{enumerate}
+
+\section{}
+\begin{enumerate}
+\item[(a)]
+Independence suggests
+$P(A\cap B) = P(A)P(B)$.
+
+Mutual exclusiveness suggests
+$P(A\cap B) = P(\emptyset) = 0$.
+
+Hence $P(A)P(B) = 0$.
+So, either $P(A) = 0$ or $P(B) = 0$.
+
+\item[(b)]
+No. It can be the case that both $A$ and $B$ are non-empty but
+they are independent and mutually exclusive.
+
+For example,
+let $X$ be a number randomly drawn from the uniform distribution on
+$[0,1]$.
+Let $A = \{.1\}$ and $B = \{.2\}$.
+Then $A$, $B$ are mutually exclusive and both have probability 0,
+hence $P(A\cap B) = P(\emptyset) = 0 = P(A)P(B)$, that is,
+they are independent.
+But neither is empty.
+\end{enumerate}
+
+\section{}
+Let $C$ be the event that the person is a child,
+$A$ be the event that the person is an adult,
+and $L$ be the event that the person likes the movie.
+Then,
+\[
+P(C\given L)
+= \frac{P(C \cap L)}{P(L)}
+= \frac{P(C \cap L)}
+    {P(L \cap C) + P(L\cap A)}
+= \frac{1}{1 + \frac{P(L\given A)P(A)}{P(L\given C)P(C)}}
+= \frac{1}{1 + \frac{(.90)(.60)}{(.95)(.40)}}
+= .4130
+\]
+
+\section{}
+
+\begin{enumerate}
+\item[(a)]
+\[
+f_X(x) = \begin{cases}
+    \frac{\diff F_X(x)}{\diff x} = 3e^{-3x}, & x \ge 0\\
+    0, & x < 0
+\end{cases}
+\]
+\item[(b)]
+\begin{enumerate}
+\item[i.]
+Let $y = g(x) = e^x$, then $x = g^{-1}(y) = \log y$.
+\[
+f_Y(y)
+= f_X(\log y) \Bigl|\frac{\diff \log y}{\diff y}\Bigr|
+= 3e^{-3\log y} y^{-1}
+= 3y^{-4},
+\quad y \ge 1
+\]
+\item[ii.]
+\[
+\int_1^\infty 3y^{-4} \diff y
+= -\int_1^\infty (-3)e^{-4} \diff y
+= -\int_1^\infty \diff y^{-4}
+= -y^{-4}\Bigm|_{y=1}^\infty
+= 1
+\]
+\item[iii.]
+\[
+E Y
+= \int_1^\infty y\cdot 3y^{-4}\diff y
+= -\frac{3}{2}\int_1^\infty (-2)y^{-3} \diff y
+= -\frac{3}{2} y^{-2}\Bigm|_{y=1}^\infty
+= \frac{3}{2}
+\]
+\end{enumerate}
+\end{enumerate}
+
+\section{}
+\begin{enumerate}
+\item[(a)]
+\[
+E\{X^m\}
+= p\cdot 1^m + (1-p)\cdot 0^m
+= p
+\]
+\item[(b)]
+\[
+E\bigl\{e^{tX}\bigr\}
+= p\cdot e^{t\cdot 1} + (1-p)\cdot e^{t\cdot 0}
+= 1 - p + pe^t
+\]
+\item[(c)]
+\[
+E\bigl\{e^{-X}\bigr\}
+= 1 - p + pe^{-1}
+\]
+\[
+E\bigl\{e^{3X}\bigr\}
+= 1 - p + pe^3
+\]
+
+\end{enumerate}
+
+\end{document}

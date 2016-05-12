@@ -1,0 +1,239 @@
+\documentclass[12pt]{article}
+\usepackage{techart}
+\begin{document}
+\title{STAT 651 HW 6 Solution}
+\maketitle
+
+\begin{enumerate}
+\item Find $E(Y)$ and $\var(Y)$ if $Y$ takes values
+$3/2, 2, 5/2,\dotsc, 8, 17/2$ with equal probability.
+\item Problem 3.4, page 128.
+\begin{enumerate}
+\item With replacement. The number of trials has a geometric distribution
+with success rate $p = 1/n$. So the mean is $1/p = n$.
+\item No replacement.
+\[
+P(X)
+= \frac{n-1}{n} \frac{n-2}{n-1}\dotsm
+    \frac{n - (X-2) - 1}{n - (X-2)} \frac{1}{n - (X-1)}
+= \frac{1}{n}
+\]
+Therefore this is a discrete uniform distribution.
+That is, without replacement,
+there is a equal chance to get the right one the first time, the second
+time,... This is the same situation in a poker game: every player has
+the same chance to get the king, the queen, or any particular card.
+
+The mean is $\sum_{i=1}^n \frac{i}{n} = \frac{n+1}{2}$.
+
+(Arithmetic series,
+$\text{sum} = n \times \frac{\text{first} + \text{last}}{2}$.)
+
+In this story, one certainly expects to find the right key faster
+\emph{without replacement}.
+
+\end{enumerate}
+
+\item Problem 3.7, page 128.
+
+\[
+P(X \ge 2)
+= 1 - P(X = 0) - P(X = 1)
+= 1
+    - \frac{e^{-\lambda} \lambda^0}{0!}
+    - \frac{e^{-\lambda} \lambda^1}{1!}
+= 1 - (1+\lambda) e^{-\lambda}
+> .99
+\]
+\[
+(1 + \lambda) e^{-\lambda} < .01
+\]
+
+\item Problem 3.13(a), page 130.
+
+\[
+P(X_T = x)
+= \frac{P(X = x)}{P(X > 0)}
+= \frac{e^{-\lambda} \lambda^x}{x!}
+  \frac{1}{1 - P(X = 0)}
+= \frac{e^{-\lambda} \lambda^x}{x!}
+    \frac{1}{1 - e^{-\lambda}}
+= \frac{\lambda^x}{(e^\lambda - 1) x!}
+,\quad
+x=1,2,\dotsc
+\]
+
+\[\begin{split}
+E(X_T)
+= \sum_{x=1}^{\infty} x\, P(X_T = x)
+&= \frac{1}{P(X > 0)} \sum_{x=1}^{\infty} x\, P(X = x)
+\\
+&= \frac{1}{1 - e^{-\lambda}}
+    \bigl(E(X) - 0\cdot P(X=0)\bigr)
+= \frac{E(X)}{1 - e^{-\lambda}}
+= \frac{\lambda}{1 - e^{-\lambda}}
+\end{split}
+\]
+
+(This is likely how you find the solution.
+But it can be written in a simpler way:
+$\sum_{x=1}^{\infty} x\, P(X_T = x)
+= \sum_{x=0}^{\infty} x\, P(X_T = x)
+= \dotsb$.
+
+\[
+E(X_T^2)
+= \sum_{x=1}^{\infty} x^2\, P(X_T = x)
+= \frac{1}{P(X > 0)} \sum_{x=0}^{\infty} x^2\, P(X = x)
+= \frac{E(X^2)}{1 - e^{-\lambda}}
+= \frac{\lambda + \lambda^2}{1 - e^{-\lambda}}
+\]
+
+\[
+\var(X_T)
+= E(X_T^2) - E^2(X_T)
+= \frac{\lambda\bigl(1 - (1 + \lambda)e^{-\lambda}\bigr)}
+    {(1 - e^{-\lambda})^2}
+\]
+
+\item Problem 3.21, page 131.
+
+\[
+M_X(t)
+= \frac{1}{\pi}
+    \int_{-\infty}^{\infty} \frac{e^{tx}}{1 + x^2}
+    \diff x
+\]
+For a fixed, positive $t$, this integral is infinite because
+$e^{tx}$ increases much faster than $x^2$.
+
+\item Problem 3.23, page 131.
+\begin{enumerate}
+\item
+\[
+\int_{\alpha}^{\infty} \frac{\beta \alpha^\beta}{x^{\beta+1}} \diff x
+= \beta \alpha^\beta \frac{1}{-\beta} \int_{\alpha}^{\infty}
+    \diff x^{-\beta}
+= \alpha^\beta (\alpha^{-\beta} - 0^\beta)
+= 1
+\]
+\item
+\[
+E(X)
+= \beta \alpha^{\beta} \int_{\alpha}^{\infty} x^{-\beta} \diff x
+= \beta \alpha^{\beta} \int_{\alpha}^{\infty} \frac{1}{-\beta + 1}
+    \diff x^{-\beta + 1}
+= \frac{\beta \alpha^{\beta}}{1 - \beta}
+    \bigl(0^{\beta - 1} - \alpha^{1-\beta}\bigr)
+= \frac{\alpha\beta}{\beta - 1}
+\]
+iif $\beta > 1$ (otherwise $0^{\beta - 1}$ is undefined).
+
+\[
+E(X^2)
+= \beta \alpha^{\beta} \int_{\alpha}^{\infty} x^{-\beta+1} \diff x
+= \beta \alpha^{\beta} \int_{\alpha}^{\infty} \frac{1}{-\beta + 2}
+    \diff x^{-\beta + 2}
+= \frac{\beta \alpha^{\beta}}{2 - \beta}
+    \bigl(0^{\beta - 2} - \alpha^{2-\beta}\bigr)
+= \frac{\alpha^2\beta}{\beta - 2}
+\]
+iif $\beta > 2$ (otherwise $0^{\beta - 2}$ is undefined).
+
+\[
+\var(X)
+= E(X^2) - E^2(X)
+= \frac{\alpha\beta (1 + \alpha\beta - \alpha\beta^2 + \beta^2)}
+    {(\beta - 2) (\beta - 1)^2}
+\]
+
+\item
+If $\beta \le 2$, the integral for $E(X^2)$ does not exist.
+\end{enumerate}
+
+\item Problem 3.24(a)(c), page 131.
+
+\begin{enumerate}
+\item
+$f_X(x) = (1/\beta) e^{-x/\beta}$.
+$y = g(x) = x^{1/\gamma}$.
+$x = g^{-1}(y) = y^{\gamma}$.
+\[
+f_Y(y)
+= \frac{1}{\beta} e^{-y^{\gamma} / \beta} \, \gamma y^{\gamma-1}
+= \frac{\gamma}{\beta} y^{\gamma-1} e^{-y^{\gamma} / \beta}
+,\quad
+y > 0, \gamma > 0, \beta > 0
+\]
+
+To verify this is a pdf
+(actually this does not need verification if the calculation above is
+correct, in which case the theorem guarantees it is the pdf of Y),
+first notice that $f_Y(y) > 0$ for $y > 0$ and $f_Y(y) = 0$ otherwise,
+then
+\[
+\int_0^{\infty} f_Y(y) \diff y
+= \int_0^{\infty}
+    \frac{\gamma}{\beta}
+    y^{\gamma-1} e^{-y^{\gamma}/\beta} \diff y
+= \int_0^{\infty}
+    e^{-y^{\gamma}/\beta} \diff \frac{y^{\gamma}}{\beta}
+= - e^{-y^{\gamma}/\beta} \Bigm|_{y=0}^{\infty}
+= 1
+\]
+given that $\beta > 0$ and $\gamma > 0$.
+
+To find the mean, let $u = y^{\gamma}$, then
+\[\begin{split}
+E(Y)
+&= \int_0^{\infty} \frac{\gamma}{\beta} y^{\gamma} e^{-y^{\gamma}/\beta}
+    \diff y
+\\
+&= \int_0^{\infty} \frac{1}{\beta} u^{1/\gamma} e^{-u/\beta} \diff u
+\\
+&= \beta^{1/\gamma} \int_0^{\infty} (u/\beta)^{1/\gamma} e^{-u/\beta}
+    \diff (u/\beta)
+= \beta^{1/\gamma} \Gamma\bigl(\gamma^{-1} + 1\bigr)
+= \beta^{1/\gamma} \gamma^{-1} \,\Gamma(1/\gamma)
+\end{split}
+\]
+
+In fact, this can be done a little more quickly (although I'm not sure
+I recommend this):
+\[
+\int_0^{\infty} y f_Y(y) \diff y
+= \int_0^{\infty} g(x) f_X(x)
+    \frac{\diff x}{\diff y} \diff y
+= \int_0^{\infty} x^{1/\gamma} \frac{1}{\beta} e^{-x/\beta} \diff x
+= \beta^{1/\gamma} \int_0^{\infty} (x/\beta)^{1/\gamma} \frac{1}{\beta} e^{-x/\beta}
+    \diff (x/\beta)
+\]
+
+\[\begin{split}
+E(Y^2)
+&= \int_0^{\infty} \frac{\gamma}{\beta} y^{\gamma+1} e^{-y^{\gamma}/\beta}
+    \diff y
+\\
+&= \int_0^{\infty} \frac{1}{\beta} u^{2/\gamma} e^{-u/\beta} \diff u
+\\
+&= \beta^{2/\gamma}
+    \int_0^{\infty} (u/\beta)^{2/\gamma} e^{-u/\beta} \diff (u/\beta)
+= \beta^{2/\gamma} \Gamma\bigl(2\gamma^{-1} + 1\bigr)
+= 2\beta^{2/\gamma} \gamma^{-1}\, \Gamma(2/\gamma)
+\end{split}
+\]
+Therefore
+\[
+\var(Y)
+= E(Y^2) - E^2(Y)
+= \beta^{2/\gamma} \gamma^{-2} \bigl(
+    2\gamma \Gamma(2/\gamma)
+    - \Gamma^2(1/\gamma)
+    \bigr)
+\]
+\item
+\end{enumerate}
+
+\end{enumerate}
+
+\end{document}

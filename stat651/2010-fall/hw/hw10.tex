@@ -1,0 +1,82 @@
+\documentclass[12pt]{article}
+\usepackage{techart}
+
+\begin{document}
+\title{STAT 651 HW 10}
+\author{Due Friday, 12/10}
+\date{}
+\maketitle
+
+
+\begin{enumerate}
+\item Let $X$ and $Y$ be independent uniform(0,1) RV's. Find
+$P(X/Y\le t)$ and $P(XY\le t)$. (Pictures will help.)
+
+\item Let $(X,Y)$ follow a multivariate normal distribution with parameters
+$\mu_X = 5$, $\mu_Y = -1$, $\sigma_X = 1$, $\sigma_Y=4$ and $\rho$ (to be specified momentarily).
+(You can use the matrix formulas learned in class.)
+
+  \begin{enumerate}
+  \item Find the conditional distribution of $Y$ given $X=7$, assuming $\rho = 0.6$.
+  Is the conditional variance of $Y$ greater than or less than the unconditional (marginal) variance?
+  \item Find the conditional distribution of $Y$ given $X=7$, assuming $\rho = -0.6$.
+  Is the conditional variance of $Y$ greater than or less than the unconditional (marginal) variance?
+  \end{enumerate}
+
+\item Let $X$, $Y$ and $Z$ be independent Poisson random variables with parameters
+$\lambda_X$, $\lambda_Y$ and $\lambda_Z$ respectively. Let $U = X+Z$ and $V = Y+Z$.
+Find $\cov(U,V)$ and $\operatorname{cor}(U,V)$.
+
+\item Let $\vec{X} \sim \text{Multinomial}(7; .4,.3,.2,.1)$.  For
+example, $\vec{X}$ represents
+the number of red, green, blue, and white balls drawn when drawing samples of size 7
+with replacement from an urn containing
+4 red, 3 green, 2 blue, and 1 white balls.  Let $f(\vec{x})$ be the corresponding pmf.
+  \begin{enumerate}
+  \item Find $f(3,2,1,1)$.
+  \item Find $f(1,1,4,1)$. (So more blue balls than there are in the urn.)
+  \item Find $f(0,3,2,2)$.
+  \item (Optional) For how many vectors of $\vec{x}$ is $f(\vec{x})$ non-zero?
+  \end{enumerate}
+
+\item Jensen's Inequality states that if $g(x)$ is convex on the support of $X$,
+ then $E(g(X)) \ge g(E(X)).$
+  \begin{enumerate}
+  \item Show that if $X \sim N(-1,\sigma^2)$, then $E(|X|)\ge 1.$
+  What bound would you get if $X \sim N(-10,\sigma^2)$?  What if $X \sim N(3,\sigma^2)$?
+  \item Show that if $X \sim $Poisson($\lambda$) then $E(X^3) \ge \lambda^3.$ (Can you find the
+exact value of $E(X^3)$?)
+  \item Use Jensen's Inequality to show that if $X \sim N(0,\sigma^2)$,
+   then $E(X^4) \ge (\sigma^2)^2 = \sigma^4.$
+  \end{enumerate}
+
+\item Let $X_i \stackrel{iid}{\sim} $ Exp($\beta$), $i=1,2,\ldots,n$.
+Find the distribution of $X_{(1)}$, the first order statistic, and
+of $X_{(n)}$, the $n$-th order statistic.  Do either of these correspond to a familiar distribution?
+
+\item
+Let $X_i \stackrel{iid}{\sim} N(\mu_X,\sigma^2)$, $i=1,2,\ldots,n$ and
+$Y_j \stackrel{iid}{\sim} N(\mu_Y,\sigma^2)$, $j = 1,\ldots,m$.
+Assume that the $\{X_i\}$ and $\{Y_j\}$ are independent.
+     \begin{enumerate}
+     \item Find the sampling distribution of $\bar{X}-\bar{Y}$.
+     \item Find the distribution of $\frac{1}{\sigma^2}[(n-1)S_X^2 + (m-1)S_Y^2]$.
+     \end{enumerate}
+
+
+\item Let $X_i \stackrel{iid}{\sim} N(0,1)$, $i=1,\ldots,5.$
+Let $X_6$ be another independent observation, also $N(0,1)$.
+Let $\bar{X} = (X_1 + X_2 + \cdots + X_5)/5$, i.e.\ the mean of just the first 5 $X$'s.
+ What is the distribution of
+\begin{enumerate}
+\item $W = \sum_1^5 X_i^2$? Why?
+\item $U = \sum_1^5 (X_i-\bar{X})^2$? Why?
+\item $\sum_1^5 (X_i-\bar{X})^2+X_6^2$?  Why?
+\item $\sqrt{5}X_6/\sqrt{W}$? Why?
+\item $2X_6/\sqrt{U}$? Why?
+\item $2(5\bar{X}^2 + X_6^2)/U$? Why?
+\end{enumerate}
+
+\end{enumerate}
+
+\end{document}

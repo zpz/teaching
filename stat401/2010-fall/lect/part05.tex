@@ -1,0 +1,556 @@
+\documentclass[12pt]{article}
+\usepackage{coursenote}
+\title{STAT 401 Chapter 5.8--5.11, 5.13}
+
+%\renewcommand\vec[1]{\boldsymbol{#1}}
+
+\begin{document}
+\maketitle
+
+\section{Random vectors/matrices; covariance matrix}
+
+In our linear model,
+if we arrange the $Y$'s corresponding to a dataset in a vector, we can
+write
+\[
+\vec{Y} =
+    \begin{bmatrix}
+        Y_1\\ \vdots\\ Y_n
+    \end{bmatrix}
+\]
+Similarly, we may put all the random errors in a vector:
+\[
+\vec{\epsilon} =
+    \begin{bmatrix}
+        \epsilon_1\\ \vdots\\ \epsilon_n
+    \end{bmatrix}
+\]
+Note,
+since the elements of $\vec{Y}$ and $\vec{\epsilon}$
+are random variables,
+$\vec{Y}$ and $\vec{\epsilon}$ are \emph{random vectors}.
+
+Similarly, there are random matrices.
+
+Now back out of the linear regression context.
+Use $\vec{X}$ to denote a general random vector.
+We can write
+$\vec{X} = [X_1, X_2,\dotsc, X_n]^T$,
+because a vector is generally understood as a \emph{column} vector
+(or matrix).
+
+The mean $E(\vec{X})$ is the vector composed of
+the mean of each element of $\vec{X}$, that is
+\[
+E(\vec{X}) =
+\begin{bmatrix}
+    E(X_1)\\
+    \vdots\\
+    E(X_n)
+\end{bmatrix}
+\]
+
+Of course, we can talk about the element-wise variances.
+But, we'll go more general and talk about the covariance between every
+pair of elements of $\vec{X}$.
+Define the \emph{covariance matrix} of the random vector
+(or multivariate random variable) $\vec{X}$
+as
+\[
+\cov(\vec{X})
+= \begin{bmatrix}
+    \cov(X_1,X_1) & \dotso & \cov(X_1,X_n) \\
+    \vdots  & \ddots & \vdots\\
+    \cov(X_n,X_1) & \dotso & \cov(X_n,X_n)
+  \end{bmatrix}
+\]
+Therefore, the $(i,j)-$th element of the covariance matrix is
+$\cov(X_i,X_j)$ whereas the $(i,i)$-th is $\cov(X_i,X_i)$, that is,
+$\var(X_i)$.
+
+(There is no standard symbol for this matrix.
+Just define it in your context.
+$\mat{\Sigma}$ is a common choice.
+The symbol used in KNNL, $\mat{\sigma}^2$, is awkward.
+Always use an upper-case letter for matrix, unless the matrix is a row
+or column vector.)
+
+From $\cov(X_i, X_j) = \cov(X_j, X_i)$
+we see \underline{$\cov(\vec{X})$ is symmetric}.
+
+We also know
+$\det(\cov(\vec{X})) > 0$.
+Therefore a \emph{covariance matrix is always invertible}.
+In statistics, this determinant is often written as $|\cov(\vec{X})|$
+(or $|\mat{\Sigma}|$, if $\mat{\Sigma}$ denotes the covariance matrix).
+
+By the definition of covariance
+(between two univariate random variables), we see
+\[
+\cov(\vec{X})
+= E\Bigl[
+    \big(\vec{X} - E(\vec{X})\bigr)
+    \bigl(\vec{X} - E(\vec{X})\bigr)^T
+    \Bigr]
+\]
+that is,
+it is the expectation of a random matrix whose elements are
+``centered cross-products''.
+
+\subsubsection{Linear combinations of random variables}
+
+Let $\vec{X}$ be a $n$-random vector and
+$\vec{Y} = \mat{A}\vec{X}$ where $\mat{A}$ is $m \times n$.
+Then $\vec{Y}$ is a $m$-random vector ($m$ can be 1).
+
+\exercise
+A matrix is tool for describing \emph{linear} combinations.
+Explain how the definition of $\vec{Y}$
+expresses each element of $\vec{Y}$ as a linear combination of the
+elements of $\vec{X}$.
+
+\underline{The expectation of $\vec{Y}$ is}
+\[
+E(\vec{Y})
+= E\bigl(\mat{A}\vec{X}\bigr)
+= \mat{A}\, E(\vec{X})
+\]
+\underline{The covariance of $\vec{Y}$ is}
+\[
+\cov(\vec{Y})
+= \cov\bigl(\mat{A}\vec{X}\bigr)
+= \mat{A}\cov(\vec{X})\mat{A}^T
+\]
+
+\exercise
+Verify the sizes of $\cov(\vec{Y})$
+and $\mat{A}\cov(\vec{X})\mat{A}^T$ are identical.
+
+\underline{\textbf{Important result}}:
+If $\vec{X}$ is a normal random vector
+(\ie, the elements of $\vec{X}$ have a joint multivariate normal
+distribution),
+then $\vec{Y}$ is also a normal random vector.
+Recall a normal distribution is completely describe by the mean and
+variance (or covariance matrix, if multivariate).
+\[
+\vec{X} \sim N(\vec{\mu}_X, \mat{\Sigma}_X)
+\quad
+\Rightarrow
+\quad
+\vec{Y} = \mat{A}\vec{X} \sim
+    N\bigl(\mat{A}\vec{\mu}_X, \mat{A}\mat{\Sigma}_X\mat{A}^T\bigr)
+\]
+
+\example Page 194.
+
+\example Page 196.
+
+\section{SLR Model formulation in Matrix}
+
+\[
+Y = \beta_0 + \beta_1 X + \epsilon
+\]
+
+For this model there is no need to use matrix.
+It's clear, simple, and complete.
+
+Matrix notation kicks in when we want to (concisely) present
+the model behind a data set, $(X_i, Y_i)$, $i=1,\dotsb,n$,
+because now there is one model for each $Y_i$.
+
+Define the notation
+$\vec{Y} = [Y_1,\dotsc,Y_n]^T$
+(random response vector),
+\[
+\mat{X} =
+\begin{bmatrix}
+    1 & X_1\\
+    \vdots & \vdots\\
+    1 & X_n
+\end{bmatrix}
+\]
+(``design matrix''),
+$\vec{\beta} = [\beta_0, \beta_1]^T$
+(coefficient vector),
+and
+$\vec{\epsilon} = [\epsilon_1,\dotsc,\epsilon_n]^T$
+(rand errors).
+The SLR model for the dataset is
+\[
+\vec{Y} = \mat{X}\vec{\beta} + \vec{\epsilon},
+\quad\text{with assumption}\quad
+\vec{\epsilon} \sim N(\vec{0}, \sigma^2\mat{I})
+.
+\]
+The assumptions on $\vec{\epsilon}$ (zero mean, constant variance,
+independent normal) are concisely and fully represented by
+$
+\vec{\epsilon} \sim N(\mat{0}, \sigma^2\mat{I})
+$.
+Note $\sigma^2$ is a scalar (single number, not bold).
+
+\note On notation:
+\begin{itemize}
+\item Usually we use capital letters for matrices.
+Preferably bold. (You will see books that use non-bold capital letters
+for matrices.)
+\item We often use bold or arrowed lower-case letters for vectors.
+(However, since vectors are matrices, in principal we could use the
+matrix notation for vectors.) I guess the arrowed form is a legacy from
+the typewriter or handwriting days.
+\item We use upper-case letters for \emph{random variables},
+hence the random vector $\vec{Y}$.
+(But it's not bold. For vector, we use either bold or arrow;
+there is no need for both decorations.)
+\item The design matrix $\mat{X}$ is not random; it's all fixed numbers.
+\item Use either $^T$ or $'$ for matrix transpose.
+\item A little ambiguity in the notation:
+we use $\vec{Y}$ for the random vector of $Y$'s (behind the observed $Y$
+values), and also for the actual observations.
+\end{itemize}
+
+
+\section{LS estimators}
+
+The LS condition leads,
+by setting to zero the derivative of $\sum e_i^2$ w.r.t.\@ every
+parameter,
+to a group of ``normal equations''
+(equations~(1.9) on page 17).
+Write this system of equation in matrix form, we get
+\begin{equation}\label{eq:ls-normal}
+\mat{X}' \mat{X} \vec{\hat{\beta}} = \mat{X}' \vec{Y}
+.
+\end{equation}
+See the section ``\textbf{Normal Equations}'' on page~199.
+
+\exercise
+Check this matrix equation does mean the same thing
+as the equation system~(1.9).
+
+Note: any linear equation system is just one line in matrix notation.
+Equation~(\ref{eq:ls-normal}) has three components:
+\begin{itemize}
+\item coefficient matrix: $\mat{X}'\mat{X}$
+\item vector of unknowns: $\vec{\hat\beta}$
+\item vector of constants: $\mat{X}'\vec{Y}$
+\end{itemize}
+
+The solution to~(\ref{eq:ls-normal}) is
+\begin{equation}\label{eq:ls-solution}
+\vec{\hat\beta} = (\mat{X}'\mat{X})^{-1} \mat{X}'\vec{Y}
+\end{equation}
+assuming the inverse exists.
+
+\alert[Q]%
+Does it happen often that $\mat{X}'\mat{X}$ is not invertible?
+
+Now it's not obvious how we can verify this solution is the same as the
+separate expressions of
+$\hat\beta_0 = ...$ and $\hat\beta_1 =...$ we have seen.
+However, this does not need to be verified (although you're welcome to
+try).
+As long as the matrix notation for the linear system is correct,
+the solution must be correct.
+(In fact, the matrix notation of linear system and its solution is more
+standard than the previous way of doing things in separate lines.)
+
+Here's a better (and more direct) way to derive~(\ref{eq:ls-solution}).
+The LS criterion is to minimize the total squared errors:
+\begin{equation}\label{eq:ls-Q}
+Q = \sum e_i^2
+  = \vec{e}^T\vec{e}
+  = \bigl(\vec{Y} - \mat{X}\vec{\beta}\bigr)^T
+    \bigl(\vec{Y} - \mat{X}\vec{\beta}\bigr)
+\end{equation}
+
+Note $Q$ is just a number, although it is expressed through matrices
+here.
+The solution should be obtained by setting to zero
+the derivative of $Q$ wrt each element of $\vec\beta$.
+If we look at a specific element $\beta_i$, then
+the derivative is
+\begin{equation}\label{eq:ls-beta-i}
+\begin{split}
+\frac{\partial Q}{\partial \beta_i}
+&= \frac{\partial \bigl(\vec{Y} - \mat{X}\vec\beta\bigr)^T}
+    {\partial \beta_i}
+    \bigl(\vec{Y} - \mat{X}\vec\beta\bigr)
+  +
+  \bigl(\vec{Y} - \mat{X}\vec\beta\bigr)^T
+  \,
+  \frac{\partial \bigl(\vec{Y} - \mat{X}\vec\beta\bigr)}
+    {\partial \beta_i}
+\\
+&= (-\mat{X}_{[,i]})^T
+    \bigl(\vec{Y} - \mat{X}\vec\beta\bigr)
+  +
+  \bigl(\vec{Y} - \mat{X}\vec\beta\bigr)^T
+  \,
+  (-\mat{X}_{[,i]})
+\\
+&=  -\mat{X}_{[,i]}^T \vec{Y}
+    + \mat{X}_{[,i]}^T\mat{X}\vec{\beta}
+    - \vec{Y}^T\mat{X}_{[,i]}
+    + \vec\beta^T \mat{X}^T \mat{X}_{[,i]}
+\\
+&= 2\mat{X}_{[,i]}^T \mat{X} \vec{\beta}
+    -2\mat{X}_{[,i]}^T \vec{Y}
+\end{split}
+\end{equation}
+where $\mat{X}_{[,i]}$ represents the $i$-th column vector of $\mat{X}$.
+Notice that all the four terms on the second-to-last line are scalars.
+Further notice that the transpose of a scalar is itself,
+leading to the combinations in the last line.
+
+Denote the ``derivative vector''
+$\Bigl[\frac{\partial Q}{\partial \beta_1}, \dotsc\Bigr]^T$ by
+$\frac{\partial Q}{\partial \vec\beta}$, then we see
+\begin{equation}\label{eq:ls-deriv-vec}
+\frac{\partial Q}{\partial \vec\beta}
+= 2\mat{X}^T \mat{X} \vec{\beta}
+    -2\mat{X}^T \vec{Y}
+\end{equation}
+
+Set this derivative vector to $\vec{0}$,
+and suppose $\vec{\hat\beta}$ is the solution, then
+\begin{equation}\label{eq:ls-normal-matrix}
+\mat{X}'\mat{X} \vec{\hat\beta} = \mat{X}'\vec{Y}
+\end{equation}
+leading to
+\[
+\vec{\hat\beta} = \bigl(\mat{X}'\mat{X}\bigr)^{-1}\mat{X}'\vec{Y}
+\]
+
+\alert[Remarks]%
+1. If you are careful and patient, you can verify~(\ref{eq:ls-beta-i}).
+It's not that special; both $Q$ and $\beta_i$ are just scalars.
+
+2. If you are comfortable with matrices, however,
+you would skip~(\ref{eq:ls-beta-i}) and go from
+(\ref{eq:ls-Q}) to~(\ref{eq:ls-deriv-vec}).
+Not totally straightforward, but there are formulas
+for matrix derivatives to look up.
+(For example, \texttt{http://matrixcookbook.com})
+
+3. Notational detail:
+we changed $\vec{\beta}$ to $\vec{\hat\beta}$
+while going from~(\ref{eq:ls-deriv-vec})
+to~(\ref{eq:ls-normal-matrix}) because
+it is the at the estimators $\vec{\hat\beta}$
+(instead of the unknown, true $\vec{\beta}$) that
+the derivatives are zero.
+
+
+4. The point to make is:
+we get the equation~(\ref{eq:ls-normal-matrix}) \underline{not} by
+translating a system of equations like what we derived in Chapter~1,
+but from the matrix version of the model \underline{directly}.
+
+5. The advantage?
+If we have multiple predictors,
+then the matrix $\mat{X}$ will have more columns and the coefficient
+vector $\vec{\beta}$ will have more entries.
+However, the LS criterion~(\ref{eq:ls-Q}) stays the same,
+and we have not restricted the size of either $\mat{X}$ or $\vec\beta$
+in the arguments leading to~(\ref{eq:ls-normal-matrix}),
+therefore the solution stays the same.---Yah! That's multiple regression
+and we have solved it, in a completely general form.
+
+\alert[Tip]%
+How can I memorize this solution?
+Here's how I do it:
+
+Think of $\mat{X}\vec{\hat\beta} = \vec{Y}$.
+We do not have such an equality (because there won't be a
+$\vec{\hat\beta}$ that
+makes this hold unless all points $(x_i, y_i)$ fall exactly on a
+straight line), but it is roughly what we mean by the model.
+Starting with this,
+we want to solve it but it can't be done, because the coefficient matrix
+$\mat{X}$ is not square.
+Then we make it square by left-multiplying $\mat{X}'$ on both sides,
+getting $\mat{X}'\mat{X} \vec{\hat\beta} = \mat{X}'\vec{Y}$.
+The solution is then straightforward (and standard).
+
+\example Page 200.
+
+
+\section{Fitted values}
+
+\begin{equation}\label{eq:fitted-full}
+\vec{\hat{Y}} = \mat{X}\vec{\hat\beta} =
+\mat{X}(\mat{X}'\mat{X})^{-1}\mat{X}'\vec{Y}
+\end{equation}
+Let $\mat{H} = \mat{X}(\mat{X}'\mat{X})^{-1}\mat{X}'$, then
+\begin{equation}\label{eq:fitted-H}
+\vec{\hat{Y}} = \mat{H}\vec{Y}
+\end{equation}
+Clearly from here,
+the fitted values are linear functions of the observed values.
+The link between the two is the matrix $\mat{H}$.
+$\mat{H}$ is known as the ``hat'' matrix, and is useful in some
+discussions.
+
+You should remember the definition of
+$\mat{H}$, and use it to simplify things.
+For example,
+don't memorize~(\ref{eq:fitted-full});
+instead, memorize~(\ref{eq:fitted-H}) and know what $\mat{H}$ is.
+
+\exercise%
+Show that $\mat{H}$ is symmetric.
+
+\exercise%
+Show that $\mat{H}\mat{H} = \mat{H}$.
+
+\example Page 202.
+
+Since $\vec{\hat{Y}}$ is a linear function of $\vec{Y}$,
+the former has a normal sampling distribution with mean
+\[
+E(\vec{\hat{Y}})
+= \mat{H}E(\vec{Y})
+= \mat{H}\mat{X}E(\vec{\hat\beta})
+= \mat{X}\vec{\beta}
+\]
+and covariance matrix
+\[
+\cov(\vec{\hat{Y}})
+= \mat{H}\cov(\vec{Y})\mat{H}'
+= \mat{H}\, \sigma^2 \mat{I}\, \mat{H}'
+= \sigma^2\mat{H}
+\]
+
+If we want the fitted value at a predictor $x_*$
+(not necessarily in the observations),
+then let $\mat{X}_* = [1, x_*]$ and
+\[
+\hat{Y}_* = \mat{X}_* \vec{\hat\beta}
+\]
+This is again normal with mean and variance
+\[
+E(\hat{Y}_*)
+= \mat{X}_* E(\vec{\hat\beta})
+= \mat{X}_* \vec{\beta}
+,\quad
+\var(\hat{Y}_*)
+= \mat{X}_* \cov(\vec{\hat\beta}) \mat{X}_*'
+\]
+We'll derive $\cov(\vec{\hat\beta})$ in a moment.
+
+\section{Residuals}
+
+\[
+\vec{e} = \vec{Y} - \vec{\hat{Y}} = (\mat{I} - \mat{H}) \vec{Y}
+\]
+This shows that the residuals are also linear functions of the
+observations (the vector $\vec{Y}$).
+
+\exercise%
+Express $\text{SSE}$ using $\mat{X}$ and $\vec{Y}$.
+
+\begin{align*}
+\text{SSE}
+= \sum_i e_i^2
+&= \vec{e}'\vec{e}
+\\
+&= \bigl[(\mat{I} - \mat{H})\vec{Y}\bigl]' (\mat{I} - \mat{H})\vec{Y}
+\\
+&= \vec{Y}'(\mat{I} - \mat{H})' (\mat{I} - \mat{H}) \vec{Y}
+\\
+&= \vec{Y}' (\mat{I} - \mat{H} - \mat{H}' + \mat{H}'\mat{H}) \vec{Y}
+\\
+&= \vec{Y}' (\mat{I} - \mat{H}) \vec{Y}
+\end{align*}
+
+Remember,
+$\hat{\sigma^2} = \text{MSE} = \text{SSE} / (n-2)$.
+
+\section{Inferences in matrix notation}
+
+Look at the solution
+\[
+\vec{\hat\beta} = (\mat{X}'\mat{X})^{-1}\mat{X}'\vec{Y}
+.
+\]
+This is a linear function of $\vec{Y}$, which is a \emph{normal} random
+vector, therefore $\vec{\hat\beta}$ is normal,
+with mean
+\[
+E(\vec{\hat\beta})
+= (\mat{X}'\mat{X})^{-1}\mat{X}'E(\vec{Y})
+= (\mat{X}'\mat{X})^{-1}\mat{X}'\mat{X}\vec{\beta}
+= \vec{\beta}
+\]
+and covariance matrix
+\begin{align*}
+\cov(\vec{\hat\beta})
+&= \bigl[(\mat{X}'\mat{X})^{-1}\mat{X}'\bigr]
+    \cov(\vec{Y})
+  \big[(\mat{X}'\mat{X})^{-1}\mat{X}'\bigr]'
+\\
+&= \bigl[(\mat{X}'\mat{X})^{-1}\mat{X}'\bigr]
+  (\sigma^2\mat{I})
+  \big[(\mat{X}'\mat{X})^{-1}\mat{X}'\bigr]'
+\\
+&= \sigma^2
+    (\mat{X}'\mat{X})^{-1}\mat{X}'
+    \mat{X}(\mat{X}'\mat{X})^{-1}
+\\
+&= \sigma^2 (\mat{X}'\mat{X})^{-1}
+.
+\end{align*}
+
+\alert[Remarks]%
+1. The manipulations of $\mat{X}$ in the above should become very
+familiar to you. In particular, you should train yourself to see readily
+that\\
+(1) $\mat{X}'\mat{X}$ is symmetric;\\
+(2) $\bigl(\mat{X}'\mat{X}\bigr)^{-1}$ is symmetric;\\
+(3) $\bigl(\mat{X}'\mat{X}\bigr)^{-1} \mat{X}'\mat{X} = \mat{I}$.
+
+2. The covariance matrix of $\vec{\hat\beta}$ above
+gives not only the variances of $\hat\beta_0$ and $\hat\beta_1$,
+but their covariance $\cov(\hat\beta_0, \hat\beta_1)$.
+In Chapter~2 we thought the dependence between $\hat\beta_0$
+and $\hat\beta_1$ was hard to describe but we walked around it.
+Now their covariance is simply the
+off-diagonal element of the matrix $\cov(\vec{\hat\beta})$.
+(And this idea generalizes however many elements
+$\beta$ contains.)
+
+\example Page 207.
+
+In a totally analogous fashion,
+we can make inferences about the expected value of $Y$ at given $X$,
+say $x_*$.
+Let $\mat{X}_* = [1, x_*]$,
+then
+\[
+\hat{Y}_* = \mat{X}_* \vec{\hat\beta}
+\]
+This is again normal with mean and variance
+\[
+E(\hat{Y}_*)
+= \mat{X}_* E(\vec{\hat\beta})
+= \mat{X}_* \vec{\beta}
+,\quad
+\var(\hat{Y}_*)
+= \mat{X}_* \cov(\vec{\hat\beta}) \mat{X}_*'
+= \sigma^2 \mat{X}_* (\mat{X}'\mat{X})^{-1} \mat{X}_*'
+\]
+
+\exercise
+We learned in Chapter~2 that
+$\var(\hat{Y}_*)
+= \sigma^2\Bigl(
+    \frac{1}{n} + \frac{(x_* - \overline{x})^2}{S_{xx}}\Bigr)$.
+Check this is identical to the above.
+To check this we need to use the formula for the inverse of a
+$2\times 2$ matrix, $\mat{X}'\mat{X}$ here.
+
+\example Page 208.
+
+\end{document}

@@ -1,0 +1,206 @@
+\documentclass[12pt]{article}
+\usepackage{techart}
+\begin{document}
+\title{STAT 651 HW 5 Solution}
+\maketitle
+
+\begin{enumerate}
+\item (24 pts)
+
+\begin{align*}
+E(X) &= \int_0^1 x \diff x = \frac{1}{2}\int_0^1 \diff x^2 = 1/2
+\\
+E(X^2) &= \int_0^1 x^2 \diff x = \frac{1}{3} \diff x^3 = 1/3
+\\
+\var(X) &= E(X^2) - \bigl(E(X)\bigr)^2 = 1/12
+\\
+E(\sin \pi X)
+&= \int_0^1 \sin\pi x \diff x
+= - \frac{1}{\pi} \int_0^1 \diff \cos\pi x
+= -\frac{1}{\pi} (-1 - 1)
+= 2/\pi
+\\
+E(X\sin\pi X)
+&= \int_0^1 x\sin\pi x \diff x
+\\
+&= -\frac{1}{\pi}\int_0^1 x \diff \cos\pi x
+\\
+&= -\frac{1}{\pi}\biggl(
+    x\cos\pi x\Bigm|_0^1 - \int_0^1 \cos\pi x \diff x
+        \biggr)
+\\
+&= \frac{1}{\pi} + \frac{1}{\pi^2} \int_0^1 \diff \sin \pi x
+\\
+&= \frac{1}{\pi}
+\\
+&= 1/\pi
+\\
+E(\cos\pi X)
+&= \int_0^1 \cos\pi x\diff x
+= \frac{1}{\pi}\int_0^1 \diff \sin\pi x
+= 0
+\\
+E(X\cos\pi X)
+&= \int_0^1 x\cos\pi x\diff x
+\\
+&= \frac{1}{\pi} \int_0^1 x \diff \sin\pi x
+\\
+&= \frac{1}{\pi} \biggl(
+    x\sin\pi x\Bigm|_0^1 - \int_0^1 \sin\pi x\diff x\biggr)
+\\
+&= \frac{1}{\pi^2} \int_0^1 \diff \cos\pi x
+\\
+&= -2/\pi^2
+\end{align*}
+
+\item (8 pts)
+
+$y = g(x) = \sigma x + \mu$,
+$x = g^{-1}(y) = \frac{y - \mu}{\sigma}$,
+$\frac{\diff g^{-1}(y)}{\diff y} = 1/\sigma$
+\[
+f_Y(y)
+= \frac{1}{\sqrt{2\pi}}
+    \exp\Bigl\{-\frac{1}{2}\frac{(y - \mu)^2}{\sigma^2}\Bigr\}
+    \cdot
+    \frac{1}{\sigma}
+= \frac{1}{\sqrt{2\pi}\, \sigma}
+    \exp\Bigl\{-\frac{1}{2}\frac{(y - \mu)^2}{\sigma^2}\Bigr\}
+\]
+
+\item (8 pts)
+
+\[
+\var(aX)
+= E\bigl[\bigl(aX - E(aX)\bigr)^2\big]
+= E\bigl[a^2\bigl(X - E(X)\bigr)^2\big]
+= a^2 E\bigl[\bigl(X - E(X)\bigr)^2\big]
+= a^2\var(X)
+\]
+\[
+\var(X + c)
+= E\bigl[\bigl(X + c - E(X + c)\bigr)^2\bigr]
+= E\bigl[\bigl(X - E(X)\bigr)^2\bigr]
+= \var{X}
+\]
+\[
+\var(aX + c)
+= \var(aX)
+= a^2\var(X)
+\]
+
+Note: we can not use properties of variance such as
+$\var(X) = E(X^2) - E^2(X)$,
+because this is more ``advanced'' properties that those
+we are asked to prove.
+However, we can use basic properties of the $E$ operator.
+
+\item (16 pts)
+
+\begin{enumerate}
+\item
+\[
+M_X(t)
+= \sum_{x=0}^{\infty} e^{tx} \frac{e^{-\lambda} \lambda^x}{x!}
+= \sum_{x=0}^{\infty} \frac{e^{-\lambda} (\lambda e^t)^x}{x!}
+= e^{\lambda(e^t - 1)} \sum_{x=0}^{\infty} \frac{e^{-\lambda e^t} (\lambda e^t)^x}{x!}
+= e^{\lambda (e^t - 1)}
+\]
+\item
+\[
+E(X)
+= \frac{\diff e^{\lambda(e^t - 1)}}{\diff t} \biggm|_{t=0}
+= e^{\lambda(e^t - 1)} \lambda e^t \biggm|_{t=0}
+= \lambda
+\]
+\[
+E(X^2)
+= \frac{\diff^2 e^{\lambda(e^t - 1)}}{\diff t^2} \biggm|_{t=0}
+= \frac{\diff e^{\lambda(e^t - 1)} \lambda e^t}{\diff t} \biggm|_{t=0}
+= \lambda e^{\lambda e^t - \lambda + t} (\lambda e^t + 1) \bigm|_{t=0}
+= \lambda (\lambda + 1)
+\]
+\[
+\var(X)
+= \lambda(\lambda + 1) - \lambda^2 = \lambda
+\]
+(When finding the 2nd derivative,
+make use the 1st derivative just obtained.)
+\end{enumerate}
+
+
+\item (16 pts)
+
+\begin{enumerate}
+\item
+\[
+M_X(t)
+= \int_{-\infty}^{\infty}
+    e^{tx}
+    \frac{1}{\sqrt{2\pi}}
+    e^{-x^2/2}
+    \diff x
+= e^{t^2/2} \int_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi}}
+    e^{-(x + t)^2 / 2}
+    \diff x
+= e^{t^2/2}
+\]
+\item
+\[
+E(X)
+= \frac{\diff e^{t^2/2}}{\diff t} \Bigm|_{t=0}
+= e^{t^2/2}\, t \bigm|_{t=0}
+= 0
+\]
+\[
+E(X^2)
+= \frac{\diff^2 e^{t^2/2}}{\diff t^2} \biggm|_{t=0}
+= \bigl(e^{t^2/2} + t^2 e^{t^2/2}\bigr) \bigm|_{t=0}
+= 1
+\]
+\[
+\var(X) = 1 - 0^2 = 1
+\]
+\end{enumerate}
+
+\item (8 pts)
+
+\[
+M_Y(t)
+= E\bigl(e^{tY}\bigr)
+= E\bigl(e^{\sigma t X + t\mu}\bigr)
+= E\bigl(e^{(\sigma t)X} e^{t\mu}\bigr)
+= e^{t\mu} M_X(\sigma t)
+= e^{\mu t} e^{\sigma^2 t^2/2}
+\]
+(Note:
+since this is a function of $t$, write $\mu t$ instead of $t\mu$.)
+
+\item (8 pts)
+
+Let $Y = -X$, then
+$X = g^{-1}(Y) = -Y$.
+\[
+f_Y(y) = f_X(-y) |-1| = f_X(-y) = f_X(y)
+\]
+because $f_X(x)$ is an even function.
+This shows that $X$ and $Y$ have the same pdf, hence the same
+distribution.
+Before this conclusion,
+it should also be noted that $X$ and $Y$ have the same support,
+because $f_X(x)$ is even (suggesting the support of $X$ is symmetric
+about 0) and $Y = -X$.
+
+\item (16 pts)
+
+\begin{enumerate}
+\item Normal. Gamma (including exponential).
+\item Uniform. Or make up a pdf that has a flat segment and slopes down
+on both sides.
+\item This is an exponential pdf. Its mode is 0.
+It's easy to show that 0 is the only value that satisfies the definition
+of mode.
+\end{enumerate}
+\end{enumerate}
+
+\end{document}

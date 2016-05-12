@@ -1,0 +1,254 @@
+\documentclass[12pt]{article}
+\usepackage{techart}
+
+\begin{document}
+\title{Notational Conventions}
+\maketitle
+
+(This note is not all understandable to you at the beginning of the
+course. Re-read it later.)
+
+The textbook has several notational problems.
+Following the principles below,
+we will make some systematic changes to the notation used in the
+textbook.
+
+All the problems stem from the fundamental distinction between
+random variable versus constants (fixed values, numbers),
+and between estimators and estimates.
+
+It is conventional to use upper-case Roman letters,
+such as $A$, $B$, $X$, $Y$,
+for \emph{variables},
+and corresponding lower-case letters,
+such as $a$, $b$, $x$, $y$,
+for \emph{specific values} these random variables happen to take
+(in any particular instance).
+It is also conventional to use Greek letters,
+such as $\alpha$, $\beta$, $\theta$,
+for \emph{variables} or (unknown, to-be-estimated) constants.
+
+Note the consistency in a formula.
+We may transform variable $X$ to
+variable $Y = \exp(X)$;
+we may also convert number $x$ to
+number $y = \exp(x)$.
+
+When we talk about data (or dataset), there are two situations.
+\begin{enumerate}
+\item
+We have data $Y_1$, $Y_2$,..., $Y_n$.
+This means we are talking about a dataset with $n$ entries.
+We treat the general situation that each $Y_i$, $i=1,\dotsc,n$,
+may be any (reasonable) value.
+This is a \emph{data variable}.
+
+If we actually go to obtain one particular such dataset,
+the $n$ values will be fixed numbers; but by using $Y$ we do not care about
+this step.
+
+In fact, if we actually obtain a specific value for each $Y$,
+there can be many possible values for each $Y$ (and we'll happen to take
+one specific value). Therefore the $Y$'s are \emph{random} variables.
+
+\item
+We have data $y_1$, $y_2$,..., $y_n$.
+This means a dataset of $n$ fixed numbers.
+\end{enumerate}
+
+An ``estimator'' is a function of data.
+Here ``data'' are \emph{random samples} from the data-generation model
+(for example $Y \sim N(\mu, \sigma^2)$).
+The data here are considered \emph{random}, not yet fixed at the
+particular values observed in reality.
+Because the data are random, an estimator (which is a function of random
+data) is a random variable.
+An estimator is represented by a formula that involves random data (and
+possibly constants, such as coefficients).
+
+The particular value of an estimator after plugging in a particular dataset
+is called the ``estimate''.
+The estimate is simply a number; it's not a random variable.
+
+In this class,
+the response is a random variable (being modeled), denoted by $Y$;
+it also has particular values, denoted by $y$.
+
+A problem of the textbook is to confuse
+the estimators and estimates of $\beta$.
+The same happens to $\sigma^2$,
+as well as for the predictors and response.
+
+We adopt a (hopefully) better notation scheme like the following.
+
+\section{The simple regression case}
+
+The predictor values are $x_1,\dotsc, x_n$.
+The predictor is a \emph{variable} because it takes various values,
+but it is \emph{not random}.
+Its values are fixed in a particular problem.
+When we refer to the ``predictor variable'' without meaning any
+particular value, we may use $X$.
+(I'm not sure I've found a really simple and consistent convention for
+this; but just remember it is \emph{not random}.)
+
+The response variable at $x$ is $Y$.
+Corresponding to $x_1$ is $Y_1$, to $x_2$ is $Y_2$, etc.
+The actual set of observed values of the response variable is
+$y_1,\dotsc, y_n$.
+
+In this course we assume the model correct describes the relation
+between the predictor and the response.
+The ``model'' here refers to
+(1) the formula of the model (the deterministic part);
+and
+(2) assumptions about how $Y$ can deviate from the value predicted by
+the deterministic formula.
+
+The fitted (\ie estimated) value of $Y$ at $x$,
+when we talk about the formula without plugging in a
+particular dataset, is $\hat{Y}$.
+Plugging a particular dataset $y_1,\dotsc,y_n$ into
+the formula for $\hat{Y}$, we get $\hat{y}$.
+If the actual dataset is a bit different, then a different $\hat{y}$
+will result.
+But the general formula for $\hat{Y}$ is the same.
+
+The model parameters are $\beta_0$, $\beta_1$, $\sigma^2$.
+The estimators are $\hat{\beta}_0$, $\hat{\beta}_1$,
+$\hat{\sigma^2}$ or $S^2$.
+The estimates are $b_0$, $b_1$, $s^2$.
+
+Example formulas:
+\begin{gather*}
+\hat{\beta}_1 =
+    \frac{\sum(x_i - \overline{x})(Y_i - \overline{Y})}
+        {\sum(x_i - \overline{x})^2}
+,\quad
+b_1 =
+    \frac{\sum(x_i - \overline{x})(y_i - \overline{y})}
+        {\sum(x_i - \overline{x})^2}
+,\quad
+E(\hat{\beta}_1) = \beta_1
+,\quad
+\var(\hat{\beta}_1) = \frac{\sigma^2}{\sum(x_i - \overline{x})^2}
+\\
+\hat{\beta}_0 = \overline{Y} - \hat{\beta}_1\overline{x}
+,\quad
+b_0 = \overline{y} - b_1\overline{x}
+\\
+\hat{Y}_i = \hat{\beta}_0 + \hat{\beta}_1 x_i
+,\quad
+\hat{y}_i = b_0 + b_1 x_i
+\\
+S^2 = \frac{\sum(Y_i - \hat{Y}_i)^2}{n - 2}
+,\quad
+s^2 = \frac{\sum(y_i - \hat{y}_i)^2}{n - 2}
+,\quad
+s^2(\hat{\beta}_1) = \frac{s^2}{\sum(x_i - \overline{x})^2}
+\end{gather*}
+
+Note: only estimators have sampling distributions, expected values,
+variances, etc. These are meaningless for estimates,
+which are not random variables (they are just fixed numbers).
+The book is fundamentally confusing when
+it writes $b_1 = 3.1$ at one place, and
+$s^2\{b_1\} = 5$ at another.
+A fixed number does not have variance.
+
+
+\section{The multiple regression case}
+
+Each data point has a predictor \emph{vector},
+$\vec{x}$.
+For the $i$th observation,
+the predictor vector may be written $\vec{x}_i$.
+
+The design matrix is $\mat{X}$.
+(Upper case, bold.)
+
+The situation for the response is the same as in the simple regression
+case, because it is still a scalar.
+That is, corresponding to predictor vector $\vec{x}$ is a
+scalar variable $Y$, or a single number $y$.
+
+The model parameters are
+$\vec{\beta}$ (coefficient vector) and $\sigma^2$.
+The estimators are $\hat{\vec{\beta}}$ and $\hat{\sigma^2}$ or $S^2$.
+The estimates are $\vec{b}$ and $s^2$.
+
+Example formulas:
+
+\begin{gather*}
+\hat{\vec{\beta}} = (\mat{X}'\mat{X})^{-1}\mat{X}'\vec{Y}
+,\quad
+\vec{b} = (\mat{X}'\mat{X})^{-1}\mat{X}'\vec{y}
+,\quad
+E(\hat{\vec{\beta}}) = \vec{\beta}
+,\quad
+\cov(\hat{\vec{\beta}}) = \sigma^2 (\mat{X}'\mat{X})^{-1}
+\\
+\hat{\vec{Y}} = \mat{X} \hat{\vec{\beta}}
+,\quad
+\hat{\vec{y}} = \mat{X} \vec{b}
+\\
+S^2 = (n-2)^{-1} (\vec{Y} - \hat{\vec{Y}})'(\vec{Y} - \hat{\vec{Y}})
+,\quad
+s^2 = (n-2)^{-1} (\vec{y} - \hat{\vec{y}})'(\vec{y} - \hat{\vec{y}})
+,\quad
+s^2(\hat{\vec{\beta}}) = s^2 (\mat{X}'\mat{X})^{-1}
+\end{gather*}
+
+I believe the arrow symbol for vector has its origin in hand-writing.
+In print we can use boldness (a similar situation is italic in print and
+underlining in hand-writing for emphasis).
+The above may be re-written as follows.
+
+\renewcommand\vec[1]{\boldsymbol{#1}}
+
+\begin{gather*}
+\hat{\vec{\beta}} = (\mat{X}'\mat{X})^{-1}\mat{X}'\vec{Y}
+,\quad
+\vec{b} = (\mat{X}'\mat{X})^{-1}\mat{X}'\vec{y}
+,\quad
+E(\hat{\vec{\beta}}) = \vec{\beta}
+,\quad
+\cov(\hat{\vec{\beta}}) = \sigma^2 (\mat{X}'\mat{X})^{-1}
+\\
+\hat{\vec{Y}} = \mat{X} \hat{\vec{\beta}}
+,\quad
+\hat{\vec{y}} = \mat{X} \vec{b}
+\\
+S^2 = (n-2)^{-1} (\vec{Y} - \hat{\vec{Y}})'(\vec{Y} - \hat{\vec{Y}})
+,\quad
+s^2 = (n-2)^{-1} (\vec{y} - \hat{\vec{y}})'(\vec{y} - \hat{\vec{y}})
+,\quad
+s^2(\hat{\vec{\beta}}) = s^2 (\mat{X}'\mat{X})^{-1}
+\end{gather*}
+
+Again, it makes no sense to write $s^2(\vec{b})$, because
+$\vec{b}$ is not random.
+
+Understand $\vec{Y}$: it's a random vector.
+Vector, hence bold; random, hence upper case.
+It means the vector with elements
+$Y_1,\dotsc,Y_n$.
+Distinguish $\vec{Y}$ from the design matrix $\vec{X}$,
+which is a matrix constant.
+
+\bigskip
+
+Another notation is the critical values
+$t(1-\alpha/2; \nu)$
+and
+$F(1-\alpha; \nu_1,\nu_2)$.
+They are more commonly written as
+$t(\alpha/2; \nu)$ and
+$F(\alpha; \nu_1,\nu_2)$,
+or
+$t_{\alpha/2;\, \nu}$ and
+$F_{\alpha;\, \nu_1,\nu_2}$.
+It is more conventional to use the \emph{right tail}
+(\ie $\alpha$ or $\alpha/2$) to identify the critical value.
+
+\end{document}

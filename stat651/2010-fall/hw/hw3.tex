@@ -1,0 +1,58 @@
+\documentclass[12pt]{article}
+\usepackage{techart}
+
+\begin{document}
+\title{STAT 651 HW 3}
+\author{Due Friday, 10/1}
+\date{}
+\maketitle
+
+\begin{enumerate}
+\item More questions about independence of events
+  \begin{enumerate}
+  \item Show that $A$ and $\emptyset$ are independent, where $A$ is an event.
+  \item Show that if $A$ and $B$ are independent event, then $A^c$ and $B^c$ are independent.
+  \end{enumerate}
+
+\item
+Consider the function 
+\[
+F(x) = \begin{cases}
+    0, & x < 0 \\
+    1-\exp(-ax), & x \ge 0
+\end{cases}
+\]
+where $a$ is a positive, known constant.
+\begin{enumerate}
+\item Show that $F(x)$ is a cdf.
+\item If $F(x)$ is the cdf for a random variable $X$, find the pdf for $X$.
+\item Let $Y = X^2$.  Find the cdf for $Y$.
+\end{enumerate}
+
+\item
+Prove that the following functions are cdfs.
+  \begin{enumerate}
+  \item $1/2 + 1/\pi \tan^{-1}(x)$, $x \in (-\infty,\infty)$
+  \item $(1+\exp(-x))^{-1}$, $x\in (-\infty,\infty)$
+  \item $\exp(-\exp(-x))$,  $x\in (-\infty,\infty)$
+  \item $1-\exp(-x)$, $x\in (0,\infty)$
+  \end{enumerate}
+
+\item
+For each of the following, determine the value of $c$ that makes $f(x)$ a pdf.
+\begin{enumerate}
+\item $f(x) = c \sin(x)$, $0 < x < \pi/2$.
+\item $f(x) = c\exp(-|x|)$, $x\in (-\infty,\infty)$
+\end{enumerate}
+
+\item
+In each of the following, find the pdf of $Y$. Show that the pdfs of both $X$ and $Y$
+integrate to 1.
+\begin{enumerate}
+\item $Y=X^3$ and $f_X(x) = 42x^5(1-x)$, $0<x<1$.
+\item $Y=4X+3$ and $f_X(x) = 7\exp(-7x)$, $0<x<\infty$.
+\end{enumerate}
+
+\end{enumerate}
+
+\end{document}

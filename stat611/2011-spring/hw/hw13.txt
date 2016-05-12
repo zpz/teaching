@@ -1,0 +1,9 @@
+STAT 611 HW 13
+
+11.6
+11.10
+11.14 (formal outlier testing is not required)
+11.20
+12.2
+12.3
+12.7 a (go just as far as you can)

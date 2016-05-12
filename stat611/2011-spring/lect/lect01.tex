@@ -1,0 +1,303 @@
+\documentclass[12pt]{article}
+\usepackage{coursenote}
+\begin{document}
+\title{STAT 611 Part 1}
+\subtitle{Basics}
+\maketitle
+
+\section{Expectation, variance, covariance, correlation}
+(Appendix~A of Chapter~2)
+
+Assume continuous random variables.
+Discrete ones need some adjustment to the formulas;
+basically, integrals become sums.
+
+$X$, $Y$, $Z$ are variables.
+$a$, $b$, $c$ are constants.
+
+\subsection{Definition and properties of expectation}
+
+Univariate definition:
+\[
+E\bigl(h(X)\bigr)
+= \int h(x)\, f(x) \diff x
+\]
+In particular, if $h(x) \equiv x$, then
+$E(X) = \int x\, f(x) \diff x$.
+
+Multivariate definition:
+\[
+E\bigl(h(X,Y)\bigr)
+= \iint h(x,y)\, f(x,y)\diff x\diff y
+\]
+
+The most important property of expectation is its
+\emph{linearity}:
+\[
+E(aX + b) = aE(X) + b
+\]
+\[
+E(aX + bY + c) = aE(X) + bE(Y) + c
+\]
+
+\subsection{Definition and properties of variance}
+
+Definition:
+\[
+\var(X)
+= E\bigl[(X - E(x)\bigr)^2\bigr]
+\]
+
+Properties:
+\[
+\var(aX + b) = a^2 \var(X)
+\]
+(Scaling gets squared; shifting does not change variance.)
+\[
+\var(X) = E(X^2) - \bigl(E(X)\bigr)^2
+\]
+(Very useful for computations.)
+
+\subsection{Definition and properties of covariance}
+
+Definition:
+\[
+\cov(X,Y)
+= E\bigl[\bigl(X-E(X)\bigr) \bigl(Y-E(Y)\bigr)\bigr]
+\]
+
+Properties:
+\[
+\cov(X,Y) = \cov(Y,X)
+\]
+\[
+\cov(X,Y)
+= E(XY) - E(X)E(Y)
+\]
+\[
+\cov(X,c) = 0
+\]
+\[
+\cov(X,cY) = c\cov(X,Y)
+\]
+\[
+\cov(X+Y, Z) = \cov(X,Z) + \cov(Y,Z)
+\]
+Note: $X$, $Y$, $Z$ here do not have to be a simple random variable.
+For example, $Z$ may be $W + 3U$.
+Using the above we get
+\[
+\cov(aX+b, cY+d) = ab\cov(X,Y)
+\]
+\[
+\cov(X_1+\dotsb+X_m, Y_1+\dotsb+Y_n)
+= \sum_{i=1}^m\sum_{j=1}^n \cov(X_i, Y_j)
+\]
+
+Note $\var(X) \equiv \cov(X,X)$ (verified directly by the definitions).
+Consequently, some properties of variance can be obtained from
+properties of covariances:
+\[
+\var(a_1X_1 +\dotsb+ a_nX_n)
+= \sum_{i=1}^n\sum_{j=1}^n a_ia_j \cov(X_i,X_j)
+\]
+\[
+\var(X+Y)
+= \cov(X,X) + \cov(X,Y) + \cov(Y,X) + \cov(Y,Y)
+= \var(X) + \var(Y) + 2\cov(X,Y)
+\]
+
+If $X$ and $Y$ are independent, then
+\[
+\cov(X,Y)
+= E\bigl[\bigl(X-E(X)\bigr) \bigl(Y-E(Y)\bigr)\bigr]
+= E\bigl(X-E(X)\bigr) \, E\bigl(Y-E(Y)\bigr)
+= 0,
+\]
+hence $\var(X+Y) = \var(X) + \var(Y)$.
+This generalizes straightforwardly to the sum of multiple independent
+random variables.
+
+\subsection{Definition and properties of correlation}
+
+Definition:
+\[
+\corr(X,Y) = \frac{\cov(X,Y)}{\sqrt{\var(X)\var(Y)}}
+\]
+
+Properties:
+\[
+0 \le \lvert\corr(X,Y)\rvert \le 1
+\]
+i.e.
+\[
+\lvert\cov(X,Y)\rvert
+\le \sqrt{\var(X)\var(Y)}
+\]
+
+\subsection{Standardization}
+
+\[
+X^* = \frac{X - E(X)}{\sqrt{\var{X}}}
+\]
+
+Properties:
+\[
+E(X^*) = 0,\quad
+\var(X^*) = 1
+\]
+
+\section{Basic concepts of time series}
+
+A \emph{stochastic process} is a family of random variables
+$\{X_t\}$, where $t$ is an index.
+This process is studied by investigating the joint distribution
+of any finite number of member variables in this family.
+
+To make things tractable,
+we often do not study the complete joint distributions;
+instead we only study \emph{the first two moments}, that is,
+means, variances, and covariances (or correlations).
+
+Note: if the joint distributions are normal,
+then the first two moments completely determine the distributions.
+
+If the index is time, in particular, not arbitrary time instants but
+regular, equi-spaced time units,
+the stochastic process is a \emph{time series} concerned in this course.
+
+To follow the text's notation, we'll use $Y$ to denote the random
+variable. The index $t$ take integer values: $0$, $\pm 1$, $\pm 2$,...
+
+We will be investigating the first two moments, that is,
+$E(Y_t)$, $\var(Y_t)$, $\cov(Y_t, Y_s)$, $\corr(Y_t, Y_s)$.
+There are functions of the time indices, $t$ and/or $s$.
+Often, we will emphasize the \emph{time lag} and write time indices as
+$t$, $t+1$, $t+2$,..., $t+k$, etc.
+
+\emph{mean function}
+
+\emph{autocovariance function} (use symbol $\gamma$ following the text)
+
+\emph{autocorrelation function} (use symbol $\rho$ following the text)
+
+
+\subsection{Sample autocorrelation function (ACF)}
+
+(p.~46)
+
+
+sample autocorrelation function
+
+correlogram
+
+\subsection{stationarity}
+
+\emph{strictly stationary}: joint distribution depends on relative time
+configuration but not on actual time points.
+
+With strict stationarity, we have
+(1) mean is constant over time;
+(2) variance is constant over time;
+(3) covariance (or correlation) depends on absolute value of
+time lag but not on actual time location.
+
+\emph{weakly stationary}: mean is constant over time; covariance
+depends on absolute value of time lag but not on actual time
+location.
+
+Since we study the first two moments only,
+weak stationarity suffices for us.
+(We won't tell the difference between strict and weak stationarities,
+because we don't study the parts where they possibly differ.)
+
+If the joint distributions are all normal,
+then weak and strict stationarities are the same.
+
+
+\subsection{Typical examples}
+
+\begin{enumerate}
+\item White noise
+\item Random walk
+\item Moving average
+\item Cosine wave
+\end{enumerate}
+
+Which of these processes are stationary?
+
+Random walk is an accumulation of white noise.
+
+Moving average is moving average of white noise.
+
+Differencing random walk gets white noise.
+
+Cosine wave shows the difficulty in assessing whether stationarity is a
+reasonable assumption on the basis of the time sequence plot of the
+observed data.
+
+``Differencing'' is an important (and simple) technique from getting
+stationary series from nonstationary ones.
+
+
+\section{Estimation of a constant mean}
+(Section 3.2)
+
+Exercise 2.17. (For stationary $\{Y_t\}$.)
+
+Suppose
+\[
+Y_t = \mu + X_t
+\]
+where $E(X_t) = 0$.
+
+Given observations $Y_1,\dotsc,Y_n$,
+take
+\[
+\overline{Y} = \frac{1}{n}\sum_{t=1}^n Y_t
+\]
+then
+\[
+E\bigl(\overline{Y}\bigr)
+= \frac{1}{n} \sum_{t=1}^n E(Y_t)
+= \frac{1}{n} \sum_{t=1}^n \bigl(\mu + E(X_t)\bigr)
+= \mu
+\]
+therefore $\overline{Y}$ is an unbiased estimator of the
+constant mean, $\mu$.
+
+Besides the mean (which is good, unbiased),
+we mainly want to also know the variance,
+because that tells us how ``precise'' the estimator tends to be.
+
+To study more properties of $\overline{Y}$,
+such as its variance,
+we need to assume more things about $Y_t$, or equivalently,
+$X_t$.
+Now assume stationarity,
+then the result of Exercise~2.17 can be used.
+
+\[
+\var\bigl(\overline{Y}\bigr) = \dotsc
+\]
+
+With this formula (for stationary $Y_t$), we look at a few special
+cases:
+\begin{itemize}
+\item Moving average: $Y_t = e_t - .5e_{t-1}$.
+
+    How much difference can the sign of $\rho_1$ make?
+\item Autocorrelation decaying fast enough such that
+    $\sum_{k=0}^\infty |\rho_k| < \infty$,
+    and $n$ is large.
+
+    A general approximation: (3.2.5)
+
+    Example: $\rho_k = \phi^{|k|}$.
+\end{itemize}
+
+For a nonstationary process, the estimator $\overline{Y}$
+can be very imprecise (although still unbiased).
+Example: random walk.
+
+\end{document}

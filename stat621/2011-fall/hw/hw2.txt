@@ -1,0 +1,81 @@
+STAT 621 HW 2
+Due in a week or so
+
+1.
+
+Carefully read the parts of Section 3.1 about the Method A (the exact
+method) for finding a confidence interval for the 'p' in a Binomial
+experiment. The interval contains all 'p' values that will be accepted
+in a TWO-SIDED test on the specified 1 - alpha level.
+Let alpha = 0.05.
+
+Write R code to implement this method.
+Use Table A4 to verify your results.
+For example:
+    n = 7, X = 2:   (0.037, 0.710)
+    n = 13, X = 10: (0.462, 0.950)
+    n = 30, X = 5:  (0.056, 0.347)
+
+Hint:
+We know the interval will contain X/n.
+Write an optimization function.
+Run the function twice, searching for a solution
+in the range (0, X/n) and (X/n, 1), respectively.
+
+The optimization function needs an 'objective' to minimize?
+What should we minimize?
+Note that we want the p-value of the observed X to be close to 0.5.
+
+
+2.
+In a lab, insects of a certain type are released in the middle of a
+circle drawn on a plain, flat table. A scent, intended to attract that
+type of insect, is located at one end of the table. Each insect is
+released singly and observed until it crosses the boundary of the
+circle. At that time it is recorded whether the insect crossed the half
+of the boundary "toward" the scent or the half "away" from the scent. At
+the conclusion of the experiment, 33 insects went "toward" the scent, 16
+went "away", and 12 did not cross the boundary within a reasonable time.
+Does the scent attract those insects?
+
+
+3.
+Test the following data to see if there is a significant correlation
+between the yearly income of a family and the number of children in that
+family.
+
+Income ($)     Number of Children
+17,440          3
+17,664          2
+17,721          4
+17,883          3
+18,000          4
+18,332          2
+18,653          0
+18,781          3
+19,087          6
+19,686          5
+19,832          2
+20,100          1
+20,222          6
+20,435          3
+20,961          5
+21,382          2
+21,957          0
+22,190          8
+22,212          1
+22,635          4
+... (data on page 177 of the book)
+
+Conduct the test and make a plot if appropriate.
+
+
+4.
+Two landing fields 50 miles apart are observed for a one-year period to
+determine whether there is a significant difference in availability due
+to weather conditions. On 286 days both fields were open.
+On 62 days both fields were closed. On 14 days Field A was closed while
+Field B was open, and on 3 days the reverse was true.
+Is there a significant difference in availability due to weather
+conditions?
+

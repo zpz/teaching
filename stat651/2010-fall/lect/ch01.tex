@@ -1,0 +1,992 @@
+\documentclass[12pt]{article}
+\usepackage{coursenote}
+\begin{document}
+\title{STAT 651 Chapter 1}
+\maketitle
+
+\section{Basic set theory}
+
+\subsection*{Basic concepts}
+
+Set $A$.
+
+Object $x$.
+
+Relation between $x$ and $A$:
+\[\text{either $x \in A$ or $x \notin A$}\]
+``membership''---$x$ is (not) a member/element of $A$;
+$x$ is (not) in $A$; $x$ belongs to (does not belong to) $A$.
+
+Whole set $S$, say.
+
+Empty set $\emptyset$.
+
+Subset: $A \subset S$.
+
+Complement: $A^c$.
+
+\example
+1. Cards: each card, spades, hearts, diamonds, suits, A's, 2's,...\\
+2. Class: each student, male, female, undergrad, grad,...
+
+\subsection*{Set operations}
+
+Operations on sets:\\
+$A \cup B$\\
+$A \cap B$\\
+$A^c$
+
+Relations between sets:\\[3pt]
+(1) subset, or ``containment'': $A \subset B$
+(``$A$ is contained in $B$'' or ``$A$ is a subset of $B$'')\\[3pt]
+(2) equality: $A = B$, defined as
+$A \subset B \text{ and } B \subset A$\\[3pt]
+(3) disjoint, or mutually exclusive: $A \cap B = \emptyset$\\[3pt]
+(4) overlapping: $A \cap B \ne \emptyset$
+(``Overlap'' is not a standard term, but this certainly is
+an important relation.)\\[3pt]
+(5) partition: $A \cap B = \emptyset$ and $A \cup B = S$
+
+\exercise
+$A = \bigl\{1, \{2,3\}, \{4,5,6\}, \{7,8\}\bigr\}$;
+$B = \{4,5,6\}$.
+What's the relation between $A$ and $B$?
+$B \in A$ or $B \subset A$?
+What if $B = \{1\}$? And what if $B = \bigl\{\{1\}\bigr\}$?
+
+\theorem 1.1.4. \textbf{Rules for set operations}:\\
+(1) commutativity\\
+(2) associativity\\
+(3) distributive laws\\
+(4) DeMorgan's laws
+
+\textbf{Important things to learn}
+
+All content of Chapter~1.1 is required. In particular
+note the following technical points.
+\begin{enumerate}
+\item
+Comfortably use the symbols
+$\in$, $\subset$, $\cup$, $\cap$, $^c$ to denote set relations and
+operations.
+\item
+Use rigorous math symbols to denote sets. For example,
+$A \cup B$ is \emph{defined as} the set
+\[
+\{x:\, x \in A \text{ or } x \in B\},
+\]
+whereas $A^c$ is defined as the set
+\[
+\{x:\, x \notin A\},
+\]
+where $x \in \Omega$ (the whole set) is implied.
+\item
+Explicitly define a set by enclosing its members between a pair of
+braces. Two situations:
+\begin{enumerate}
+\item Explicitly list all members, \eg
+$\{1, 3, 5, 7\}$, $\{\text{Lisa}, \text{Mary}, \text{Jane}\}$,
+$\{1, 2, 3,...\}$.
+\item Give a description of the members, \eg
+$\{x:\, \sqrt{x} > 3 \text{ and } x^2 < 100\}$.
+(It is usually implicit that $x$ is a real number.)
+\end{enumerate}
+\item
+Use definition to prove set relations, esp set equality.
+\item
+Use Venn diagrams to help see, understand, discover, and prove set
+relations.
+\end{enumerate}
+
+\example Prove the distributive law
+$A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$.
+See page~3.
+
+\example Prove the associativity property
+$A \cup (B \cup C) = (A \cup B) \cup C$.
+
+\textbf{Proof}
+
+\indentblock{%
+First, prove $A \cup (B \cup C) \subset (A \cup B) \cup C$.
+This is equivalent to saying that
+if $x \in \bigl(A \cup (B \cup C)\bigr)$,
+then $x \in \bigl((A \cup B) \cup C\bigr)$.
+
+Since $x \in \bigl(A \cup (B \cup C)\bigr)$,
+then $x \in A$ or $x \in (B \cup C)$.
+\\
+(1) If $x \in A$, then $x \in (A \cup B)$,
+hence $x \in \bigl((A \cup B) \cup C\bigr)$.
+\\
+(2) If $x \in (B \cup C)$, then
+$x \in B$ or $x \in C$.
+\\ \hspace*{5mm}
+(2a) If $x \in B$, then
+$x \in (A \cup B)$, hence $x \in \bigl((A \cup B) \cup C\bigr)$.
+\\ \hspace*{5mm}
+(2b) If $x \in C$, then
+$x \in \bigl((A \cup B) \cup C\bigr)$.
+
+Second, prove $(A \cup B) \cup C \subset A \cup (B \cup C)$.
+This is equivalent to saying that
+if $x \in \bigl((A \cup B) \cup C\bigr)$,
+then $x \in \bigl(A \cup (B \cup C)\bigr)$.
+
+Since $x \in \bigl((A \cup B) \cup C\bigr)$,
+then $x \in (A \cup B)$ or $x \in C$.
+\\
+(1) If $x \in (A \cup B)$, then
+$x \in A$ or $x \in B$.
+\\ \hspace*{5mm}
+(1a) If $x \in A$, then
+$x \in \bigl(A \cup (B \cup C)\bigr)$.
+\\ \hspace*{5mm}
+(1b) If $x \in B$, then
+$x \in (B \cup C)$, hence
+$x \in \bigl(A \cup (B \cup C)\bigr)$.
+\\
+(2) If $x \in C$, then
+$x \in (B \cup C)$, hence
+$x \in \bigl(A \cup (B \cup C)\bigr)$.
+
+The proof is now complete.}
+
+
+\subsection*{Extensions}
+
+Extend the $\cup$, $\cap$ operations and the mutually exclusiveness and
+partition concepts to multiple (finite or infinite) sets.
+
+Finite, infinite, countable, uncountable.
+
+\example
+(1) $\cup_{i=1}^{\infty} \bigl[(1/i), 1\bigr] = (0, 1]$\\[3pt]
+(2) The sets $[i, i+1)$, $i=0,1,\dotsc$, form a partition of $[0, \infty)$.
+
+\subsection*{Connections between set theory and probability theory}
+
+Experiment and outcomes.
+
+\textbf{Experiment}: an action or procedure whose outcome is uncertain.
+
+When the outcome contains multiple components,
+it is important to know/specify whether their order matters.
+
+\definition 1.1.1.
+\textbf{Sample space}, $\mathcal{S}$, of an experiment:
+the set of all possible outcomes of the experiment.
+
+\exercise List the sample space of\\
+(1) toss a coin once;\\
+(2) toss a coin 3 times;\\
+(3) toss 3 coins simultaneously;\\
+(4) throw a die twice;\\
+(5) draw 2 cards and get their types;\\
+(6) take a measure of the temperature (the randomness is due to
+measurement; the temperature at any given moment is assumed to be an
+unknown constant).
+
+\definition 1.1.2. \textbf{Event}:
+any collection (\ie set) of outcomes in the sample space.
+
+Note: an event is a set; its members are ``outcomes''.
+
+An event occurs: if the outcome is in the collection of
+outcomes that define the event. Therefore, one experiment may trigger
+multiple events to occur.
+
+\exercise Define some events in the previous exercise.
+
+
+\section{Basics of probability theory}
+\subsection{Axiomatic foundations}
+
+In STAT 200 and STAT 300, we understood ``probability''
+as ``relative frequency of occurrence in repeated experiments''.
+
+Now take a different, more general, somewhat more abstract, and more defensible
+approach. In essence, we define what ``probability'' should look like
+(and declare that anything with that look is valid probability),
+but do not stipulate what ``probability'' means.
+This is the ``axiomatic approach''.
+
+\definition 1.2.1. \textbf{Sigma algebra} (Borel field).
+
+\indentblock{From the remarks below definition~1.2.1 on page~6,
+appreciate an important requirement on mathematical definitions---a
+definition should eliminate redundancy.
+A typical way to define something is to list
+a necessary and sufficient group of properties of it.
+We sometimes see different ways to define the same thing,
+because different authors prefer different groups of defining
+properties. But the definitions are all equivalent.
+
+Several basic facts derived from the definition:
+
+1. $S \in \mathcal{B}$.
+\\
+2. $\mathcal{B}$ is closed under countable intersections.
+\\
+3. $\mathcal{B}$ is closed under finite unions and intersections.
+}
+
+\example 1.2.2
+
+\example 1.2.3
+
+\definition 1.2.4. \textbf{Probability function}.
+
+\indentblock{The ``domain'' $\mathcal{B}$ of the function
+is a sigma algebra, which is a collection of ``events''.
+The ``range'' of the function is $[0,1]$.
+The probability function takes any element of $\mathcal{B}$
+(that is, any event) as input,
+and gives a single real number on $[0, 1]$,
+called the ``probability'' of that event.
+
+Requirement~3 has a name: ``countable additivity''.}
+
+This definition chooses three properties as defining properties of the
+concept. Other properties can be derived from these three.
+One may ask, upon seeing the definition,
+(1) What is $P(\emptyset)$?
+(2) Is it true that $P(A) \le 1$ for any set $A$?
+(3) If we know $P(A)$, can we calculate $P(A^c)$?
+These are answered in
+\textbf{theorem 1.2.8}.
+
+\example 1.2.5
+
+The definition of probability function does not specify
+the meaning of probability. There are two interpretations to a
+probability: (1) relative frequency of occurrence of the event in
+repeated experiments; (2) some sort of ``subjective belief'' in this
+event on the scale $[0, 1]$.
+(Naturally, 0 means impossible and 1 means definite.)
+
+So the definition does not specify (or restrict) where the probability
+function comes from, then how can we define a probability function?
+By defining a probability function, we mean
+assigning a probability (a single number on $[0,1]$) to each event
+(that is, defining a function from $\mathcal{B}$ to $[0,1]$)
+such that the function satisfies the three axioms.
+
+Any such function is a valid probability function, according to the
+definition. We define it in a way that is ``natural'' and ``sensible''.
+Here we follow the ``frequency'' path only.
+
+The recipe is based on
+
+\theorem 1.2.6
+
+and the following:
+if two outcomes $s_i$ and $s_j$ are ``equally likely'', then the two
+events $\{s_i\}$ and $\{s_j\}$ have the same probability.
+
+Consequently,
+if $S = \{s_1,\dotsc,s_n\}$ is finite and the outcomes
+$s_1,\dotsc,s_n$ are all ``equally likely'', then
+$P(\{x_i\}) = 1/n$ for $i=1,\dotsc,n$.
+See \textbf{example~1.2.5}.
+
+If an experiment have $N$ possible outcomes and all the outcomes are
+\emph{equally likely}, then $P(A) = N(A) / N$,
+where $N(A)$ is the number of outcomes in event $A$.
+
+\example
+Draw one card from a fully mixed deck of cards.
+There are 52 possible outcomes and
+it is reasonable to assume all individual cards
+have the same chance of being picked.
+Event $A$: the card drawn is a spade.
+
+\textbf{Answer}: $N(A) = 13$, hence $P(A) = 13/52 = 1/4$.
+
+
+If the outcomes are ``continuous'', the idea is analogous.
+See \textbf{example~1.2.7}.
+
+Question: in example~1.2.7, what is the sample space?
+
+
+\subsection{The calculus of probabilities}
+
+\theorem 1.2.8
+
+\theorem 1.2.9
+
+\theorem 1.2.11
+
+\indentblock{%
+Prove these theorems.
+Illustrate with Venn diagrams (as always).
+
+These are all very useful, for example in the subsequent sections on
+``counting''.
+For example, if $P(A)$ is hard to find, find $P(A^c)$ and use 1.2.8c.
+For another example, find $P(B)$ using 1.2.9a, or $P(A)$ using 1.2.11a.
+
+1.2.11a is an extension/generalization of 1.2.9a.
+It is used in classifying the question into smaller, disjoint ones,
+and performing divide-and-conquer.
+
+1.2.11b is somewhat a generalization of 1.2.9b.
+
+Perhaps 1.2.9a is more naturally written as\\
+$P(A \cap B) = P(B) - P(B \cap A^c) = P(A) - P(A \cap B^c)$\\ or
+$P(B) = P(B \cap A) + P(B \cap A^c)$.
+
+1.2.9b will be used a lot.}
+
+\subsection{Counting}
+
+\theorem 1.2.14. \textbf{Fundamental theorem of counting},
+or product (or multiplication) rule.
+
+With replacement; without replacement.
+
+Ordered; un-ordered.
+
+\example
+Throw 4 dice into 4 spots.
+How many possible outcomes?
+
+\example
+Draw 3 cards from one deck and arrange them in the order they are drawn.
+How many possible outcomes?
+
+\example
+Experiment: draw 4 cards.\\
+Event: all 4 cards are of the same suit, and their ranks (face
+number) are in sequence, like 2, 3, 4, 5.\\
+Question: how many possible outcomes does this event contain?
+
+\textbf{Answer}
+
+\indentblock{%
+Think of it as 2 steps: (1) choose the suit---4 choices;
+(2) choose the ranks---11 choices (1,2,3,4; 2,3,4,5;...;11,12,13,1).
+$4 \times 11 = 44$.
+
+Or think of it this way: each outcome is uniquely identified
+by an ordered pair of items:
+\texttt{(suit, starting rank)}.}
+
+\definition 1.2.16. \textbf{Factorial}:
+\[
+n! = \cdots
+\]
+There are $n!$ possible orderings for $n$ items.
+
+\definition \textbf{Permutation}:
+choosing $r$ out of $n$ objects without replacement,
+and the order matters. How many possible outcomes?
+\[
+P^n_r = n \cdot (n-1) \cdot (n-2) \dotsb [n - (r-1)]
+    = \frac{n!}{(n-r)!}
+\]
+Product of $r$ numbers counting down from $n$.
+(There are different ways to define the $P$ notation.)
+
+\definition 1.2.17.
+\textbf{Combination}:
+choosing $r$ out of $n$ objects without replacement,
+and the order does not matter.
+How many possible outcomes (that is, unique combinations)?
+\[
+{n \choose r} = \frac{P^n_r}{r!} = \frac{n!}{r! (n-r)!}
+\]
+(To turn a permutation into a combination,
+ignore the difference between the $r!$ orderings.)
+
+\example Page 14--15, after definition~1.2.16.
+
+Understand item~4 on page~15:\\
+(1) Why $44^6/6!$ is wrong, and is too small?
+See \textbf{example~1.2.19}.\\
+(2) Understand the formula ${n + r - 1 \choose r}$:
+think of $n+r-1$ objects ($n-1$ walls plus $r$ markers);
+pick $r$ of them as markers.
+
+\textbf{Table 1.2.1}.
+(The ``ordered, without replacement'' case is permutation.)
+
+
+\subsection{Enumerating outcomes}
+
+(For Section~1.2.4, only read through the first paragraph of page~18.)
+
+In an experiment with equally likely outcomes,
+calculating probabilities amounts to counting
+the number of outcomes in the desired event,
+plus counting the number of all possible outcomes.
+(This is what the title of this section means.)
+
+\example
+A quality control engineer is to randomly pick 5 out of the 11 available
+products for inspection. Suppose 2 of the 11 products have defects.
+What is the probability that (1) no defective product is picked?
+(2) exactly one defective product is picked?
+
+\example 1.2.18
+
+\example 1.2.19
+
+\example
+Consider a regular deck of 52 playing cards.
+For a five-card poker hand, find the probability of
+(a) All of different ranks;
+(b) One pair;
+(c) Two pairs;
+(d) Three of a kind: three cards of the same rank and two others of
+different ranks, for example JJJ74;
+(e) A straight: five cards in sequence; the ace can be either high or
+low;
+(f) A flush: five cards of the same suit;
+(g) All are spades;
+(h) There are exactly 2 clubs and 2 hearts.
+
+
+\example
+A box in a certain supply room contains four 40-W lightbulbs, five 60-W
+bulbs, and six 75-W bulbs.
+Suppose that three bulbs are randomly selected.
+(*) What is the probability that exactly two of the selected bulbs are
+rated 75 W?
+(**) What is the probability that all three of the selected bulbs have
+the same rating?
+(***) What is the probability that one bulb of each type is selected?
+
+\textbf{Answer:}
+
+\indentblock{%
+(1) $\displaystyle {9\choose 5} \biggm/ {11\choose 5}$.
+(2) $\displaystyle {2\choose 1} {9\choose 4} \biggm/ {11\choose 5}$.
+\\
+(a) $\displaystyle {13\choose 5} 4^5 \biggm/ {52\choose 5}$.
+(b) $\displaystyle 13 {4\choose 4} {12\choose 3} 4^3 \biggm/ {52\choose 5}$.
+\\
+(c) $\displaystyle {13\choose 2} {4\choose 2}^2 {44\choose 1} \biggm/ {52\choose 5}$.
+\\
+(d) $\displaystyle 13 {4\choose 3} {12\choose 2} 4^2 \biggm/ {52\choose 5}$.
+(e) $\displaystyle 11\times 4^5 \biggm/ {52\choose 5}$.
+\\
+(f) $\displaystyle 4 {13\choose 5} \biggm/ {52\choose 5}$.
+(g) $\displaystyle {13\choose 5} \biggm/ {52\choose 5}$.
+\\
+(h) $\displaystyle {13\choose 2}^2 \biggm/ {52\choose 5}$.
+\\
+(*) $\displaystyle {6\choose 2} {9\choose 1} \biggm/ {15\choose 3}$.
+\\
+(**) $\displaystyle \biggl[{4\choose 3} + {5\choose 3} + {6\choose 3}\biggr]
+    \biggm/ {15\choose 3}$.
+(***) $\displaystyle 4\cdot 5\cdot 6 \biggm/ {15\choose 3}$.
+
+}
+
+
+\section{Conditional probability and independence}
+
+\example Roll a die, $A = \{1\}$. $B = \{1,3,5\}$.
+(1) $P(A)$? (2) $P(B)$? (3) $P(A \given B)$?
+
+\textbf{Answer}: $P(A) = 1/6$. $P(B) = 1/2$. $P(A \given B) = 1/3$.
+
+\textbf{Why?}
+
+In the case of equally-likely outcomes,
+\[
+P(A \given B)
+= \frac{N(\text{in $A$, besides being in $B$})}{N(\text{in $B$})}
+= \frac{N(A \cap B)}{N(B)}
+\]
+
+Since $B$ is a condition, that is, it is assumed that $B$ occurs,
+then the \emph{sample space} for the subsequent (conditional) event
+is $B$. Under this condition,
+the \emph{event $A$ is actually $A \cap B$}.
+Hence
+$P(A \given B) = N(A \cap B) / N(B)$.
+
+
+\definition 1.3.2. \textbf{Conditional probability}:
+\[
+P(A \given B) = \frac{P(A \cap B)}{P(B)}
+\]
+Of course,
+\[
+P(B \given A) = \frac{P(A \cap B)}{P(A)}
+\]
+is the same thing, and is also useful.
+
+Use Venn diagram to illustrate the concept.
+
+The rearrangement,
+\[
+P(A \cap B) = P(B) P(A \given B) = P(A) P(B \given A)
+\]
+if very useful.
+Interpret it in words.
+
+\example 1.3.1
+
+\example 1.3.3.
+First, figure out the final answer directly.
+Second, use conditional probability.
+
+\example
+Draw two cards from a deck of 52 cards.
+What's the probability of getting a pair?
+
+\textbf{Answer}
+
+\indentblock{%
+Solution 1.
+$N(S) = {52 \choose 2}$.
+$N(A) = {13 \choose 1} {4 \choose 2}$.
+
+\[
+P(A)
+= \frac{N(A)}{N(S)}
+= \frac{13 \times 4 \times 3}{1 \times 2} \Bigm/
+  \frac{52 \times 51}{1 \times 2}
+= 1/17
+\]
+
+Solution 2.
+\[
+A = (1,1) \cup (2,2) \cup \dotsb \cup (13,13)
+\]
+These sub-events are mutually exclusive,
+and they all have the same probability.
+\[
+\begin{split}
+P(A)
+&= \sum_{i=1}^{13} P(i,i)
+\\
+&= \sum_{i=1}^{13} P(\text{first draw $i$})
+    P(\text{second draw $i$} \given \text{first draw $i$})
+\\
+&= 13 \times \frac{4}{52} \frac{3}{51}
+\\
+&= \frac{1}{17}
+\end{split}
+\]
+}
+
+\example Pick 2 cards without replacement from a 52 deck.\\
+A1 = an ace is selected on the first draw.\\
+A2 = an ace is selected on the second draw.\\
+Find $P(A_1)$, $P(A_2)$.
+
+\textbf{Answer}
+
+\indentblock{%
+\begin{align*}
+P(A_1) &= \frac{4}{52}
+\\
+P(A_2) &= P(A_1) P(A_2 \given A_1) + P(A_1^c) P(A_2 \given A_1^c) \\
+       &= \frac{4}{52} \frac{3}{51} + \frac{48}{52} \frac{4}{51}
+        = \frac{4}{52}
+\end{align*}
+We used the relation $P(A_2) = P(A_1 \cap A_2) + P(A_1^c \cap A_2)$.
+This is a very general and powerful ``classify and tackle them one by
+one'' strategy.
+Note: $A_2 = A_1$!\\
+Implication: in a poker game, seating should not matter.
+}
+
+\example
+The probability a randomly selected family belongs to the AAA auto club
+is 0.25 (\textit{Source}: American Automobile Association). If a family
+belongs to AAA, the probability they have more than one car is 0.45.
+Suppose a family is randomly selected.
+What is the probability they have more than one car and belong to AAA?
+
+\textbf{Answer}
+
+\indentblock{%
+$A = \text{belong to AAA}$.
+$M = \text{have more than one car}$.
+\[
+P(M \cap A)
+= P(A) P(M \given A)
+= 0.25 \times 0.45
+= 0.1125.
+\]
+It is also true that
+$P(M \cap A) = P(M) P(A \given M)$,
+but it is not useful for this question,
+because $P(M)$ and $P(A \given M)$ are unknown.}
+
+\example
+During frequent trips to a certain
+city a traveling salesperson stays at hotel A 50\% of the time,
+at hotel B 30\% of the time, and at hotel C 20\% of the time.
+When checking in, there is some problems with the reservation 3\%
+of the time at hotel A, 6\% of the time at hotel B,
+and 10\% of the time at hotel C.
+Suppose the salesperson travels to this city.
+\\
+(a) Find the probability the salesperson stays at hotel A and has a
+problem with the reservation.\\
+(b) Find the probability the salesperson has a problem with the
+reservation.\\
+(c) Suppose the salesperson has a problem with the reservation, what is
+the probability the salesperson is staying at hotel A?
+
+\hrulefill
+
+In the formula of definition~1.3.2,
+it is often easier to find $P(A \cap B)$ via the relation
+$P(A \cap B) = P(A)\, P(B \given A)$,
+which is just a re-use of definition~1.3.2.
+Therefore,
+\[
+P(A \given B) = \frac{P(A)\, P(B \given A)}{P(B)}
+\]
+This is called the \textbf{Bayes' rule}.
+
+This rule deals with this situation:
+Originally we have some knowledge about $A$ (represented by its
+probability), without info about $B$.
+Now we are told $B$ has happend.
+Given this info, is our knowledge about $A$ improved?
+Intuitively, yes, if $A$ and $B$ affect each other.
+Then, how do we update our knowledge of $A$, given the ocurrence of $B$?
+Well, our updated knowledge is $P(A \given B)$, and the updating is
+obtained by Bayes' rule.
+
+In Bayesian nomenclature,
+$P(A)$ is the \emph{prior} probability of $A$.
+The prior is updated to the \emph{posterior},
+$P(A \given B)$, in light of the \emph{likelihood}
+$P(B \given A)$.
+
+The rule can also be obtained by re-arranging
+\[
+P(A)\, P(B\given A) = P(B)\, P(A\given B).
+\]
+An extended form of the Bayes' rule is given in
+\textbf{theorem~1.3.5}.
+The denominator in theorem~1.3.5 is equal to $P(B)$,
+according to theorem~1.2.11a.
+
+How can I memorize the Bayes' rule?
+
+\example 1.3.6.
+
+\hrulefill
+
+If $P(A \given B) = P(A)$,
+that is, the probability of $A$'s occurrence is not affected by whether
+$B$ occurs, we say $A$ and $B$ are \emph{independent}.
+
+\definition 1.3.7. \textbf{Independence}.
+
+\textbf{Note}:
+\begin{enumerate}
+\item
+Note the three equivalent forms:
+(1) $P(A \given B) = P(A)$;
+(2) $P(B \given A) = P(B)$;
+(3) $P(A \cap B) = P(A)\, P(B)$.
+Verify that the three forms are equivalent.
+\item
+The definitions are also properties.
+If we know $A$ and $B$ are independent,
+then we know the three relations above hold.
+The third is used especially often.
+\item
+Independence is not the same as disjoint.
+Actually if $A \cap B = \emptyset$, the two events are
+dependent. Knowing that $B$ has occurred certainly tells us about the
+occurrence of $A$: $A$ will not occur.
+\item
+There is no useful way to represent ``independence'' by a Venn
+diagram.
+\item
+The third definition is generalized to a definition of independence
+between more than two events.
+See \textbf{definition 1.3.12}.
+\item
+In the definition of independence, we can replace any event by its
+complement. For example, if $A$ and $B$ are independent,
+then $A^c$ and $B$ are independent.
+See \textbf{theorem 1.3.9}.
+\end{enumerate}
+
+
+\example 1.3.8.
+
+
+\section{Random variables}
+
+We've been talking about experiments, outcomes, events (\ie sets of
+outcomes) etc.
+There are all kinds of experiment-outcomes,
+for example:
+
+\begin{tabular}{ll}
+type of outcome & example\\ \hline
+number & throw a die once, get the face number\\
+character & pick a student randomly, get the name\\
+a group of things & the first 3 people who enter Chapman bldg on Friday\\
+an ordered list & at University and College, the colors of the first 10
+vehicles after noon\\
+a description & low/normal/high blood pressure of a random patient
+\\ \hline
+\end{tabular}
+
+We want to unify things under the roof of ``numbers''; specifically,
+real values. After that we will build a whole bunch of tools to
+characterise and study them.
+
+\definition 1.4.1. \textbf{Random variable}:
+a function from a sample space \textbf{into} the real numbers.
+
+Note ``into''---the range of the function does not have to be the whole
+$(-\infty, \infty)$.
+It may be just a few numbers; or all integers; or certain interval(s);
+or $(-\infty, \infty)$, or some subset of $(-\infty, \infty)$,
+and so on.
+
+There are many possibilities of the definition of this function,
+for example:
+
+\begin{tabular}{ll}
+types of outcome and rv $X$ & example \\ \hline
+a number; directly & throw a die; face number\\
+    & measurement of temperature; measured temperature\\
+complicated; a summary & the list of H/T of 10 coin tosses; number of heads\\
+    & survey of 1000 people; number of 'Yes'\\
+    & applicant's credentials; ACT score\\
+non-numerical; coding & success vs failure; 1 vs 0
+\\ \hline
+\end{tabular}
+
+The essence of the concept of function is that
+the input \emph{uniquely} determines the output.
+Did the above define functions?
+
+Extension: the concept of multivariate random variable, or random
+vector.
+
+The rv has its own \textbf{sample space}, \ie the range of the function,
+and a probability function defined on a sigma algebra of its sample
+space.
+
+$S$: sample space of the experiment.\\
+$s$: any outcome, $s \in S$.\\
+$X(s) : S \rightarrow \mathcal{R}$.\\
+$\mathcal{X}$: sample space (or range) of $X$.
+
+$\mathcal{X} = \{x: X(s) = x, s \in S\}$
+
+\bigskip
+
+A probability function,
+$P_X(x)$ where $x \in \mathcal{X}$,
+is induced from that of the original experiment:
+
+$P_X(X = x) = P\bigl(\{s \in S: X(s) = x\}\bigr)$
+
+\example 1.4.3.
+
+\example 1.4.4.
+
+\section{Distribution functions (cdf)}
+
+\definition 1.5.1. $F_X(x) = P_X(X \le x)$, for all $x$.
+
+Attention: $\le$. \emph{right continuity}.
+
+\example 1.5.2.
+(Esp.\@ note how the plot indicates right continuity
+and that the function is defined on the whole real line.)
+
+Observations below example~1.5.2:\\
+1. $F_X$ is defined for all $x \in (-\infty, \infty)$,
+    even if $S_X$ does not contain all real numbers.\\
+2. $F_X$ jumps at the values $x_i \in \mathcal{X}$,
+size of the jump being $P(X = x_i)$.\\
+3. $F_X(x) = 0$ for $x < \operatorname{min}(x)$,
+    $F_X(x) = 1$ for $x > \operatorname{max}(x)$.\\
+4. $F_X(x)$ is flat between adjacent $x$ values if $X$ is
+discrete.
+
+\exercise
+How do you formally define or describe
+``right continuity''?
+How would you go about proving that
+a cdf is right continuous?
+
+\theorem 1.5.3.  $F(x)$ is a cdf iif\\
+(1) $\lim_{x\to -\infty} F(x) = 0$ and
+    $\lim_{x\to \infty} F(x) = 1$\\
+(2) nondecreasing, \ie $x_1 \ge x_2 \Rightarrow F(x_1) \ge F(x_2)$.\\
+(3) right continuous, \ie $\lim_{x \downarrow x_0} F(x) = F(x_0)$.
+
+\example 1.5.4. Discrete distribution.
+
+\example 1.5.5. Continuous distributions.
+
+\example 1.5.6. cdf with jumps. (Illustrate with a graph.)
+
+You should be familiar with the look of cdf curves,
+and know what these features mean for the distribution:\\
+(1) step function, right continuous;\\
+(2) continuously increasing;\\
+(3) with jumps;\\
+(4) with flat segments.\\
+(5) mix of continuously increasing, jumps, flats.
+
+\definition 1.5.7. Continuous and discrete rv's.
+
+Observations on the definition:
+
+\indentblock{%
+$X$ is continuous if $F_X(x)$ is continuous---shouldn't have jumps,
+that is, no value of $X$ has a nonzero probability (point mass).
+But flat segments are allowed, meaning the range of $X$ could consist of
+disjoint intervals.
+
+$X$ is discrete if $F_X(x)$ is a step function---no continuous segments.
+
+According to this definition,
+a mixture of continuous and discrete distributions
+is neither continuous nor discrete.
+Although easily conceivable,
+such mixture distributions is not studied in this course.
+}
+
+Important:
+\textbf{the cdf $F_X(x)$ completely determines the probability
+distribution of a rv $X$.}
+
+
+\definition 1.5.8.
+What do we mean by saying $X$ and $Y$ have the same distribution?
+
+
+\theorem 1.5.10.
+How do we tell whether $X$ and $Y$ have the same distribution?
+
+\section{Density and mass functions (pdf and pmf)}
+
+\definition 1.6.1. pmf of a discrete rv.
+
+\alert
+\begin{enumerate}
+\item
+pmf gives ``point probabilities'' or ``point masses''.
+Of course, point probabilities can be easily derived from the cdf.
+pmf and cdf are equivalent---both completely describe
+the distribution.
+\[
+\text{cdf} \xleftarrow{\text{summation}}
+    \xrightarrow[\text{difference}]{} \text{pmf}
+\]
+
+\item
+From pmf to cdf:
+\[
+F(x)
+= P(X \le x)
+= \sum_{x_i \le x} P(X = x_i)
+= \sum_{x_i \le x} f(x_i)
+\]
+
+\item
+From cdf to pmf:
+\[
+f(x) = \begin{cases}
+    F(x) - \lim_{t \to x-} F(t),
+        & x \in \mathcal{X}\\
+    0,
+        & x \notin \mathcal{X}
+    \end{cases}
+\]
+where
+$F(x) - \lim_{t\to x-} F(t)$
+is the mathematical way to say the ``jump'' at $x$.
+$\lim_{t \to x-}$ is also written as
+$\lim_{t \uparrow x}$.
+
+
+\end{enumerate}
+
+
+\example 1.6.2.
+
+\definition 1.6.3. pdf of a continuous rv.
+
+\alert
+\begin{enumerate}
+\item
+pdf helps give ``interval probabilities''.
+\[
+\text{cdf} \xleftarrow{\text{integration}}
+    \xrightarrow[\text{differentiation}]{} \text{pdf}
+\]
+
+\item
+From pdf to cdf and interval probabilities
+(based directly on the definition~1.6.3):
+\[
+F(x) = \int_{-\infty}^x f(t) \diff t
+\]
+\[
+P(a < X \le b)
+= F(b) - F(a)
+= \int_a^b f(x) \diff x
+\]
+
+\item
+$f(x)$ does not tell us the ``probability'' of $X$ taking the
+value $x$! In fact, $f(x)$ can be $> 1$.
+For continuous rv $X$,
+\[
+P(X = x) = 0
+\]
+for any $x$.
+I think a good way to understand this statement is by observing
+$P(X = x) = F(x) - \lim_{t\to x-} F(t)$,
+where the limit is equal to $F(x)$ if $F(t)$ is continuous at $t = x$.
+
+Consequently,
+\[
+P(a < X < b) = P(a < X \le b) = P(a \le X < b) = P(a \le X \le b)
+\]
+
+\item
+The definition of pdf does not prohibit ``spikes'',
+therefore for any cdf there can be (as far as
+definition~1.6.3 is concerned) multiple pdf's that
+satisfy the definition, because spikes do not contribute to the integral.
+In practice we take the non-spiked, most natural curve---the
+continuous function.
+
+\item
+From cdf to pdf:
+\[
+f(x) = \frac{\diff F(x)}{\diff x}
+\]
+if $F(x)$ is differentiable and we take the continuous function $f(x)$
+among all functions that satisfy the definition~1.6.3.
+\end{enumerate}
+
+\example 1.6.4.
+
+Note on notation: examples\\
+random variable $X$, a specific value $x$,\\
+cdf $F(x)$, pdf $f(x)$,\\
+distributed as $X \sim F(x)$ or $X \sim f(x)$\\
+identically distributed: $X\sim Y$.
+
+
+\theorem 1.6.5.  Requirements for pdf or pmf.
+
+\end{document}
+

@@ -1,0 +1,34 @@
+\documentclass[12pt]{article}
+\usepackage{techart}
+\begin{document}
+\title{STAT 621 Final Project}
+\date{}\author{}
+\maketitle
+
+Due December 16 or earlier,
+with a discussion on and demonstration of your program.
+
+\begin{enumerate}
+\item Implement the kernel density estimation algorithm
+    in Zhang (2011), ``Iterative posterior inference for Bayesian
+    kriging'', for 1-D in \textit{R}.
+
+    Notes:
+    (1) While the Zhang algorithm allows a weighted sample,
+    you only need to consider a random sample.
+    (2) As utilities for this implementation, you will need to
+    implement functions for computing the density of a normal mixture
+    and drawing random samples from a normal mixture.
+    (3) The program will contain an optimization step, which you have
+    practiced in a homework assignment.
+
+\item Construct at least two examples to test and illustrate the
+    performance of your implementation.
+    For this purpose,
+    you will need to make up a true normal mixture density,
+    draw a random sample from it, and estimate the density based on the
+    sample. Make plots to compare the true density and the estimated
+    density.
+\end{enumerate}
+
+\end{document}

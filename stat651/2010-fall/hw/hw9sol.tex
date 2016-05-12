@@ -1,0 +1,229 @@
+\documentclass[12pt]{article}
+\usepackage{techart}
+\begin{document}
+\title{STAT 651 HW 9 Solution}
+\maketitle
+
+\begin{enumerate}
+\item
+\begin{enumerate}
+\item First quadrant, above the line $y = x$.
+\item No. The indicator for the support can not be factors into
+     a product of a $X$ term and a $Y$ term.
+\item $X = U$, $Y = V - X = V - U$.
+The conditions
+$X > 0$ and $Y > X$ are equivalent to
+$U > 0$ and $V - U > U$,
+leading to the support
+$0 < U < V/2 < \infty$.
+
+\item
+Using $X = U$, $Y = V - U$,
+we get the Jacobian
+\[
+J = \left|\begin{matrix}1 & 0\\ -1 & 1\end{matrix}\right| = 1
+\]
+hence
+\[
+f_{U,V}(u,v)
+= f_{X,Y}\bigl(x(u, v), y(u,v)\bigr) \cdot J
+= 2e^{-v},
+\quad
+0 < u < v/2 < \infty
+\]
+(Note this is a joint density of $U$ and $V$,
+although the density value involves $v$ only.
+The support involves both $U$ and $V$.
+If you think it's a density of $V$ alone,
+it does not integrate to 1.)
+
+\item $U$ and $V$ are not independent.
+
+\[
+f_U(u)
+= \int_{2u}^{\infty} f_{U,V}(u,v) \diff v = 2e^{-2u},
+\quad 0<u<\infty
+\]
+\[
+f_V(v)
+= \int_{0}^{v/2} f_{U,V}(u,v) \diff u = ve^{-v},
+\quad 0<v<\infty
+\]
+(Marginal $U$ is exponential; marginal $V$ is gamma.)
+\end{enumerate}
+\item
+\begin{enumerate}
+\item
+\[
+1 = \int_0^1 \int_0^x k(x+y) \diff y \diff x = \frac{k}{2}
+\]
+hence $k = 2$.
+
+\item
+In ``the box'', below the line $y = x$.
+
+\item
+From the definition of $U$ and $V$ we find
+\[
+X = \frac{U + V}{3},\quad
+Y = \frac{2U - V}{3}
+\]
+Use the conditions
+$0 < Y$, $Y < X$, $X < 1$ to get the support
+$\frac{U}{2} < V < 2U$ and $U+V < 3$.
+
+\item
+The Jacobian is
+\[
+J = \left|\begin{matrix}1/3 & 1/3\\ 2/3 & -1/3\end{matrix}\right|
+= 1/3
+\]
+Hence
+\[
+f_{U,V}(u,v)
+= f_{X,Y}\bigl(x(u,v), y(u,v)\bigr) \cdot J
+= 2u/3,
+\quad
+u/2 < v < 2u, u+v < 3
+\]
+
+\item
+Not independent.
+\end{enumerate}
+
+\item
+\begin{enumerate}
+\item MGF of $\text{gamma}(\alpha,\beta)$ is $(1- \beta t)^{-\alpha}$.
+Using the independence of $X$ and $Y$,
+\[
+M_{X+Y}(t)
+= M_X(t) M_Y(t)
+= (1 - \beta t)^{-\alpha_X - \alpha_Y}
+\]
+$X+Y$ is distributed as $\text{gamma}(\alpha_X+\alpha_Y, \beta)$.
+
+\item
+MGF of $\text{Poisson}(\alpha)$ is $e^{\lambda(e^t - 1)}$.
+Using the independence of $X$ and $Y$,
+\[
+M_{X+Y}(t)
+= M_X(t) M_Y(t)
+= e^{(\theta+\lambda)(e^t - 1)}
+\]
+$X+Y$ is distributed as $\text{Poisson}(\theta+\lambda)$.
+\end{enumerate}
+
+\item
+
+\begin{enumerate}
+\item
+
+\begin{enumerate}
+\item
+\[
+f_X(x) = \int_{-x+1}^{-x+2} 1 \diff y = 1,
+\quad 0<x<1
+\]
+Hence $X$ is uniform on $(0,1)$ with mean $1/2$ and variance $1/12$.
+
+\item
+To get $E(Y)$ and $E(Y^2)$, we could find $f_Y(y)$ first.
+But we could also use the joint density directly.
+\[
+E(Y) = \int_0^1 \int_{-x+1}^{-x+2} y\cdot 1 \diff y\diff x = 1
+\]
+\[
+E(Y) = \int_0^1 \int_{-x+1}^{-x+2} y^2\cdot 1 \diff y\diff x
+    = \int_0^1 \frac{1}{3}(7 + 3x^2 - 9x) \diff x = 7/6
+\]
+\item
+\[
+E(XY) = \int_0^1 \int_{-x+1}^{-x+2} xy\cdot 1 \diff y\diff x
+= \int_0^1 (3x/2 - x^2) \diff x
+= 5/12
+\]
+\item
+\[
+\cov(X,Y)
+= E(XY) - E(X)E(Y)
+= 5/12 - (1/2)(1)
+\approx -0.08333
+\]
+\[
+\operatorname{cor}(X,Y)
+= \cov(X,Y) / \sqrt{\var(X)\var(Y)}
+= -0.08333/\sqrt{(1/12) (1/6)}
+= -0.7071
+\]
+\end{enumerate}
+
+\item
+The second part is similar.
+\end{enumerate}
+
+\item
+
+Given the symmetry of $N(0,1)$,
+we see $E(XY) = E(X^3) = 0$, which is equal to
+$E(X)E(Y) = 0\cdot E(Y) = 0$.
+Hence
+$\cov(X,Y) = E(XY) - E(X)E(Y) = 0$;
+$X$ and $Y$ are uncorrelated.
+
+The dependence between $X$ and $Y$ is apparent because $Y = X^2$.
+
+\item
+Because the $Y_i$'s are independent Poisson,
+using the result from an earlier question we have
+$Z\given N \sim \text{Poisson}(10N)$ where $N\sim \text{unif}(\{1,\dotsc,13\})$.
+Then using results about a Poisson variable we see
+\[
+E(Z)
+= E_{N}\bigl(E(Z\given N)\bigr) = E_N(10N)
+= 10 E_{N}(N)
+= 10 (1+13)/2
+= 70
+\]
+\[\begin{split}
+\var(Z)
+&= \var_N\bigl(E(Z\given N)\bigr) + E_N\bigl(\var(Z\given N)\bigr)
+\\
+&= \var_N(10N) + E(10N)
+\\
+&= 100\var(N) + 10E(N)
+\\
+&= 100\frac{(13+1)(13-1)}{12} + 10\frac{1+13}{2}
+\\
+&= 1470
+\end{split}
+\]
+
+\item
+\[
+\cov(X, c)
+= E(cX) - E(X)E(c)
+= cE(X) - cE(X)
+= 0
+\]
+
+\item
+\[
+\cov(X_1+X_2, X_2+X_3)
+= \cov(X_1, X_2) + \cov(X_1, X_3) + \cov(X_2, X_2) + \cov(X_2, X_3)
+= 0 + 0 + \sigma^2 + 0 = \sigma^2
+\]
+(You can also use\\
+$\cov(X_1+X_2, X_2+X_3)
+= \cov(X_1, X_2+X_3) + \cov(X_2, X_2+X_3)
+= 0 + \cov(X_2,X_2)
+= \sigma^2$.)
+
+\[
+\cov(X_1+X_2, X_1-X_2)
+= \cov(X_1,X_1) - \cov(X_1,X_2) + \cov(X_2,X_1) - \cov(X_2,X_2)
+= \sigma^2 - 0 + 0 - \sigma^2
+= 0
+\]
+\end{enumerate}
+
+\end{document}

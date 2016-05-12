@@ -1,0 +1,236 @@
+\documentclass[12pt]{article}
+\usepackage{techart}
+\begin{document}
+\title{STAT 651 HW 2 Solutions}
+\maketitle
+
+\begin{enumerate}
+\item
+    \begin{enumerate}
+    \item
+    \[
+        {13\choose 1}{4\choose 3}\times {12\choose 1}{4\choose 2}
+        = 3744
+    \]
+    Note: one ``kind'' gets 3 cards and the other gets 2,
+    therefore these two ``kinds'' are different.
+    We can imagine finishing the task in two steps:
+    the first step does the 3-card kind,
+    and after that there are ${12\choose 1}$ choices for the
+    2-card kind.
+    \item
+    \[
+        {13\choose 2}{4\choose 2}^2\times {44\choose 1}
+        = 123552
+    \]
+    Note: there are two special kinds, each getting two cards.
+    But there is no ordering between these two ``kinds''.
+    Different from the one above.
+    \item
+    \[
+        {13\choose 5}{4\choose 1}^5 = 1317888
+    \]
+    \end{enumerate}
+
+\item
+Let $E_i$, $i=1,2,\dotsc$, be the event that $A$ wins at her $i$-th toss,
+meaning $A$ and $B$ both get all tails in their previous tosses,
+and $A$ gets head in the $i$-th toss.
+\begin{enumerate}
+\item
+We have
+$P(E_i) = (1/2)^{i-1}\times (1/2)^{i-1} \times .5$.
+(Check this formula is OK for $i=1$.)
+The probability that $A$ wins is
+\[
+\sum_{i=1}^{\infty} P(E_i)
+= \sum_{i=1}^{\infty} \Bigl(\frac{1}{4}\Bigr)^{i-1} \times \frac{1}{2}
+= \frac{1}{2} \times \frac{1}{1 - \frac{1}{4}}
+= 2/3
+\]
+where we have used the formula~(1.5.4) on page~31.
+
+\item
+Now we have
+$P(E_i) = (1-p)^{i-1}\times (1-p)^{i-1} \times p$.
+Then the probability that $A$ wins is
+\[
+\sum_{i=1}^{\infty} P(E_i)
+= \sum_{i=1}^{\infty} \bigl((1-p)^2\bigr)^{i-1}\times p
+= p \times \frac{1}{1 - (1-p)^2}
+= \frac{1}{2-p}
+\]
+
+\item
+From the above,
+for all $p \in (0,1)$,
+\[
+P = \frac{1}{2 - p} > \frac{1}{2 - 1} = \frac{1}{2}
+\]
+\end{enumerate}
+
+\item
+Let
+$M$, $F$, $B$ be the events that a person
+is male, is female, and is color-blind, respectively.
+Then
+\[\begin{split}
+P(M \given B)
+= \frac{P(M \cap B)}{P(B)}
+&= \frac{P(M \cap B)}{P(B\cap M) + P(B\cap F)}
+\\
+&= \biggl(1 + \frac{P(B\cap F)}{P(M\cap B}\biggr)^{-1}
+\\
+&= \biggl(1 + \frac{P(F)\,P(B\given F)}{P(M)\,P(B\given M)}\biggr)^{-1}
+\\
+&= \biggl(1 + \frac{.5\times .25}{.5\times 5}\biggr)^{-1}
+\\
+&= 0.9524
+\end{split}
+\]
+
+\item
+Denote the events of
+hitting the target $k$ times by
+$H_k$ and at least $k$ times by
+$H_{k+}$. Then
+\[
+P(H_k) = {10\choose k}\Bigl(\frac{1}{5}\Bigr)^k
+    \Bigl(\frac{4}{5}\Bigr)^{10-k}
+\]
+
+\begin{enumerate}
+\item
+\[
+P(H_{2+})
+= 1 - P(H_0) - P(H_1)
+= 1 - \Bigl(\frac{4}{5}\Bigr)^{10}
+    - 10\times\frac{1}{5} \Bigl(\frac{4}{5}\Bigr)^9
+= .6242
+\]
+
+\item
+\[
+P(H_{2+}\given H_{1+})
+= \frac{P(H_{2+})}{1 - P(H_0)}
+= \frac{.6242}{1 - \bigl(\frac{4}{5}\bigr)^{10}}
+= .6993
+\]
+\end{enumerate}
+
+\item
+\begin{enumerate}
+\item
+\[
+P(A\given B)
+= \frac{P(A\cap B)}{P(B)}
+= P(A\cap B)
+= P(A) + P(B) - P(A\cup B)
+= P(A) + 1 - P(B)
+= P(A)
+\]
+where we have used
+$P(B) = 1$,
+and $P(A\cup B) \ge P(B) = 1$,
+hence $P(A\cup B) = 1$.
+
+\item
+\[
+P(B\given A)
+= \frac{P(B\cap A)}{P(A)}
+= \frac{P(A)}{P(A)}
+= 1
+\]
+\[
+P(A\given B)
+= \frac{P(A\cap B)}{P(B)}
+= \frac{P(A)}{P(B)}
+\]
+where we have used $B\cap A = A$ because $A\subset B$.
+
+\item
+\[
+P(A\given A\cup B)
+= \frac{P\big(A\cap (A\cup B)\bigr)}{P(A\cup B)}
+= \frac{P(A)}{P(A\cup B)}
+= \frac{P(A)}{P(A) + P(B)}
+\]
+where
+$P(A\cup B) = P(A) + P(B)$ is due to the fact
+that $A$ and $B$ are mutually exclusive
+\end{enumerate}
+
+\item
+\begin{enumerate}
+\item
+\[
+P(A\given B)
+= \frac{P(A\cap B)}{P(B)}
+= \frac{P(\emptyset)}{P(B)}
+= 0
+\ne P(A)
+\]
+(where we have used the fact that
+$A$ and $B$ are mutually exclusive)
+hence
+$A$ and $B$ are not independent.
+
+\item
+\[
+P(A\cap B)
+= P(A)\, P(B\given A)
+= P(A)\, P(B)
+> 0
+\]
+(where we have used the fact that
+$A$ and $B$ are independent)
+hence
+$A\cap B \ne \emptyset$,
+that is,
+$A$ and $B$ are not mutually exclusive.
+\end{enumerate}
+
+\item
+Let $H_k$, $k=0,1,2,3,4$,
+be the event of having $k$ heads in the outcome.
+Then
+\[
+P(H_k)
+= {4\choose k} (1/2)^k (1/2)^{4-k}
+= \frac{3}{2} \frac{1}{k!\,(4-k)!}
+\]
+
+\begin{center}
+\begin{tabular}{ccc}
+$k$ & $P(H_k)$ & $X$ \\ \hline
+0   & $\frac{1}{16}$  & 0 \\[5pt]
+1   & $\frac{1}{4}$  & 3 \\[5pt]
+2   & $3\over 8$  & 4 \\[5pt]
+3   & $1\over 4$  & 3 \\[5pt]
+4   & $1\over 16$  & 0 \\ \hline
+\end{tabular}
+\end{center}
+
+Therefore the pmf of $X$ is
+\[
+P(x) = \begin{cases}
+    \frac{1}{8},   & x = 0\\
+    \frac{1}{2},   & x = 3\\
+    \frac{3}{8},   & x = 4\\
+    0,             & \text{otherwise}
+    \end{cases}
+\]
+
+The cdf of $X$ is
+\[
+F(x) = \begin{cases}
+    0,            & x < 0\\
+    \frac{1}{8},  & 0 \le x < 3\\
+    \frac{5}{8},  & 3 \le x < 4\\
+    1,            & x \ge 4
+    \end{cases}
+\]
+
+\end{enumerate}
+
+\end{document}
